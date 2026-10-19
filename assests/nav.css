@@ -1,0 +1,67 @@
+:root {
+  --dock-ink: #202B33;
+  --dock-accent: #E3B86F;
+  --dock-secondary: #496B7C;
+  --dock-footer: #596770;
+  --dock-border: #D3DADD;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dock-ink: #151C21;
+    --dock-accent: #DDB36A;
+    --dock-secondary: #7895A3;
+    --dock-footer: #A9B4B9;
+    --dock-border: #354149;
+  }
+}
+.site-dock {
+  position: fixed;
+  z-index: 20;
+  right: 50%;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px;
+  transform: translateX(50%);
+  border: 1px solid var(--dock-border);
+  border-radius: 999px;
+  background: var(--dock-ink);
+  box-shadow: 0 8px 28px rgba(20, 30, 38, .22);
+  font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.site-dock a, .site-dock button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #f5f7f7;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  transition: background .16s ease, color .16s ease;
+}
+.site-dock a:hover { background: rgba(255,255,255,.12); color: #fff; }
+.site-dock button { background: var(--dock-accent); color: var(--dock-ink); }
+.site-dock button:hover { background: #f0cf92; }
+.site-dock a:focus-visible, .site-dock button:focus-visible { outline: 3px solid var(--dock-secondary); outline-offset: 3px; }
+.shared-site-footer {
+  margin-top: 48px;
+  padding: 19px 20px 82px;
+  border-top: 1px solid var(--dock-border);
+  color: var(--dock-footer);
+  font: 13px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: center;
+}
+body { padding-bottom: 78px !important; }
+@media (max-width: 420px) {
+  .site-dock { bottom: 12px; }
+  .site-dock a, .site-dock button { min-height: 34px; padding: 0 13px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-dock a, .site-dock button { transition: none; }
+}
