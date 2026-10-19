@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Muhammadali Manopov's Web Programming profile and coursework portfolio.">
+  <title>Muhammadali Manopov — Web Programming Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17242b;
+      --muted: #607079;
+      --line: #dbe3e5;
+      --paper: #f5f7f5;
+      --card: #ffffff;
+      --accent: #b87b35;
+      --deep: #24434a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 0; border-bottom: 1px solid var(--line);
+      font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .brand { font-weight: 800; letter-spacing: .1em; text-decoration: none; }
+    .top-note { color: var(--muted); }
+    .hero {
+      display: grid; grid-template-columns: 1.4fr .6fr; gap: 48px;
+      align-items: center; padding: clamp(60px, 10vw, 116px) 0 76px;
+    }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 16px 0 18px; font-size: clamp(44px, 7vw, 78px); line-height: .99; letter-spacing: -.065em; }
+    h1 span { color: var(--accent); }
+    .intro { max-width: 590px; color: var(--muted); font-size: 17px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 0 18px; border: 1px solid var(--deep);
+      border-radius: 5px; background: var(--deep); color: #fff;
+      text-decoration: none; font-weight: 700; font-size: 14px;
+    }
+    .button.secondary { background: transparent; color: var(--deep); }
+    .profile-card {
+      position: relative; overflow: hidden; padding: 28px;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+      box-shadow: 0 20px 50px rgba(23,36,43,.06);
+    }
+    .monogram {
+      display: grid; place-items: center; width: 90px; height: 90px;
+      margin-bottom: 26px; border-radius: 50%; background: #e9dfcf; color: var(--deep);
+      font-size: 28px; font-weight: 850; letter-spacing: -.06em;
+    }
+    .profile-card h2 { margin: 0 0 3px; font-size: 23px; letter-spacing: -.04em; }
+    .profile-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .details { display: grid; gap: 13px; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .detail { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; }
+    .detail span:first-child { color: var(--muted); }
+    .detail span:last-child { font-weight: 700; text-align: right; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+    .section-head h2 { margin: 0; font-size: clamp(26px, 4vw, 36px); letter-spacing: -.05em; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 14px; }
+    .week-shortcuts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 0 0 36px; }
+    .week-button {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      min-height: 54px; padding: 0 16px; border: 1px solid var(--line);
+      border-radius: 7px; background: var(--card); color: var(--deep);
+      text-decoration: none; font-size: 14px; font-weight: 800;
+      transition: background .18s ease, color .18s ease, transform .18s ease, border-color .18s ease;
+    }
+    .week-button:hover { transform: translateY(-2px); border-color: var(--deep); background: var(--deep); color: #fff; }
+    .week-button span { color: var(--accent); font-size: 11px; letter-spacing: .1em; }
+    .week-button:hover span { color: #f0cf9e; }
+    .coursework { padding: 30px 0 88px; border-top: 1px solid var(--line); }
+    .weeks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .week {
+      display: flex; flex-direction: column; min-height: 190px; padding: 24px;
+      border: 1px solid var(--line); border-radius: 9px; background: var(--card);
+      text-decoration: none; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .week:hover { transform: translateY(-3px); border-color: #c6a06e; box-shadow: 0 12px 28px rgba(23,36,43,.06); }
+    .week-label { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .week h3 { margin: 10px 0 5px; font-size: 24px; letter-spacing: -.04em; }
+    .week p { margin: 0; color: var(--muted); font-size: 14px; }
+    .open { margin-top: auto; padding-top: 20px; font-size: 13px; font-weight: 800; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0 30px; color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; }
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 64px; }
+      .profile-card { max-width: 440px; }
+      .section-head { align-items: start; flex-direction: column; gap: 6px; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 28px, 1080px); }
+      .top-note { max-width: 120px; text-align: right; }
+      .weeks { grid-template-columns: 1fr; }
+      .week-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .week-button { min-height: 50px; padding: 0 12px; font-size: 13px; }
+      .footer-inner { flex-direction: column; gap: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="index.html">MM / Portfolio</a>
+    <span class="top-note">Web Programming · 2026</span>
+  </header>
 
+  <main>
+    <section class="wrap hero" aria-labelledby="intro-title">
+      <div>
+        <div class="eyebrow">Student profile & coursework</div>
+        <h1 id="intro-title">Muhammadali<br><span>Manopov.</span></h1>
+        <p class="intro">Welcome to my Web Programming portfolio. This page brings together my weekly exercises and assignments in HTML, CSS, JavaScript, and interactive web design.</p>
+        <div class="actions">
+          <a class="button" href="#coursework">Explore coursework ↘</a>
+          <a class="button secondary" href="Week%201/index.html">Open Week 1</a>
+        </div>
+      </div>
+
+      <aside class="profile-card" aria-label="Student details">
+        <div class="monogram" aria-hidden="true">MM</div>
+        <h2>Muhammadali Manopov</h2>
+        <p>Web Programming student</p>
+        <div class="details">
+          <div class="detail"><span>Student ID</span><span>202537299</span></div>
+          <div class="detail"><span>University</span><span>Gachon University</span></div>
+          <div class="detail"><span>Focus</span><span>Front-end development</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <nav class="wrap week-shortcuts" aria-label="Quick access to each week">
+      <a class="week-button" href="Week%201/index.html">Week 1 <span>01 ↗</span></a>
+      <a class="week-button" href="Week%202/index.html">Week 2 <span>02 ↗</span></a>
+      <a class="week-button" href="Week%203/index.html">Week 3 <span>03 ↗</span></a>
+      <a class="week-button" href="Week%204/index.html">Week 4 <span>04 ↗</span></a>
+    </nav>
+
+    <section class="coursework" id="coursework">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Coursework archive</h2>
+          <p>Choose a week to view its assignments.</p>
+        </div>
+        <div class="weeks">
+          <a class="week" href="Week%201/index.html">
+            <span class="week-label">Week 01</span>
+            <h3>HTML foundations</h3>
+            <p>Page structure, text elements, links, images, and introductory HTML exercises.</p>
+            <span class="open">View Week 1 ↗</span>
+          </a>
+          <a class="week" href="Week%202/index.html">
+            <span class="week-label">Week 02</span>
+            <h3>Web page practice</h3>
+            <p>Continue through the second week's lessons and tasks.</p>
+            <span class="open">View Week 2 ↗</span>
+          </a>
+          <a class="week" href="Week%203/index.html">
+            <span class="week-label">Week 03</span>
+            <h3>CSS & interaction</h3>
+            <p>Styling, layouts, navigation, and small interactive assignments.</p>
+            <span class="open">View Week 3 ↗</span>
+          </a>
+          <a class="week" href="Week%204/index.html">
+            <span class="week-label">Week 04</span>
+            <h3>JavaScript & DOM</h3>
+            <p>JavaScript practice and browser document interaction.</p>
+            <span class="open">View Week 4 ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Muhammadali Manopov</span>
+      <span>Web Programming · Gachon University</span>
+    </div>
+  </footer>
+</body>
+</html>
