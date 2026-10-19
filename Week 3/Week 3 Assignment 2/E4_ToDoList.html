@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E4 - To-Do List - Manopov Muhammadali</title>
+    <link rel="stylesheet" href="../../../portfolio.css">
+<style>
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 48px 20px;
+      background: #f3f6fb;
+      color: #202b3c;
+      font-family: Arial, sans-serif;
+    }
+    .app { width: min(100%, 540px); margin: 0 auto; }
+    h1 { margin: 0; color: #1a56db; font-size: 36px; }
+    .student { margin: 8px 0 24px; color: #68758a; font-size: 14px; }
+    .card {
+      overflow: hidden;
+      border: 1px solid #e0e7f1;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 12px 32px rgba(36, 57, 92, .08);
+    }
+    .add-row { display: flex; gap: 9px; padding: 18px; border-bottom: 1px solid #edf0f5; }
+    input {
+      min-width: 0; flex: 1; padding: 12px 13px;
+      border: 1px solid #cdd8ea; border-radius: 8px;
+      outline: none; font: inherit; font-size: 15px;
+    }
+    input:focus { border-color: #1a56db; box-shadow: 0 0 0 3px rgba(26, 86, 219, .12); }
+    button { border: 0; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 600; }
+    .add-btn { padding: 0 16px; background: #1a56db; color: white; }
+    .add-btn:hover { background: #1649bd; }
+    .filters { display: flex; gap: 6px; padding: 12px 18px; border-bottom: 1px solid #edf0f5; }
+    .filter { padding: 7px 11px; background: transparent; color: #68758a; font-size: 13px; }
+    .filter:hover { background: #f2f5fa; }
+    .filter.active { background: #eaf0ff; color: #1a56db; }
+    #todo-list { margin: 0; padding: 6px 18px; list-style: none; }
+    .todo-item { display: flex; align-items: center; gap: 11px; padding: 12px 2px; border-bottom: 1px solid #edf0f5; }
+    .todo-item:last-child { border-bottom: 0; }
+    .todo-item span { flex: 1; overflow-wrap: anywhere; font-size: 15px; }
+    .todo-item.completed span { color: #929dad; text-decoration: line-through; }
+    .check-btn { width: 21px; height: 21px; padding: 0; border: 2px solid #c7d0df; border-radius: 50%; background: white; }
+    .completed .check-btn { border-color: #16a36a; background: #16a36a; }
+    .delete-btn { padding: 5px 9px; background: #fff0ef; color: #c33d37; font-size: 13px; }
+    .delete-btn:hover { background: #ffe1df; }
+    #empty-msg { padding: 25px 16px; color: #929dad; text-align: center; font-size: 14px; }
+    .card-footer { display: flex; justify-content: space-between; gap: 12px; padding: 13px 18px; border-top: 1px solid #edf0f5; color: #778398; font-size: 12px; }
+    .clear-btn { padding: 0; background: transparent; color: #778398; font-size: 12px; }
+    .clear-btn:hover:not(:disabled) { color: #c33d37; }
+    .clear-btn:disabled { cursor: default; opacity: .5; }
+    @media (max-width: 420px) {
+      body { padding: 32px 14px; }
+      h1 { font-size: 31px; }
+      .add-row { padding: 14px; }
+      .add-btn { padding: 0 12px; }
+      #todo-list { padding-right: 14px; padding-left: 14px; }
+      .filters, .card-footer { padding-right: 14px; padding-left: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>My To-Do List</h1>
+    <p class="student">Manopov Muhammadali · 202537299 · Computer Engineering</p>
+
+    <section class="card" aria-label="To-do list">
+      <form class="add-row" id="add-form">
+        <input id="todo-input" type="text" placeholder="Add a task..." aria-label="New task" maxlength="160" autocomplete="off">
+        <button class="add-btn" type="submit">+ Add</button>
+      </form>
+      <div class="filters" aria-label="Task filters">
+        <button class="filter active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="active">Active</button>
+        <button class="filter" type="button" data-filter="completed">Completed</button>
+      </div>
+      <ul id="todo-list"></ul>
+      <p id="empty-msg">No tasks yet! Add one above.</p>
+      <footer class="card-footer">
+        <span id="task-count">0 tasks left</span>
+        <button class="clear-btn" id="clear-btn" type="button">Clear completed</button>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'manopov-todo-list';
+    const form = document.querySelector('#add-form');
+    const input = document.querySelector('#todo-input');
+    const list = document.querySelector('#todo-list');
+    const emptyMsg = document.querySelector('#empty-msg');
+    const count = document.querySelector('#task-count');
+    const clearBtn = document.querySelector('#clear-btn');
+    const filters = document.querySelector('.filters');
+    let activeFilter = 'all';
+
+    function readTasks() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        return Array.isArray(saved) ? saved.filter(task => task && typeof task.text === 'string') : [];
+      } catch {
+        return [];
+      }
+    }
+
+    let tasks = readTasks();
+
+    function saveTasks() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); } catch { /* Keep the list usable if storage is unavailable. */ }
+    }
+
+    function renderTasks() {
+      list.replaceChildren();
+      const visible = tasks.filter(task => activeFilter === 'all' ||
+        (activeFilter === 'active' && !task.completed) ||
+        (activeFilter === 'completed' && task.completed));
+
+      visible.forEach(task => {
+        const item = document.createElement('li');
+        item.className = `todo-item${task.completed ? ' completed' : ''}`;
+        item.dataset.id = task.id;
+
+        const check = document.createElement('button');
+        check.type = 'button';
+        check.className = 'check-btn';
+        check.setAttribute('aria-label', task.completed ? 'Mark task active' : 'Mark task completed');
+
+        const text = document.createElement('span');
+        text.textContent = task.text;
+
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'delete-btn';
+        remove.textContent = 'Delete';
+        remove.setAttribute('aria-label', `Delete ${task.text}`);
+
+        item.append(check, text, remove);
+        list.append(item);
+      });
+
+      emptyMsg.hidden = visible.length > 0;
+      if (tasks.length > 0 && visible.length === 0) {
+        emptyMsg.textContent = activeFilter === 'active' ? 'You have no active tasks.' : 'No completed tasks yet.';
+      } else {
+        emptyMsg.textContent = 'No tasks yet! Add one above.';
+      }
+      const remaining = tasks.filter(task => !task.completed).length;
+      count.textContent = `${remaining} ${remaining === 1 ? 'task' : 'tasks'} left`;
+      clearBtn.disabled = !tasks.some(task => task.completed);
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (!text) { input.focus(); return; }
+      tasks.push({ id: `${Date.now()}-${Math.random()}`, text, completed: false });
+      input.value = '';
+      activeFilter = 'all';
+      filters.querySelectorAll('.filter').forEach(button => button.classList.toggle('active', button.dataset.filter === activeFilter));
+      saveTasks();
+      renderTasks();
+      input.focus();
+    });
+
+    list.addEventListener('click', event => {
+      const item = event.target.closest('.todo-item');
+      if (!item) return;
+      const task = tasks.find(entry => entry.id === item.dataset.id);
+      if (!task) return;
+      if (event.target.closest('.check-btn')) task.completed = !task.completed;
+      if (event.target.closest('.delete-btn')) tasks = tasks.filter(entry => entry.id !== task.id);
+      saveTasks();
+      renderTasks();
+    });
+
+    filters.addEventListener('click', event => {
+      const button = event.target.closest('.filter');
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      filters.querySelectorAll('.filter').forEach(filter => filter.classList.toggle('active', filter === button));
+      renderTasks();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      tasks = tasks.filter(task => !task.completed);
+      saveTasks();
+      renderTasks();
+    });
+
+    renderTasks();
+  </script>
+
+<script src="../../../assets/nav.js"></script>
+</body>
+</html>
