@@ -1,44 +1,221 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Form Validation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration Form | Week 7</title>
+
+  <style>
+    :root {
+      --ink: #17242b;
+      --muted: #607079;
+      --paper: #f5f7f5;
+      --card: #ffffff;
+      --line: #dbe3e5;
+      --accent: #b87b35;
+      --deep: #24434a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px max(6%, calc((100% - 1000px) / 2));
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark {
+      color: var(--deep);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .wordmark span {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-link, .back-link {
+      color: var(--deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-link:hover, .back-link:hover { color: var(--accent); }
+
+    main {
+      width: min(760px, 90%);
+      margin: 48px auto;
+    }
+
+    .page-meta {
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .intro { margin-bottom: 28px; color: var(--muted); }
+
+    .exercise-card {
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(23, 36, 43, .04);
+    }
+
+    .exercise-card h2 { margin-top: 0; font-size: 1.25rem; }
+
+    .field { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    button {
+      padding: 11px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--deep);
+      color: white;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--accent); }
+
+    .result {
+      margin-top: 22px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      overflow-wrap: anywhere;
+    }
+
+    #message { margin: 0; }
+
+    .back-link { display: inline-block; margin-top: 26px; }
+
+    .site-footer {
+      padding: 24px 5%;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 520px) {
+      .site-nav { align-items: flex-start; flex-direction: column; padding: 18px 5%; }
+      main { margin: 32px auto; }
+      .exercise-card { padding: 22px; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Registration Form</h1>
+  <header class="site-nav">
+    <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+    <a class="nav-link" href="index.html">← Back to Week 7</a>
+  </header>
 
-  <form id="myForm">
-    <label>Name:</label>
-    <input type="text" id="name"><br><br>
+  <main>
+    <div class="page-meta">Week 7 · Task 2</div>
+    <h1>Registration Form</h1>
+    <p class="intro">Enter your details and submit the form to check that your information is valid.</p>
 
-    <label>Email:</label>
-    <input type="email" id="email"><br><br>
+    <section class="exercise-card">
+      <h2>Your details</h2>
 
-    <label>Age:</label>
-    <input type="number" id="age"><br><br>
+      <form id="myForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" autocomplete="name" placeholder="Enter your name">
+        </div>
 
-    <button type="submit">Submit</button>
-  </form>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" placeholder="you@example.com">
+        </div>
 
-  <p id="message"></p>
+        <div class="field">
+          <label for="age">Age</label>
+          <input type="number" id="age" min="1" step="1" placeholder="Enter your age">
+        </div>
+
+        <button type="submit">Submit registration</button>
+      </form>
+
+      <div class="result" aria-live="polite">
+        <p id="message">Your result will appear here.</p>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">← Return to Week 7 tasks</a>
+  </main>
+
+  <footer class="site-footer">MM / Portfolio · Week 7</footer>
 
   <script>
-    document.getElementById("myForm").addEventListener("submit",
-      function(event) {
-        event.preventDefault();
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const age = Number(document.getElementById("age").value);
-        const message = document.getElementById("message");
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const ageText = document.getElementById("age").value.trim();
+      const age = Number(ageText);
+      const message = document.getElementById("message");
 
-        if (name === "" || email === "" || age <= 0) {
-          message.textContent = "Please fill in all fields correctly.";
-        } else {
-          message.textContent = "Form submitted successfully!";
-        }
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (name === "" || email === "" || ageText === "" ||
+          !validEmail || !Number.isInteger(age) || age <= 0) {
+        message.textContent = "Please enter a name, a valid email, and a positive whole-number age.";
+        return;
       }
-    );
+
+      message.textContent = "Form submitted successfully!";
+    });
   </script>
 </body>
 </html>
