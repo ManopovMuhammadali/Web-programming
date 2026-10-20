@@ -1,41 +1,298 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>To-Do List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My To-Do List | Week 7</title>
+
+  <style>
+    :root {
+      --ink: #17242b;
+      --muted: #607079;
+      --paper: #f5f7f5;
+      --card: #ffffff;
+      --line: #dbe3e5;
+      --accent: #b87b35;
+      --deep: #24434a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px max(6%, calc((100% - 1000px) / 2));
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark {
+      color: var(--deep);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .wordmark span { color: var(--muted); font-weight: 500; }
+
+    .nav-link, .back-link {
+      color: var(--deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-link:hover, .back-link:hover { color: var(--accent); }
+
+    main { width: min(760px, 90%); margin: 48px auto; }
+
+    .page-meta {
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .intro { margin-bottom: 28px; color: var(--muted); }
+
+    .exercise-card {
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(23, 36, 43, .04);
+    }
+
+    .exercise-card h2 { margin-top: 0; font-size: 1.25rem; }
+
+    .add-row {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--deep);
+      color: white;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--accent); }
+
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    #taskList {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #taskList li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .task-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-text.completed {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .complete-button {
+      flex-shrink: 0;
+      background: #e8efec;
+      color: var(--deep);
+    }
+
+    .delete-button {
+      flex-shrink: 0;
+      background: #f4e8e2;
+      color: #773c2b;
+    }
+
+    .empty-message {
+      margin-top: 22px;
+      color: var(--muted);
+    }
+
+    .back-link { display: inline-block; margin-top: 26px; }
+
+    .site-footer {
+      padding: 24px 5%;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 520px) {
+      .site-nav { align-items: flex-start; flex-direction: column; padding: 18px 5%; }
+      main { margin: 32px auto; }
+      .exercise-card { padding: 22px; }
+      .add-row { flex-direction: column; }
+      #taskList li { flex-wrap: wrap; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>My To-Do List</h1>
+  <header class="site-nav">
+    <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+    <a class="nav-link" href="index.html">← Back to Week 7</a>
+  </header>
 
-  <input type="text" id="taskInput" placeholder="Enter a task">
-  <button onclick="addTask()">Add Task</button>
+  <main>
+    <div class="page-meta">Week 7 · Task 6</div>
+    <h1>My To-Do List</h1>
+    <p class="intro">Add tasks, mark completed items, and remove tasks when you no longer need them.</p>
 
-  <ul id="taskList"></ul>
+    <section class="exercise-card">
+      <h2>Your tasks</h2>
+
+      <form id="taskForm">
+        <div class="add-row">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="What do you need to do?"
+            aria-label="New task"
+            maxlength="200"
+          >
+          <button type="submit">Add task</button>
+        </div>
+      </form>
+
+      <p id="emptyMessage" class="empty-message">No tasks yet. Add your first task above.</p>
+      <ul id="taskList" aria-label="To-do items"></ul>
+      <p id="message" aria-live="polite"></p>
+    </section>
+
+    <a class="back-link" href="index.html">← Return to Week 7 tasks</a>
+  </main>
+
+  <footer class="site-footer">MM / Portfolio · Week 7</footer>
 
   <script>
-    function addTask() {
-      const input = document.getElementById("taskInput");
-      const task = input.value.trim();
+    const taskForm = document.getElementById("taskForm");
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+    const emptyMessage = document.getElementById("emptyMessage");
+    const message = document.getElementById("message");
+
+    function updateEmptyMessage() {
+      emptyMessage.hidden = taskList.children.length > 0;
+    }
+
+    taskForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const task = taskInput.value.trim();
 
       if (task === "") {
-        alert("Please enter a task.");
+        message.textContent = "Please enter a task first.";
+        taskInput.focus();
         return;
       }
 
       const li = document.createElement("li");
-      li.textContent = task + " ";
 
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "Delete";
-      removeButton.onclick = function() {
+      const taskText = document.createElement("span");
+      taskText.className = "task-text";
+      taskText.textContent = task;
+
+      const completeButton = document.createElement("button");
+      completeButton.type = "button";
+      completeButton.className = "complete-button";
+      completeButton.textContent = "Complete";
+      completeButton.setAttribute("aria-label", "Mark task as completed");
+
+      completeButton.addEventListener("click", function() {
+        const completed = taskText.classList.toggle("completed");
+
+        completeButton.textContent = completed ? "Undo" : "Complete";
+        completeButton.setAttribute(
+          "aria-label",
+          completed ? "Mark task as not completed" : "Mark task as completed"
+        );
+      });
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "delete-button";
+      deleteButton.textContent = "Delete";
+      deleteButton.setAttribute("aria-label", "Delete task: " + task);
+
+      deleteButton.addEventListener("click", function() {
         li.remove();
-      };
+        updateEmptyMessage();
+        message.textContent = "Task deleted.";
+      });
 
-      li.appendChild(removeButton);
-      document.getElementById("taskList").appendChild(li);
+      li.appendChild(taskText);
+      li.appendChild(completeButton);
+      li.appendChild(deleteButton);
+      taskList.appendChild(li);
 
-      input.value = "";
-    }
+      taskInput.value = "";
+      message.textContent = "Task added successfully.";
+      updateEmptyMessage();
+      taskInput.focus();
+    });
+
+    updateEmptyMessage();
   </script>
 </body>
 </html>
+
