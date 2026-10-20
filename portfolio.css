@@ -181,3 +181,96 @@ body > footer:not(.site-footer) { padding: 24px 20px; color: var(--muted); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Repository-wide finishing touches */
+::selection {
+  background: #dce6ff;
+  color: #172033;
+}
+
+a {
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+button:not(:disabled):hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 640px) {
+  .site-nav {
+    width: calc(100% - 28px);
+    min-height: 64px;
+    gap: 12px;
+  }
+
+  .wordmark {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  main {
+    width: calc(100% - 28px);
+  }
+
+  .assignment-link {
+    grid-template-columns: 48px minmax(0, 1fr) 18px;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .assignment-link:hover {
+    padding-left: 16px;
+  }
+
+  .site-footer {
+    width: calc(100% - 28px);
+    flex-wrap: wrap;
+  }
+
+  .archive-content-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
