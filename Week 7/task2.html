@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+</head>
+<body>
+  <h1>Registration Form</h1>
+
+  <form id="myForm">
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+
+    <label>Email:</label>
+    <input type="email" id="email"><br><br>
+
+    <label>Age:</label>
+    <input type="number" id="age"><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit",
+      function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const age = Number(document.getElementById("age").value);
+        const message = document.getElementById("message");
+
+        if (name === "" || email === "" || age <= 0) {
+          message.textContent = "Please fill in all fields correctly.";
+        } else {
+          message.textContent = "Form submitted successfully!";
+        }
+      }
+    );
+  </script>
+</body>
+</html>
