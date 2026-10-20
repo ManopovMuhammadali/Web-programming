@@ -1,0 +1,71 @@
+
+name: HTML Link Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check local HTML links and assets
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlparse, unquote
+
+          root = Path(".").resolve()
+          errors = []
+
+          class LinkChecker(HTMLParser):
+              def __init__(self, file):
+                  super().__init__()
+                  self.file = file
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  for attr in ("href", "src"):
+                      value = attrs.get(attr, "")
+                      if not value:
+                          continue
+                      if value.startswith(("#", "https://", "http://",
+                                           "mailto:", "tel:", "data:", "javascript:")):
+                          continue
+
+                      target = unquote(urlparse(value).path)
+                      if not target:
+                          continue
+
+                      resolved = (self.file.parent / target).resolve()
+                      if not resolved.exists():
+                          errors.append(
+                              f"{self.file.relative_to(root)}: "
+                              f"{attr}='{value}' not found"
+                          )
+
+          for file in root.rglob("*.html"):
+              if ".git" in file.parts:
+                  continue
+              checker = LinkChecker(file)
+              checker.feed(file.read_text(encoding="utf-8", errors="replace"))
+
+          if errors:
+              print("\n".join(errors))
+              raise SystemExit(f"\nFound {len(errors)} broken local reference(s).")
+
+          print("All local HTML references point to existing paths.")
+          PY
