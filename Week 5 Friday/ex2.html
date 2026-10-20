@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repeat a task</title>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #eef2f2;
+    font-family: "Trebuchet MS", sans-serif;
+    color: #1c2a33;
+  }
+  .card {
+    max-width: 580px;
+    background: #fcfdff;
+    border: 1px solid #cfd8dc;
+    border-top: 6px solid #3356a3;
+    border-radius: 10px;
+    padding: 44px 28px 28px;
+  }
+  .eyebrow {
+    margin: 0 0 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #3356a3;
+  }
+  h1 {
+    margin: 0 0 18px;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 2.6rem;
+  }
+  .intro {
+    margin: 0 0 30px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #5a6b73;
+  }
+  button {
+    font: inherit;
+    font-size: 1.15rem;
+    font-weight: bold;
+    padding: 16px 18px;
+    border: 0;
+    border-radius: 6px;
+    background: #3356a3;
+    color: #fff;
+    cursor: pointer;
+  }
+  h2 { margin: 36px 0 10px; font-size: 1.3rem; }
+  ol, ul { margin: 0; padding-left: 36px; font-size: 1.25rem; }
+  li { padding: 5px 0; }
+  ol li { color: #3356a3; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">Week 05 · Loops</p>
+    <p class="intro">Press the button to run a for loop five times, then use a for...of loop to list each fruit.</p>
 
+    <button onclick="runLoops()">Run loops</button>
+
+    <h2>Counting loop</h2>
+    <ol id="steps"></ol>
+
+    <h2>Array loop</h2>
+    <ul id="fruitList"></ul>
+  </div>
+
+  <script>
+    function runLoops() {
+      const steps = document.getElementById('steps');
+      const fruitList = document.getElementById('fruitList');
+      steps.innerHTML = '';
+      fruitList.innerHTML = '';
+
+      // Repeat 5 times
+      for (let i = 1; i <= 5; i++) {
+        steps.innerHTML += '<li>Step ' + i + '</li>';
+      }
+
+      // Loop through an array
+      let fruits = ['apple', 'banana', 'cherry'];
+      for (let fruit of fruits) {
+        fruitList.innerHTML += '<li>' + fruit + '</li>';
+      }
+    }
+  </script>
+</body>
+</html> 
