@@ -2,20 +2,223 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Week 7 — Web Programming</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Week 7 web programming tasks.">
+  <title>Week 7 — Web Programming Portfolio</title>
+
+  <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    .week7-page {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 70px 0 90px;
+    }
+
+    .week7-heading {
+      margin-bottom: 36px;
+    }
+
+    .week7-heading .eyebrow {
+      color: #b87b35;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .week7-heading h1 {
+      margin: 12px 0;
+      font-size: clamp(38px, 6vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+    }
+
+    .week7-heading p {
+      color: #607079;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .task-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 105px;
+      padding: 22px;
+      border: 1px solid #dbe3e5;
+      border-radius: 9px;
+      background: #fff;
+      color: #24434a;
+      text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease,
+                  box-shadow .18s ease;
+    }
+
+    .task-card:hover {
+      transform: translateY(-3px);
+      border-color: #c6a06e;
+      box-shadow: 0 12px 28px rgba(23, 36, 43, .06);
+    }
+
+    .task-number {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #e9dfcf;
+      color: #24434a;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .task-info h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      letter-spacing: -.025em;
+    }
+
+    .task-info p {
+      margin: 0;
+      color: #607079;
+      font-size: 13px;
+    }
+
+    .task-arrow {
+      color: #b87b35;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 30px;
+      color: #24434a;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #b87b35;
+    }
+
+    @media (max-width: 520px) {
+      .week7-page {
+        width: calc(100% - 28px);
+        padding-top: 48px;
+      }
+
+      .tasks-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .task-card {
+        min-height: 90px;
+        padding: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .task-card {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Week 7</h1>
-  <h2>Tasks</h2>
-  <ul>
-    <li><a href="task1.html">Task 1</a></li>
-    <li><a href="task2.html">Task 2</a></li>
-    <li><a href="task3.html">Task 3</a></li>
-    <li><a href="task4.html">Task 4</a></li>
-    <li><a href="task5.html">Task 5</a></li>
-    <li><a href="task6.html">Task 6</a></li>
-  </ul>
-  <p><a href="../index.html">Back to Home</a></p>
+  <header class="wrap topbar">
+    <a class="brand" href="../index.html">MM / Portfolio</a>
+    <span class="top-note">Web Programming · 2026</span>
+  </header>
+
+  <main class="week7-page">
+    <section class="week7-heading">
+      <div class="eyebrow">Coursework archive · Week 07</div>
+      <h1>Week 7 Tasks.</h1>
+      <p>Select a task below to open the corresponding assignment.</p>
+    </section>
+
+    <section class="tasks-grid" aria-label="Week 7 assignments">
+      <a class="task-card" href="task1.html">
+        <span class="task-number">01</span>
+        <span class="task-info">
+          <h2>Task 1</h2>
+          <p>Open assignment one</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+
+      <a class="task-card" href="task2.html">
+        <span class="task-number">02</span>
+        <span class="task-info">
+          <h2>Task 2</h2>
+          <p>Open assignment two</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+
+      <a class="task-card" href="task3.html">
+        <span class="task-number">03</span>
+        <span class="task-info">
+          <h2>Task 3</h2>
+          <p>Open assignment three</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+
+      <a class="task-card" href="task4.html">
+        <span class="task-number">04</span>
+        <span class="task-info">
+          <h2>Task 4</h2>
+          <p>Open assignment four</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+
+      <a class="task-card" href="task5.html">
+        <span class="task-number">05</span>
+        <span class="task-info">
+          <h2>Task 5</h2>
+          <p>Open assignment five</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+
+      <a class="task-card" href="task6.html">
+        <span class="task-number">06</span>
+        <span class="task-info">
+          <h2>Task 6</h2>
+          <p>Open assignment six</p>
+        </span>
+        <span class="task-arrow">↗</span>
+      </a>
+    </section>
+
+    <a class="back-link" href="../index.html">← Back to Home</a>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Muhammadali Manopov</span>
+      <span>Web Programming · Gachon University</span>
+    </div>
+  </footer>
 </body>
 </html>
