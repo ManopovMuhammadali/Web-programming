@@ -3,50 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Week 7 web programming tasks.">
   <title>Week 7 — Web Programming Portfolio</title>
-
   <link rel="stylesheet" href="../portfolio.css">
 
   <style>
-    .week7-page {
+    .week7-content {
       width: min(900px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 70px 0 90px;
+      padding: 60px 0 80px;
     }
 
-    .week7-heading {
-      margin-bottom: 36px;
-    }
-
-    .week7-heading .eyebrow {
+    .week7-label {
       color: #b87b35;
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: .18em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
-    .week7-heading h1 {
+    .week7-content h1 {
       margin: 12px 0;
       font-size: clamp(38px, 6vw, 58px);
-      line-height: 1.05;
-      letter-spacing: -.055em;
+      line-height: 1.1;
+      letter-spacing: -.05em;
     }
 
-    .week7-heading p {
+    .week7-intro {
+      margin: 0 0 32px;
       color: #607079;
-      font-size: 16px;
-      margin: 0;
     }
 
-    .tasks-grid {
+    .week7-tasks {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .task-card {
+    .week7-task {
       display: flex;
       align-items: center;
       gap: 16px;
@@ -57,87 +50,64 @@
       background: #fff;
       color: #24434a;
       text-decoration: none;
-      transition: transform .18s ease, border-color .18s ease,
-                  box-shadow .18s ease;
+      transition: transform .18s ease, border-color .18s ease;
     }
 
-    .task-card:hover {
+    .week7-task:hover {
       transform: translateY(-3px);
-      border-color: #c6a06e;
-      box-shadow: 0 12px 28px rgba(23, 36, 43, .06);
+      border-color: #b87b35;
     }
 
-    .task-number {
+    .week7-number {
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #e9dfcf;
-      color: #24434a;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
     }
 
-    .task-info {
+    .week7-task-title {
       flex: 1;
-    }
-
-    .task-info h2 {
-      margin: 0 0 4px;
       font-size: 18px;
-      letter-spacing: -.025em;
+      font-weight: 750;
     }
 
-    .task-info p {
-      margin: 0;
-      color: #607079;
-      font-size: 13px;
-    }
-
-    .task-arrow {
+    .week7-arrow {
       color: #b87b35;
       font-size: 20px;
-      font-weight: 800;
     }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 30px;
+    .week7-back {
+      display: inline-block;
+      margin-top: 28px;
       color: #24434a;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 750;
       text-decoration: none;
     }
 
-    .back-link:hover {
-      color: #b87b35;
-    }
+    .week7-back:hover { color: #b87b35; }
 
     @media (max-width: 520px) {
-      .week7-page {
+      .week7-content {
         width: calc(100% - 28px);
-        padding-top: 48px;
+        padding-top: 42px;
       }
 
-      .tasks-grid {
+      .week7-tasks {
         grid-template-columns: 1fr;
         gap: 10px;
       }
 
-      .task-card {
-        min-height: 90px;
-        padding: 17px;
-      }
+      .week7-task { padding: 17px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .task-card {
-        transition: none;
-      }
+      .week7-task { transition: none; }
     }
   </style>
 </head>
@@ -148,70 +118,52 @@
     <span class="top-note">Web Programming · 2026</span>
   </header>
 
-  <main class="week7-page">
-    <section class="week7-heading">
-      <div class="eyebrow">Coursework archive · Week 07</div>
-      <h1>Week 7 Tasks.</h1>
-      <p>Select a task below to open the corresponding assignment.</p>
-    </section>
+  <main class="week7-content">
+    <div class="week7-label">Coursework archive · Week 07</div>
+    <h1>Week 7 Tasks.</h1>
+    <p class="week7-intro">
+      Select a task below to open the corresponding assignment.
+    </p>
 
-    <section class="tasks-grid" aria-label="Week 7 assignments">
-      <a class="task-card" href="task1.html">
-        <span class="task-number">01</span>
-        <span class="task-info">
-          <h2>Task 1</h2>
-          <p>Open assignment one</p>
-        </span>
-        <span class="task-arrow">↗</span>
+    <section class="week7-tasks" aria-label="Week 7 tasks">
+      <a class="week7-task" href="task1.html">
+        <span class="week7-number">01</span>
+        <span class="week7-task-title">Task 1</span>
+        <span class="week7-arrow">↗</span>
       </a>
 
-      <a class="task-card" href="task2.html">
-        <span class="task-number">02</span>
-        <span class="task-info">
-          <h2>Task 2</h2>
-          <p>Open assignment two</p>
-        </span>
-        <span class="task-arrow">↗</span>
+      <a class="week7-task" href="task2.html">
+        <span class="week7-number">02</span>
+        <span class="week7-task-title">Task 2</span>
+        <span class="week7-arrow">↗</span>
       </a>
 
-      <a class="task-card" href="task3.html">
-        <span class="task-number">03</span>
-        <span class="task-info">
-          <h2>Task 3</h2>
-          <p>Open assignment three</p>
-        </span>
-        <span class="task-arrow">↗</span>
+      <a class="week7-task" href="task3.html">
+        <span class="week7-number">03</span>
+        <span class="week7-task-title">Task 3</span>
+        <span class="week7-arrow">↗</span>
       </a>
 
-      <a class="task-card" href="task4.html">
-        <span class="task-number">04</span>
-        <span class="task-info">
-          <h2>Task 4</h2>
-          <p>Open assignment four</p>
-        </span>
-        <span class="task-arrow">↗</span>
+      <a class="week7-task" href="task4.html">
+        <span class="week7-number">04</span>
+        <span class="week7-task-title">Task 4</span>
+        <span class="week7-arrow">↗</span>
       </a>
 
-      <a class="task-card" href="task5.html">
-        <span class="task-number">05</span>
-        <span class="task-info">
-          <h2>Task 5</h2>
-          <p>Open assignment five</p>
-        </span>
-        <span class="task-arrow">↗</span>
+      <a class="week7-task" href="task5.html">
+        <span class="week7-number">05</span>
+        <span class="week7-task-title">Task 5</span>
+        <span class="week7-arrow">↗</span>
       </a>
 
-      <a class="task-card" href="task6.html">
-        <span class="task-number">06</span>
-        <span class="task-info">
-          <h2>Task 6</h2>
-          <p>Open assignment six</p>
-        </span>
-        <span class="task-arrow">↗</span>
+      <a class="week7-task" href="task6.html">
+        <span class="week7-number">06</span>
+        <span class="week7-task-title">Task 6</span>
+        <span class="week7-arrow">↗</span>
       </a>
     </section>
 
-    <a class="back-link" href="../index.html">← Back to Home</a>
+    <a class="week7-back" href="../index.html">← Back to Home</a>
   </main>
 
   <footer>
