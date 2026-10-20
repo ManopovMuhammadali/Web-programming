@@ -2,31 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Week 7 Tasks</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f4f6f8;
-    }
-    h1 { color: #243b53; }
-    li { margin: 15px 0; }
-    a { color: #1769aa; }
-  </style>
+  <title>Calculator</title>
 </head>
 <body>
-  <h1>Week 7 — JavaScript Tasks</h1>
-  <ol>
-    <li><a href="task1.html">Task 1 — Calculator</a></li>
-    <li><a href="task2.html">Task 2 — Form Validation</a></li>
-    <li><a href="task3.html">Task 3 — Even or Odd</a></li>
-    <li><a href="task4.html">Task 4 — Vowel Counter</a></li>
-    <li><a href="task5.html">Task 5 — String Reverser</a></li>
-    <li><a href="task6.html">Task 6 — To-Do List</a></li>
-  </ol>
-  <p><a href="../index.html">Back to Home</a></p>
+  <h1>Simple Calculator</h1>
+
+  <input type="number" id="num1" placeholder="First number">
+  <input type="number" id="num2" placeholder="Second number">
+
+  <br><br>
+
+  <button onclick="calculate('+')">Add</button>
+  <button onclick="calculate('-')">Subtract</button>
+  <button onclick="calculate('*')">Multiply</button>
+  <button onclick="calculate('/')">Divide</button>
+
+  <h3 id="result">Result: </h3>
+
+  <script>
+    function calculate(operator) {
+      const a = Number(document.getElementById("num1").value);
+      const b = Number(document.getElementById("num2").value);
+      let result;
+
+      if (operator === "+") result = a + b;
+      else if (operator === "-") result = a - b;
+      else if (operator === "*") result = a * b;
+      else if (operator === "/") {
+        if (b === 0) {
+          document.getElementById("result").textContent =
+            "Cannot divide by zero";
+          return;
+        }
+        result = a / b;
+      }
+
+      document.getElementById("result").textContent =
+        "Result: " + result;
+    }
+  </script>
 </body>
 </html>
