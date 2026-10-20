@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,90 +6,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Counter</title>
 <style>
-  body {
-    margin: 0;
-    padding: 10px;
-    background: #eef2f2;
-    font-family: "Trebuchet MS", sans-serif;
-    color: #1c2a33;
-  }
-  .card {
-    max-width: 590px;
-    margin: 0 auto;
-    background: #fcfdff;
-    border: 1px solid #cfd8dc;
-    border-top: 6px solid #b9503f;
-    border-radius: 10px;
-    padding: 56px 20px 40px;
-    text-align: center;
-  }
-  .eyebrow {
-    margin: 0 0 14px;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 1.05rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #b9503f;
-  }
-  h1 {
-    margin: 0 0 24px;
-    font-family: Georgia, serif;
-    font-weight: normal;
-    font-size: 2.8rem;
-    line-height: 1.1;
-  }
-  .intro { margin: 0 0 36px; font-size: 1.2rem; color: #5a6b73; }
-  #count {
-    font-size: 5rem;
-    font-weight: bold;
-    line-height: 1;
-    color: #2f6e61;
-    margin-bottom: 14px;
-  }
-  .buttons { display: flex; gap: 14px; justify-content: center; }
-  button {
-    width: 148px;
-    height: 61px;
-    font: inherit;
-    font-size: 1.25rem;
-    font-weight: bold;
-    border: 2px solid #2f6e61;
-    border-radius: 8px;
-    background: #fff;
-    color: #1c2a33;
-    cursor: pointer;
-  }
-  button.add { background: #2f6e61; color: #fff; }
-  button:focus-visible { outline: 3px solid #b9503f; outline-offset: 2px; }
+body {
+  margin: 0;
+  padding: 10px;
+  background: #eef2f2;
+  font-family: "Trebuchet MS", sans-serif;
+  color: #1c2a33;
+}
+.card {
+  max-width: 590px;
+  margin: 0 auto;
+  background: #fcfdff;
+  border: 1px solid #cfd8dc;
+  border-top: 6px solid #b9503f;
+  border-radius: 10px;
+  padding: 56px 20px 40px;
+  text-align: center;
+}
+.eyebrow {
+  margin: 0 0 14px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #b9503f;
+}
+h1 {
+  margin: 0 0 24px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: 2.8rem;
+  line-height: 1.1;
+}
+.intro { margin: 0 0 36px; font-size: 1.2rem; color: #5a6b73; }
+#count {
+  font-size: 5rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #2f6e61;
+  margin-bottom: 14px;
+}
+.buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+button {
+  width: 148px;
+  height: 61px;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid #2f6e61;
+  border-radius: 8px;
+  background: #fff;
+  color: #1c2a33;
+  cursor: pointer;
+}
+button.add { background: #2f6e61; color: #fff; }
+button:focus-visible { outline: 3px solid #b9503f; outline-offset: 2px; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <p class="eyebrow">Week 05 · Mini-app</p>
-    <h1>Counter</h1>
-    <p class="intro">Use the buttons to change the count.</p>
+<div class="card">
+  <p class="eyebrow">Week 05 · Mini-app</p>
+  <h1>Counter</h1>
+  <p class="intro">Use the buttons to change the count.</p>
 
-    <div id="count">0</div>
+  <div id="count">0</div>
 
-    <div class="buttons">
-      <button onclick="change(-1)">− Subtract</button>
-      <button class="add" onclick="change(1)">+ Add</button>
-      <button onclick="reset()">Reset</button>
-    </div>
+  <div class="buttons">
+    <button onclick="change(-1)">− Subtract</button>
+    <button class="add" onclick="change(1)">+ Add</button>
+    <button onclick="reset()">Reset</button>
   </div>
+</div>
 
-  <script>
-    let count = 0;
+<script>
+let count = 0;
 
-    function change(amount) {
-      count = count + amount;
-      document.getElementById('count').textContent = count;
-    }
+function change(amount) {
+  count = count + amount;
+  document.getElementById('count').textContent = count;
+}
 
-    function reset() {
-      count = 0;
-      document.getElementById('count').textContent = 0;
-    }
-  </script>
+function reset() {
+  count = 0;
+  document.getElementById('count').textContent = 0;
+}
+</script>
 </body>
 </html>
