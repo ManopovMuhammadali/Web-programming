@@ -1,44 +1,305 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="tasks.css">
+  <title>Simple Calculator | Week 7</title>
+
+  <style>
+    :root {
+      --ink: #17242b;
+      --muted: #607079;
+      --paper: #f5f7f5;
+      --card: #ffffff;
+      --line: #dbe3e5;
+      --accent: #b87b35;
+      --deep: #24434a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px max(6%, calc((100% - 1000px) / 2));
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wordmark {
+      color: var(--deep);
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .wordmark span {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-link,
+    .back-link {
+      color: var(--deep);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-link:hover,
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    main {
+      width: min(760px, 90%);
+      margin: 48px auto;
+    }
+
+    .page-meta {
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+    }
+
+    .intro {
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+
+    .exercise-card {
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(23, 36, 43, 0.04);
+    }
+
+    .exercise-card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    button {
+      padding: 11px 17px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--deep);
+      color: white;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent);
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .result {
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      overflow-wrap: anywhere;
+    }
+
+    #result {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 26px;
+    }
+
+    .site-footer {
+      padding: 24px 5%;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 520px) {
+      .site-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 5%;
+      }
+
+      main {
+        margin: 32px auto;
+      }
+
+      .exercise-card {
+        padding: 22px;
+      }
+
+      .button-group button {
+        flex: 1 1 40%;
+      }
+    }
+  </style>
 </head>
+
 <body>
- <header class="site-nav">
-  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
-  <a class="nav-link" href="index.html">← Back to Week 7</a>
- </header>
-  <br><br>
+  <header class="site-nav">
+    <a class="wordmark" href="../index.html">
+      MM / <span>PORTFOLIO</span>
+    </a>
+    <a class="nav-link" href="index.html">← Back to Week 7</a>
+  </header>
 
-  <button onclick="calculate('+')">Add</button>
-  <button onclick="calculate('-')">Subtract</button>
-  <button onclick="calculate('*')">Multiply</button>
-  <button onclick="calculate('/')">Divide</button>
+  <main>
+    <div class="page-meta">Week 7 · Task 1</div>
+    <h1>Simple Calculator</h1>
+    <p class="intro">
+      Enter two numbers and choose an operation to calculate the result.
+    </p>
 
-  <h3 id="result">Result: </h3>
+    <section class="exercise-card">
+      <h2>Calculator</h2>
+
+      <div class="field">
+        <label for="num1">First number</label>
+        <input
+          type="number"
+          id="num1"
+          step="any"
+          placeholder="Enter the first number"
+        >
+      </div>
+
+      <div class="field">
+        <label for="num2">Second number</label>
+        <input
+          type="number"
+          id="num2"
+          step="any"
+          placeholder="Enter the second number"
+        >
+      </div>
+
+      <div class="button-group">
+        <button type="button" onclick="calculate('+')">Add</button>
+        <button type="button" onclick="calculate('-')">Subtract</button>
+        <button type="button" onclick="calculate('*')">Multiply</button>
+        <button type="button" onclick="calculate('/')">Divide</button>
+      </div>
+
+      <div class="result" aria-live="polite">
+        <h3 id="result">Result will appear here.</h3>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">← Return to Week 7 tasks</a>
+  </main>
+
+  <footer class="site-footer">
+    MM / Portfolio · Week 7
+  </footer>
 
   <script>
     function calculate(operator) {
-      const a = Number(document.getElementById("num1").value);
-      const b = Number(document.getElementById("num2").value);
-      let result;
+      const inputA = document.getElementById("num1").value.trim();
+      const inputB = document.getElementById("num2").value.trim();
+      const resultElement = document.getElementById("result");
 
-      if (operator === "+") result = a + b;
-      else if (operator === "-") result = a - b;
-      else if (operator === "*") result = a * b;
-      else if (operator === "/") {
-        if (b === 0) {
-          document.getElementById("result").textContent =
-            "Cannot divide by zero";
-          return;
-        }
-        result = a / b;
+      if (inputA === "" || inputB === "") {
+        resultElement.textContent = "Please enter both numbers.";
+        return;
       }
 
-      document.getElementById("result").textContent =
-        "Result: " + result;
+      const a = Number(inputA);
+      const b = Number(inputB);
+      let result;
+
+      if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        resultElement.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      if (operator === "+") {
+        result = a + b;
+      } else if (operator === "-") {
+        result = a - b;
+      } else if (operator === "*") {
+        result = a * b;
+      } else if (operator === "/") {
+        if (b === 0) {
+          resultElement.textContent = "Cannot divide by zero.";
+          return;
+        }
+
+        result = a / b;
+      } else {
+        resultElement.textContent = "Unknown operation.";
+        return;
+      }
+
+      resultElement.textContent = "Result: " + result;
     }
   </script>
 </body>
 </html>
+
