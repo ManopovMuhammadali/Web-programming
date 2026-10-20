@@ -1,1 +1,70 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grade Calculator</title>
+<style>
+:root{--bg:#f6f7f4;--ink:#1c2420;--muted:#66726b;--card:#fff;--line:#d8ddd7;--accent:#1f6f54;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a17;--ink:#e8eee9;--muted:#93a199;--card:#1d2521;--line:#2f3a34;--accent:#5cc79d}}
+:root[data-theme="dark"]{--bg:#141a17;--ink:#e8eee9;--muted:#93a199;--card:#1d2521;--line:#2f3a34;--accent:#5cc79d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+main{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+h1{font-size:1.25rem;margin:0 0 4px}
+p{margin:0 0 20px;color:var(--muted);font-size:.95rem}
+label{display:block;font-weight:600;margin-bottom:6px}
+.row{display:flex;gap:8px}
+input{flex:1;min-width:0;font:inherit;font-size:1.1rem;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+button{font:inherit;font-weight:600;padding:10px 16px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
+:root[data-theme="dark"] button{color:#0d1411}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button{color:#0d1411}}
+input:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#result{margin-top:24px;text-align:center;min-height:80px}
+#grade{font-size:2.5rem;font-weight:700;line-height:1.2;color:var(--accent)}
+#note{margin-top:8px;color:var(--muted)}
+#note.err{color:#c0392b}
+</style>
+</head>
+<body>
+<main>
+  <h1>Grade calculator</h1>
+  <p>Enter a score from 0 to 100.</p>
+  <label for="score">Score</label>
+  <div class="row">
+    <input id="score" type="number" inputmode="decimal" min="0" max="100" placeholder="e.g. 75" autofocus>
+    <button id="go" type="button">Get grade</button>
+  </div>
+  <div id="result" aria-live="polite"><div id="grade"></div><div id="note"></div></div>
+</main>
+<script>
+function getGrade(score){
+  if (score >= 90) return 'A';
+  else if (score >= 80) return 'B';
+  else if (score >= 70) return 'C';
+  else if (score >= 60) return 'D';
+  else return 'F';
+}
+const input = document.getElementById('score');
+const gradeEl = document.getElementById('grade');
+const noteEl = document.getElementById('note');
+function show(){
+  const raw = input.value.trim();
+  const score = Number(raw);
+  noteEl.className = '';
+  if (raw === '' || isNaN(score) || score < 0 || score > 100){
+    gradeEl.textContent = '';
+    noteEl.textContent = 'Enter a number between 0 and 100.';
+    noteEl.className = 'err';
+    return;
+  }
+  noteEl.textContent = '';
+  gradeEl.textContent = 'Your grade is: ' + getGrade(score);
+}
+document.getElementById('go').addEventListener('click', show);
+input.addEventListener('keydown', e => { if (e.key === 'Enter') show(); });
+</script>
+</body>
+</html>
