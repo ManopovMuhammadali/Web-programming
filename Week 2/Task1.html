@@ -1,77 +1,364 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog — Gachon Web Students</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Web programming notes, HTML tutorials, and student coursework at Gachon University.">
+  <title>Gachon Journal — Web Programming</title>
   <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    :root {
+      --blog-bg: #f4f7f4;
+      --blog-ink: #182d27;
+      --blog-muted: #64766e;
+      --blog-green: #174c3a;
+      --blog-lime: #d9f27a;
+      --blog-line: #dce5df;
+      --blog-white: #ffffff;
+    }
+
+    body {
+      background: var(--blog-bg);
+      color: var(--blog-ink);
+    }
+
+    .blog-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .blog-nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .blog-brand {
+      color: var(--blog-ink);
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      font-size: 20px;
+    }
+
+    .blog-brand span {
+      color: #528363;
+    }
+
+    .blog-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .blog-links a {
+      color: var(--blog-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .blog-links a:hover {
+      color: var(--blog-green);
+    }
+
+    .blog-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(38px, 7vw, 78px);
+      border-radius: 24px;
+      background: var(--blog-green);
+      color: white;
+    }
+
+    .blog-hero::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -65px;
+      bottom: -110px;
+      border: 1px solid rgba(217, 242, 122, .5);
+      border-radius: 50%;
+      box-shadow: 0 0 0 28px rgba(217, 242, 122, .05),
+                  0 0 0 58px rgba(217, 242, 122, .05);
+      pointer-events: none;
+    }
+
+    .blog-kicker {
+      color: var(--blog-lime);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+    }
+
+    .blog-hero h1 {
+      max-width: 700px;
+      margin: 20px 0;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1;
+      letter-spacing: -.065em;
+    }
+
+    .blog-hero p {
+      max-width: 570px;
+      color: #d6e5db;
+      font-size: 17px;
+    }
+
+    .blog-pill {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--blog-lime);
+      color: var(--blog-ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .blog-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(230px, .8fr);
+      gap: 24px;
+      padding: 38px 0 60px;
+      align-items: start;
+    }
+
+    .blog-section-label {
+      margin: 0 0 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--blog-muted);
+      font-weight: 850;
+    }
+
+    .blog-post {
+      padding: 28px;
+      margin-bottom: 18px;
+      border: 1px solid var(--blog-line);
+      border-radius: 18px;
+      background: var(--blog-white);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .blog-post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(24, 45, 39, .07);
+    }
+
+    .blog-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #eaf2e9;
+      color: var(--blog-green);
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .blog-post h2 {
+      margin: 16px 0 10px;
+      font-size: clamp(23px, 3vw, 32px);
+      line-height: 1.15;
+      letter-spacing: -.045em;
+    }
+
+    .blog-post p {
+      color: var(--blog-muted);
+    }
+
+    .blog-meta {
+      font-size: 12px;
+      color: var(--blog-muted);
+    }
+
+    .blog-sidebar {
+      display: grid;
+      gap: 18px;
+    }
+
+    .blog-panel {
+      padding: 24px;
+      border: 1px solid var(--blog-line);
+      border-radius: 18px;
+      background: var(--blog-white);
+    }
+
+    .blog-panel h2 {
+      margin: 0 0 12px;
+      font-size: 19px;
+    }
+
+    .blog-panel p {
+      color: var(--blog-muted);
+      font-size: 14px;
+    }
+
+    .blog-panel ul {
+      padding-left: 20px;
+      color: var(--blog-muted);
+    }
+
+    .blog-panel li {
+      margin: 9px 0;
+    }
+
+    .blog-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 24px 0 34px;
+      border-top: 1px solid var(--blog-line);
+      color: var(--blog-muted);
+      font-size: 12px;
+    }
+
+    .blog-footer a {
+      color: var(--blog-green);
+    }
+
+    @media (max-width: 720px) {
+      .blog-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 18px 0;
+      }
+
+      .blog-links {
+        gap: 15px;
+      }
+
+      .blog-hero {
+        border-radius: 16px;
+      }
+
+      .blog-post {
+        padding: 22px;
+      }
+
+      .blog-footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blog-post {
+        transition: none;
+      }
+
+      .blog-post:hover {
+        transform: none;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Page-level header -->
-  <header>
-    <h1>My University</h1>
-    <nav>...</nav>
-    <h1>Gachon Web Blog</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
+  <header class="blog-shell blog-nav">
+    <a class="blog-brand" href="../index.html">GACHON<span> JOURNAL.</span></a>
+    <nav class="blog-links" aria-label="Main navigation">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">Week 2</a>
+      <a href="#articles">Articles</a>
+      <a href="#about">About</a>
     </nav>
-          <!-- Primary site navigation -->
-  <nav aria-label="Main navigation">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/courses">Courses</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
-        <nav aria-label="Breadcrumb">
-  <ol>
-    <li><a href="/">Home</a></li>
-    <li><a href="/courses">Courses</a></li>
-    <li aria-current="page">Web Programming</li>
-  </ol>
-</nav>
-<main id="main-content">
-    <h2>Web Programming Course</h2>
-    <p>This page is about K0126002...</p>
-    <!-- Everything unique to this page goes here -->
-  </main>
-
-<!-- Footer links: minor, do NOT need <nav> -->
-<footer>
-  <a href="/privacy">Privacy</a> ·
-  <a href="/terms">Terms</a>
-    <p>&copy; 2026 Gachon University · Web Programming K0126002</p>
-  <nav aria-label="Footer links">
-    <a href="/privacy">Privacy Policy</a> ·
-    <a href="/accessibility">Accessibility</a> ·
-    <a href="/contact">Contact</a>
-  </nav>
-</footer>
-<article>
-  <h2>Semantic HTML Deep Dive</h2>
-  <p>Using semantic elements makes your code...</p>
-  <footer>
-    <p>Author: Prof. Muhammadali · Published: <time datetime="2026-09-05">Sep 5, 2026</time></p>
-    <p>Tags: HTML, Accessibility, SEO</p>
-  </footer>
-</article>
   </header>
 
-  <main>
-    <article>
-      <!-- Article-level header (inside article) -->
-      <header>
-        <h2>My First HTML Page</h2>
-        <p>Posted by Muhammadali Manopov · <time datetime="2026-09-05">Sep 5, 2026</time>
+  <main class="blog-shell">
+    <section class="blog-hero" aria-labelledby="page-title">
+      <div class="blog-kicker">Student publication · 2026</div>
+      <h1 id="page-title">Learning the language of the web.</h1>
+      <p>
+        Notes, experiments, and lessons from my Web Programming course
+        at Gachon University.
+      </p>
+      <a class="blog-pill" href="#articles">Explore the journal ↓</a>
+    </section>
+
+    <div class="blog-layout">
+      <section id="articles" aria-labelledby="articles-title">
+        <h2 class="blog-section-label" id="articles-title">Latest articles</h2>
+
+        <article class="blog-post">
+          <span class="blog-tag">HTML foundations</span>
+          <h2>My First HTML Page</h2>
+          <p>
+            Every website starts with a structure. HTML gives content
+            meaning through headings, paragraphs, links, and semantic elements.
           </p>
-    </article>
+          <p class="blog-meta">
+            By Muhammadali Manopov ·
+            <time datetime="2026-09-05">September 5, 2026</time>
+          </p>
+        </article>
+
+        <article class="blog-post">
+          <span class="blog-tag">Semantic HTML</span>
+          <h2>Building pages with meaning</h2>
+          <p>
+            Elements such as main, article, nav, and footer make a page
+            easier to understand for people, browsers, and assistive technology.
+          </p>
+          <p class="blog-meta">Web Programming · Learning notes</p>
+        </article>
+
+        <article class="blog-post">
+          <span class="blog-tag">Course notes</span>
+          <h2>What I am learning at Gachon</h2>
+          <p>
+            This journal records my progress as I practise HTML, CSS,
+            responsive layouts, and JavaScript.
+          </p>
+          <p class="blog-meta">K0126002 · Web Programming</p>
+        </article>
+      </section>
+
+      <aside class="blog-sidebar" aria-label="Course information">
+        <section class="blog-panel" id="about">
+          <h2>About this journal</h2>
+          <p>
+            A student project documenting the process of learning
+            front-end web development.
+          </p>
+        </section>
+
+        <section class="blog-panel">
+          <h2>Topics</h2>
+          <ul>
+            <li>HTML and semantic structure</li>
+            <li>CSS and visual design</li>
+            <li>Responsive web layouts</li>
+            <li>JavaScript and interaction</li>
+          </ul>
+        </section>
+
+        <section class="blog-panel">
+          <h2>Course information</h2>
+          <p>Web Programming</p>
+          <p>Gachon University · 2026</p>
+          <a href="../index.html">View my portfolio →</a>
+        </section>
+      </aside>
+    </div>
   </main>
 
-
-<script src="../assets/nav.js"></script>
+  <footer class="blog-shell blog-footer">
+    <span>© 2026 Gachon Journal</span>
+    <span>Built while learning the web at Gachon University.</span>
+  </footer>
 </body>
 </html>
