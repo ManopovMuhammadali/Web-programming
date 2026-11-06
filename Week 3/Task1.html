@@ -1,50 +1,73 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8">
-  <link rel="stylesheet" href="../portfolio.css">
-<style>
-  .card {
-    width: 280px;
-    height: 180px;
-    background: white;
-    border: 2px solid #14b8a6;
-    border-radius: 12px;
-    position: relative;
-    margin: 40px;
-  }
-  .badge {
-    position: absolute;
-    top: -12px;
-    right: 16px;
-    background: #0f766e;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 12px;
-    border-radius: 20px;
-  }
-</style>
-</head>
-<body>
-  <div class="card">
-    <span class="badge">SALE</span>
-    <p style="padding:16px;color:#0f766e;font-weight:bold">Card content here</p>
-  </div>
-  <div class="card">
-    <img
-        src="https://placehold.co/600x350?text=Web+Programming"
-        alt="Web programming illustration"
-    >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sale Card</title>
 
-    <div class="card-content">
-        <h2>Web Programming</h2>
-        <p>
-            Learn how to create websites using HTML,
-            CSS and JavaScript.
-        </p>
-        <a href="#">Learn More</a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0fdfa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            padding: 25px;
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #d1e5df;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: #dc2626;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #0f766e;
+        }
+
+        .price {
+            font-size: 25px;
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .old-price {
+            color: #888;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <span class="badge">SALE</span>
+
+        <h2>Wireless Headphones</h2>
+
+        <p>High-quality sound with comfortable design.</p>
+
+        <p class="price">$49.99</p>
+        <p class="old-price">$79.99</p>
     </div>
-</div>
 
 </body>
 </html>
