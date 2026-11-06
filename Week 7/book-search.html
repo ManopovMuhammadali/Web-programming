@@ -74,7 +74,7 @@ form.addEventListener("submit", async function(event) {
     results.innerHTML = data.docs.map(book => {
       const title = escapeHTML(book.title || "Untitled");
       const author = escapeHTML(book.author_name?.[0] || "Unknown author");
-      const year = book.first_publish_year || "Year unavailable";
+      const year = escapeHTML(String(book.first_publish_year || "Year unavailable"));
       const cover = book.cover_i
         ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
         : "";
