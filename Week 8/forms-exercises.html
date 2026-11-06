@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 8 — HTML Forms Exercises</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.exercise {
+  max-width: 800px;
+  margin: 22px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.field { margin: 14px 0; }
+label { display: block; margin-bottom: 6px; font-weight: bold; }
+input, select, textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #9aa8ad;
+  border-radius: 6px;
+  font: inherit;
+}
+input:valid { border-color: #15803d; }
+input:invalid:not(:placeholder-shown) { border-color: #b91c1c; }
+button {
+  padding: 10px 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.status { margin-top: 10px; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 8</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 08 / HTML FORMS AND VALIDATION</p>
+  <h1>Forms and validation</h1>
+  <p>Five HTML form exercises. The JavaScript registration exercise is in registration.html.</p>
+</header>
+
+<section class="exercise">
+  <h2>01 — Login Form</h2>
+  <form class="demo-form">
+    <div class="field">
+      <label for="loginEmail">Email</label>
+      <input id="loginEmail" type="email" required placeholder="name@example.com">
+    </div>
+    <div class="field">
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" required minlength="8">
+    </div>
+    <button type="submit">Log in</button>
+    <p class="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="exercise">
+  <h2>02 — Validation Attributes</h2>
+  <form class="demo-form">
+    <div class="field">
+      <label for="userName">Name (minimum 2 characters)</label>
+      <input id="userName" type="text" required minlength="2" maxlength="40">
+    </div>
+    <div class="field">
+      <label for="userAge">Age (18–100)</label>
+      <input id="userAge" type="number" min="18" max="100" required>
+    </div>
+    <div class="field">
+      <label for="userWebsite">Website</label>
+      <input id="userWebsite" type="url" placeholder="https://example.com">
+    </div>
+    <button type="submit">Check validation</button>
+    <p class="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="exercise">
+  <h2>03 — CSS Valid/Invalid States</h2>
+  <p>Enter a valid email address to see the valid state.</p>
+  <div class="field">
+    <label for="stateEmail">Email</label>
+    <input id="stateEmail" type="email" required placeholder="name@example.com">
+  </div>
+  <p>Green border means valid. Red border means invalid after entering a value.</p>
+</section>
+
+<section class="exercise">
+  <h2>04 — Student Registration Form</h2>
+  <form class="demo-form">
+    <div class="field">
+      <label for="studentName">Full name</label>
+      <input id="studentName" type="text" required minlength="2">
+    </div>
+    <div class="field">
+      <label for="studentEmail">Email</label>
+      <input id="studentEmail" type="email" required>
+    </div>
+    <div class="field">
+      <label for="studentCourse">Course</label>
+      <select id="studentCourse" required>
+        <option value="">Choose a course</option>
+        <option>Computer Science</option>
+        <option>Web Programming</option>
+        <option>Cybersecurity</option>
+      </select>
+    </div>
+    <button type="submit">Register</button>
+    <p class="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section class="exercise">
+  <h2>05 — Contact Form</h2>
+  <form class="demo-form">
+    <div class="field">
+      <label for="contactName">Your name</label>
+      <input id="contactName" type="text" required>
+    </div>
+    <div class="field">
+      <label for="contactEmail">Your email</label>
+      <input id="contactEmail" type="email" required>
+    </div>
+    <div class="field">
+      <label for="contactMessage">Message</label>
+      <textarea id="contactMessage" rows="4" required minlength="10"></textarea>
+    </div>
+    <button type="submit">Send message</button>
+    <p class="status" aria-live="polite"></p>
+  </form>
+</section>
+</main>
+
+<script>
+document.querySelectorAll(".demo-form").forEach(form => {
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const status = form.querySelector(".status");
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    status.textContent =
+      "The form is valid. This demonstration does not send data to a server.";
+    form.reset();
+  });
+});
+</script>
+</body>
+</html>
