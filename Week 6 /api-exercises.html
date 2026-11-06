@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fetch API Exercises</title>
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    .task { max-width: 850px; margin: 35px auto; padding: 25px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+    button { padding: 10px 16px; background: #24434a; color: white; border: 0; border-radius: 6px; cursor: pointer; }
+    input { padding: 10px; border: 1px solid #dbe3e5; border-radius: 6px; }
+    .output { margin-top: 15px; line-height: 1.7; color: #24434a; }
+    .item { padding: 12px; border-bottom: 1px solid #dbe3e5; }
+  </style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 6</a>
+</header>
+<main>
+  <section class="task">
+    <p>WEEK 06 / API PRACTICE</p>
+    <h1>Fetch API Exercises</h1>
+    <p>Six exercises using public APIs and JavaScript fetch().</p>
+  </section>
+
+  <section class="task">
+    <h2>01 — Fetch a User</h2>
+    <button onclick="loadUser()">Load user</button>
+    <div class="output" id="user"></div>
+  </section>
+
+  <section class="task">
+    <h2>02 — Fetch Multiple Users</h2>
+    <button onclick="loadUsers()">Load users</button>
+    <div class="output" id="users"></div>
+  </section>
+
+  <section class="task">
+    <h2>03 — Fetch a Post</h2>
+    <button onclick="loadPost()">Load post</button>
+    <div class="output" id="post"></div>
+  </section>
+
+  <section class="task">
+    <h2>04 — Search Posts</h2>
+    <input id="searchId" type="number" min="1" max="100" placeholder="Enter post ID">
+    <button onclick="searchPost()">Search</button>
+    <div class="output" id="searchResult"></div>
+  </section>
+
+  <section class="task">
+    <h2>05 — Fetch Comments</h2>
+    <button onclick="loadComments()">Load comments</button>
+    <div class="output" id="comments"></div>
+  </section>
+
+  <section class="task">
+    <h2>06 — Fetch Countries</h2>
+    <button onclick="loadCountries()">Load countries</button>
+    <div class="output" id="countries"></div>
+  </section>
+</main>
+
+<script>
+const base = "https://jsonplaceholder.typicode.com";
+
+async function getData(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Could not load data.");
+  return response.json();
+}
+
+async function loadUser() {
+  const box = document.getElementById("user");
+  box.textContent = "Loading...";
+  try {
+    const user = await getData(base + "/users/1");
+    box.textContent = `${user.name} — ${user.email} — ${user.address.city}`;
+  } catch (error) { box.textContent = error.message; }
+}
+
+async function loadUsers() {
+  const box = document.getElementById("users");
+  box.textContent = "Loading...";
+  try {
+    const users = await getData(base + "/users");
+    box.innerHTML = users.slice(0, 5).map(u =>
+      `<div class="item"><strong>${u.name}</strong><br>${u.email}</div>`
+    ).join("");
+  } catch (error) { box.textContent = error.message; }
+}
+
+async function loadPost() {
+  const box = document.getElementById("post");
+  box.textContent = "Loading...";
+  try {
+    const post = await getData(base + "/posts/1");
+    box.innerHTML = `<strong>${post.title}</strong><p>${post.body}</p>`;
+  } catch (error) { box.textContent = error.message; }
+}
+
+async function searchPost() {
+  const id = Number(document.getElementById("searchId").value);
+  const box = document.getElementById("searchResult");
+  if (!Number.isInteger(id) || id < 1 || id > 100) {
+    box.textContent = "Enter a post ID from 1 to 100.";
+    return;
+  }
+  box.textContent = "Loading...";
+  try {
+    const post = await getData(base + "/posts/" + id);
+    box.innerHTML = `<strong>${post.title}</strong><p>${post.body}</p>`;
+  } catch (error) { box.textContent = error.message; }
+}
+
+async function loadComments() {
+  const box = document.getElementById("comments");
+  box.textContent = "Loading...";
+  try {
+    const comments = await getData(base + "/posts/1/comments");
+    box.innerHTML = comments.map(c =>
+      `<div class="item"><strong>${c.name}</strong><br>${c.email}<p>${c.body}</p></div>`
+    ).join("");
+  } catch (error) { box.textContent = error.message; }
+}
+
+async function loadCountries() {
+  const box = document.getElementById("countries");
+  box.textContent = "Loading...";
+  try {
+    const response = await fetch("https://restcountries.com/v3.1/all?fields=name,capital,region");
+    if (!response.ok) throw new Error("Could not load countries.");
+    const countries = await response.json();
+    box.innerHTML = countries.slice(0, 10).map(c =>
+      `<div class="item"><strong>${c.name.common}</strong> — ${c.capital?.[0] || "No capital listed"} (${c.region})</div>`
+    ).join("");
+  } catch (error) { box.textContent = error.message; }
+}
+</script>
+</body>
+</html>
