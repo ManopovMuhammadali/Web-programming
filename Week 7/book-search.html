@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Library Book Search</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.search-box { max-width: 850px; margin: 35px auto; padding: 28px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+.search-row { display: flex; gap: 10px; flex-wrap: wrap; }
+input { flex: 1; min-width: 180px; padding: 12px; border: 1px solid #dbe3e5; border-radius: 6px; font: inherit; }
+button { padding: 12px 18px; border: 0; border-radius: 6px; background: #24434a; color: white; cursor: pointer; }
+#results { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; margin-top: 25px; }
+.book { padding: 18px; border: 1px solid #dbe3e5; border-radius: 9px; background: #fff; }
+.book img { width: 100px; height: 145px; object-fit: cover; background: #f5f7f5; }
+.book h3 { color: #24434a; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+<a class="nav-link" href="index.html">← Week 7</a>
+</header>
+<main>
+<section class="search-box">
+<p>WEEK 07 / PROJECT</p>
+<h1>Open Library</h1>
+<p>Search for books by title, author, or subject.</p>
+<form class="search-row" id="searchForm">
+<input id="query" type="search" placeholder="Try Harry Potter..." required>
+<button type="submit">Search books</button>
+</form>
+<p id="status" aria-live="polite"></p>
+<div id="results"></div>
+</section>
+</main>
+<script>
+const form = document.getElementById("searchForm");
+const results = document.getElementById("results");
+const statusBox = document.getElementById("status");
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+  const query = document.getElementById("query").value.trim();
+  if (!query) return;
+
+  results.innerHTML = "";
+  statusBox.textContent = "Searching...";
+  try {
+    const response = await fetch(
+      "https://openlibrary.org/search.json?q=" + encodeURIComponent(query) + "&limit=12"
+    );
+    if (!response.ok) throw new Error("Search failed.");
+    const data = await response.json();
+
+    if (!data.docs.length) {
+      statusBox.textContent = "No books found. Try another search.";
+      return;
+    }
+
+    statusBox.textContent = `${data.numFound.toLocaleString()} results found. Showing the first ${data.docs.length}.`;
+    results.innerHTML = data.docs.map(book => {
+      const title = escapeHTML(book.title || "Untitled");
+      const author = escapeHTML(book.author_name?.[0] || "Unknown author");
+      const year = book.first_publish_year || "Year unavailable";
+      const cover = book.cover_i
+        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+        : "";
+      return `<article class="book">
+        ${cover ? `<img src="${cover}" alt="Cover of ${title}" loading="lazy">` : "<p>No cover available</p>"}
+        <h3>${title}</h3>
+        <p>${author}</p>
+        <small>First published: ${year}</small>
+      </article>`;
+    }).join("");
+  } catch (error) {
+    statusBox.textContent = "Unable to connect. Please try again.";
+  }
+});
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#039;"
+  })[char]);
+}
+</script>
+</body>
+</html>
