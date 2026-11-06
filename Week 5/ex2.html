@@ -1,73 +1,45 @@
- <!DOCTYPE html>
+ 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loops and Arrays — Week 5</title>
-  <link rel="stylesheet" href="exercises.css">
+  <title>Loops and Arrays</title>
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    .task-card { max-width: 620px; margin: 50px auto; padding: 32px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+    button { padding: 12px 20px; background: #24434a; color: white; border: 0; border-radius: 7px; cursor: pointer; }
+    #output { margin-top: 20px; line-height: 1.9; color: #24434a; }
+  </style>
 </head>
 <body>
   <header class="site-nav">
     <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
     <a class="nav-link" href="index.html">← Week 5</a>
   </header>
-
   <main>
-    <div class="page-meta">
-      <span>Web Programming</span>
-      <span>Week 05 / Exercise 02</span>
-    </div>
-    <h1>Loops and arrays.</h1>
-    <p class="intro">
-      Run a for loop five times, then use a for...of loop to list each fruit.
-    </p>
-
-    <section class="exercise-card">
-      <button id="run" type="button">Run loops ↗</button>
-
-      <h2>Counting loop</h2>
-      <ol id="steps">
-        <li>Press “Run loops” to begin.</li>
-      </ol>
-
-      <h2>Array loop</h2>
-      <ul id="fruitList">
-        <li>Your fruit list will appear here.</li>
-      </ul>
+    <section class="task-card">
+      <p>WEEK 05 / EXERCISE 02</p>
+      <h1>Loops and Arrays</h1>
+      <p>Use JavaScript loops to display numbers and calculate their total.</p>
+      <button onclick="runLoop()">Run exercise</button>
+      <div id="output" aria-live="polite"></div>
     </section>
-
-    <a class="back-link" href="index.html">← Back to Week 5 exercises</a>
   </main>
-
-  <footer class="site-footer">
-    <p>MM / Web Programming Portfolio</p>
-    <p><a href="../index.html">Return to homepage ↑</a></p>
-  </footer>
-
   <script>
-    function runLoops() {
-      const steps = document.getElementById('steps');
-      const fruitList = document.getElementById('fruitList');
+    function runLoop() {
+      const numbers = [5, 10, 15, 20, 25];
+      let total = 0;
+      let output = "<strong>Numbers:</strong><br>";
 
-      steps.replaceChildren();
-      fruitList.replaceChildren();
-
-      for (let i = 1; i <= 5; i++) {
-        const item = document.createElement('li');
-        item.textContent = 'Step ' + i;
-        steps.appendChild(item);
+      for (let i = 0; i < numbers.length; i++) {
+        output += numbers[i] + "<br>";
+        total += numbers[i];
       }
 
-      const fruits = ['apple', 'banana', 'cherry'];
-
-      for (const fruit of fruits) {
-        const item = document.createElement('li');
-        item.textContent = fruit;
-        fruitList.appendChild(item);
-      }
+      output += `<br><strong>Total: ${total}</strong>`;
+      document.getElementById("output").innerHTML = output;
     }
-
-    document.getElementById('run').addEventListener('click', runLoops);
   </script>
 </body>
 </html>
