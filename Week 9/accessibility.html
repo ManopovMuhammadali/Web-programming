@@ -1,64 +1,142 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Accessibility Exercises</title>
+<title>Week 9 — Web Accessibility</title>
 <link rel="stylesheet" href="../portfolio.css">
 <style>
-.exercise { max-width: 800px; margin: 25px auto; padding: 25px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
-button, a { cursor: pointer; }
-button { padding: 11px 17px; border: 0; border-radius: 6px; background: #24434a; color: white; }
-input { padding: 10px; border: 1px solid #607079; border-radius: 5px; }
-:focus-visible { outline: 3px solid #b87b35; outline-offset: 3px; }
-.demo-nav a { margin-right: 15px; color: #24434a; }
+.exercise {
+  max-width: 850px;
+  margin: 22px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 10px;
+  padding: 12px;
+  background: white;
+  color: black;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 10px;
+}
+button, a, input {
+  font: inherit;
+}
+:focus-visible {
+  outline: 3px solid #b87b35;
+  outline-offset: 3px;
+}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <header class="site-nav">
-<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
-<a class="nav-link" href="index.html">← Week 9</a>
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 9</a>
 </header>
-<main>
-<section class="exercise" id="semantic">
-<p>WEEK 09 / EXERCISE 01</p>
-<h1>Semantic HTML</h1>
-<p>This page uses meaningful HTML elements to describe its structure.</p>
-<nav class="demo-nav" aria-label="Example navigation">
-<a href="#images">Images</a>
-<a href="#keyboard">Keyboard</a>
-</nav>
-<article>
-<h2>Why semantic HTML matters</h2>
-<p>Semantic elements help browsers, search engines, and assistive technologies understand webpage content.</p>
-</article>
+
+<main id="main-content">
+<header class="archive-intro">
+  <p>WEEK 09 / WEB ACCESSIBILITY</p>
+  <h1>Accessible web design</h1>
+  <p>Practice semantic HTML, keyboard navigation, alt text and accessibility testing.</p>
+</header>
+
+<section class="exercise" id="lighthouse">
+  <h2>01 — Lighthouse Accessibility Audit</h2>
+  <p>
+    Open Chrome DevTools, choose Lighthouse, select Accessibility,
+    and run an audit on the published portfolio.
+  </p>
+  <ol>
+    <li>Open the published website in Chrome.</li>
+    <li>Open DevTools.</li>
+    <li>Select Lighthouse.</li>
+    <li>Select Accessibility and run the report.</li>
+    <li>Record the actual score and fix reported issues.</li>
+  </ol>
+  <p><strong>My audit result:</strong> Enter your real Lighthouse score here after testing.</p>
 </section>
 
-<section class="exercise" id="images">
-<p>WEEK 09 / EXERCISE 02</p>
-<h2>Accessible Images and Forms</h2>
-<figure>
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700" alt="Laptop displaying a web development workspace" style="max-width:100%;height:auto;border-radius:8px">
-<figcaption>A workspace used for web development.</figcaption>
-</figure>
-<form onsubmit="event.preventDefault(); document.getElementById('formResult').textContent='Thank you for your message.';">
-<label for="visitorName">Your name</label><br>
-<input id="visitorName" type="text" required>
-<button type="submit">Send</button>
-<p id="formResult" role="status" aria-live="polite"></p>
-</form>
+<section class="exercise" id="skip">
+  <h2>02 — Skip Link</h2>
+  <p>
+    Press Tab after reloading this page. The skip link appears
+    and allows keyboard users to jump to the main content.
+  </p>
+  <a href="#main-content">Skip to main content</a>
+</section>
+
+<section class="exercise" id="native-button">
+  <h2>03 — Replace a Div-Button With a Real Button</h2>
+  <p>A clickable div is not automatically keyboard accessible.</p>
+  <p>Use a native button instead:</p>
+  <button id="accessibleButton" type="button">Accessible button</button>
+  <p id="buttonMessage" role="status" aria-live="polite"></p>
+</section>
+
+<section class="exercise" id="alt-text">
+  <h2>04 — Add Proper Alt Text</h2>
+  <figure>
+    <img
+      src="https://picsum.photos/seed/accessibility/650/250"
+      alt="A student using a laptop at a desk"
+      style="max-width:100%;height:auto"
+    >
+    <figcaption>
+      The alt text describes the meaningful content of the image.
+    </figcaption>
+  </figure>
+  <p>
+    Decorative images should use an empty alt attribute:
+    <code>alt=""</code>.
+  </p>
 </section>
 
 <section class="exercise" id="keyboard">
-<p>WEEK 09 / EXERCISE 03</p>
-<h2>Keyboard Navigation</h2>
-<p>Use the Tab key to move between these controls. Press Enter or Space to activate them.</p>
-<button onclick="document.getElementById('keyboardResult').textContent='You activated the first button.'">First button</button>
-<button onclick="document.getElementById('keyboardResult').textContent='You activated the second button.'">Second button</button>
-<a href="#semantic">Return to the first exercise</a>
-<p id="keyboardResult" role="status" aria-live="polite"></p>
+  <h2>05 — Keyboard Navigation and Testing</h2>
+  <p>
+    Use Tab and Shift+Tab to navigate. Press Enter or Space
+    to activate controls. Focus indicators must remain visible.
+  </p>
+  <label for="keyboardInput">Example input</label>
+  <input id="keyboardInput" type="text">
+  <button type="button" id="keyboardButton">Test keyboard button</button>
+  <p id="keyboardMessage" role="status" aria-live="polite"></p>
+</section>
+
+<section class="exercise">
+  <h2>Accessibility checklist</h2>
+  <ul>
+    <li>Use semantic headings and landmarks.</li>
+    <li>Give meaningful images useful alt text.</li>
+    <li>Use real buttons for actions.</li>
+    <li>Associate every form field with a label.</li>
+    <li>Keep visible keyboard focus.</li>
+    <li>Check color contrast.</li>
+    <li>Run Lighthouse and fix actual findings.</li>
+  </ul>
 </section>
 </main>
+
+<script>
+document.getElementById("accessibleButton").addEventListener("click", () => {
+  document.getElementById("buttonMessage").textContent =
+    "The native button works with keyboard and pointer input.";
+});
+
+document.getElementById("keyboardButton").addEventListener("click", () => {
+  document.getElementById("keyboardMessage").textContent =
+    "The button was activated.";
+});
+</script>
 </body>
 </html>
