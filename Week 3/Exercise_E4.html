@@ -1,46 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8">
-  <link rel="stylesheet" href="../portfolio.css">
-<style>
-  :root {
-    --primary: #0f766e;
-    --accent:  #14b8a6;
-    --bg:      #f0fdfa;
-    --text:    #1e293b;
-    --radius:  10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg:   #051a0a;
-      --text: #d4edda;
-    }
-  }
-  body { background: var(--bg); color: var(--text);
-         font-family: sans-serif; padding: 20px; }
-  .btn {
-    background: var(--primary);
-    color: white; border: none;
-    padding: 10px 20px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn:hover { background: var(--accent); }
-  .card {
-    background: var(--bg);
-    border: 2px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 20px; margin-top: 16px;
-    color: var(--text);
-  }
-</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables Theme</title>
+
+    <style>
+        :root {
+            --primary: #0f766e;
+            --accent: #14b8a6;
+            --bg: #f0fdfa;
+            --text: #1e293b;
+            --card: #ffffff;
+            --radius: 12px;
+        }
+
+        body.dark {
+            --primary: #a78bfa;
+            --accent: #8b5cf6;
+            --bg: #111827;
+            --text: #f9fafb;
+            --card: #1f2937;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: var(--radius);
+            cursor: pointer;
+        }
+
+        .card {
+            background: var(--card);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <button class="btn">Click Me</button>
-  <div class="card">A themed card using CSS variables</div>
 
+    <h1>CSS Variables Theme</h1>
 
-  
+    <button class="btn" id="themeButton">
+        Change Theme
+    </button>
+
+    <div class="card">
+        <h2>My Themed Card</h2>
+        <p>
+            This card uses CSS custom properties
+            for its background, text and border colors.
+        </p>
+    </div>
+
+    <script>
+        const themeButton = document.getElementById("themeButton");
+
+        themeButton.addEventListener("click", function () {
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                themeButton.textContent = "Switch to Light Theme";
+            } else {
+                themeButton.textContent = "Switch to Dark Theme";
+            }
+        });
+    </script>
+
 </body>
 </html>
