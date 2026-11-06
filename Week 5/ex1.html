@@ -1,84 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grade Calculator — Week 5</title>
-  <link rel="stylesheet" href="exercises.css">
+  <title>Grade Calculator</title>
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    .task-card { max-width: 620px; margin: 50px auto; padding: 32px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+    label { display: block; margin: 18px 0 8px; color: #24434a; }
+    input { width: 100%; padding: 12px; border: 1px solid #dbe3e5; border-radius: 7px; font: inherit; }
+    button { margin-top: 20px; padding: 12px 20px; background: #24434a; color: white; border: 0; border-radius: 7px; cursor: pointer; }
+    #result { margin-top: 22px; color: #24434a; font-weight: bold; }
+  </style>
 </head>
 <body>
   <header class="site-nav">
     <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
     <a class="nav-link" href="index.html">← Week 5</a>
   </header>
-
   <main>
-    <div class="page-meta">
-      <span>Web Programming</span>
-      <span>Week 05 / Exercise 01</span>
-    </div>
-    <h1>Grade calculator.</h1>
-    <p class="intro">Enter your score to calculate your letter grade.</p>
-
-    <section class="exercise-card">
-      <label for="score">Score (0–100)</label>
-      <div class="form-row">
-        <div class="field">
-          <input id="score" type="number" min="0" max="100"
-                 placeholder="e.g. 75">
-        </div>
-        <button id="go" type="button">Get grade ↗</button>
-      </div>
-
-      <div class="result" aria-live="polite">
-        <div class="result-value" id="grade"></div>
-        <div class="result-note" id="note"></div>
-      </div>
+    <section class="task-card">
+      <p>WEEK 05 / EXERCISE 01</p>
+      <h1>Grade Calculator</h1>
+      <p>Enter your score to calculate your letter grade.</p>
+      <label for="score">Your score (0–100)</label>
+      <input id="score" type="number" min="0" max="100" placeholder="Enter your score">
+      <button onclick="calculateGrade()">Calculate grade</button>
+      <p id="result" aria-live="polite"></p>
     </section>
-
-    <a class="back-link" href="index.html">← Back to Week 5 exercises</a>
   </main>
-
-  <footer class="site-footer">
-    <p>MM / Web Programming Portfolio</p>
-    <p><a href="../index.html">Return to homepage ↑</a></p>
-  </footer>
-
   <script>
-    function getGrade(score) {
-      if (score >= 90) return 'A';
-      if (score >= 80) return 'B';
-      if (score >= 70) return 'C';
-      if (score >= 60) return 'D';
-      return 'F';
-    }
+    function calculateGrade() {
+      const score = Number(document.getElementById("score").value);
+      const result = document.getElementById("result");
 
-    const input = document.getElementById('score');
-    const gradeEl = document.getElementById('grade');
-    const noteEl = document.getElementById('note');
-
-    function show() {
-      const raw = input.value.trim();
-      const score = Number(raw);
-
-      noteEl.className = 'result-note';
-
-      if (raw === '' || !Number.isFinite(score) ||
-          score < 0 || score > 100) {
-        gradeEl.textContent = '';
-        noteEl.textContent = 'Enter a number between 0 and 100.';
-        noteEl.classList.add('error');
+      if (document.getElementById("score").value === "" || score < 0 || score > 100) {
+        result.textContent = "Please enter a score between 0 and 100.";
         return;
       }
 
-      gradeEl.textContent = 'Grade: ' + getGrade(score);
-      noteEl.textContent = 'Your score is ' + score + ' out of 100.';
-    }
+      let grade;
+      if (score >= 90) grade = "A";
+      else if (score >= 80) grade = "B";
+      else if (score >= 70) grade = "C";
+      else if (score >= 60) grade = "D";
+      else grade = "F";
 
-    document.getElementById('go').addEventListener('click', show);
-    input.addEventListener('keydown', event => {
-      if (event.key === 'Enter') show();
-    });
+      result.textContent = `Your grade is ${grade}.`;
+    }
   </script>
 </body>
 </html>
