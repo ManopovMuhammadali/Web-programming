@@ -1,75 +1,208 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Registration Form</title>
-<link rel="stylesheet" href="../portfolio.css">
-<style>
-.form-card { max-width: 650px; margin: 35px auto; padding: 30px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
-.form-group { margin: 18px 0; }
-label { display: block; margin-bottom: 7px; color: #24434a; font-weight: 600; }
-input, select { width: 100%; padding: 12px; border: 1px solid #dbe3e5; border-radius: 6px; font: inherit; box-sizing: border-box; }
-button { padding: 12px 20px; background: #24434a; color: white; border: 0; border-radius: 6px; cursor: pointer; }
-#message { margin-top: 18px; line-height: 1.6; }
-.hint { color: #607079; font-size: 13px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Registration — Week 8</title>
+  <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    .form-card {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 30px;
+      background: white;
+      border: 1px solid #dbe3e5;
+      border-radius: 12px;
+    }
+
+    .form-group {
+      margin: 18px 0;
+    }
+
+    fieldset {
+      border: 1px solid #dbe3e5;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    legend {
+      font-weight: bold;
+      color: #24434a;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #24434a;
+      font-weight: 600;
+    }
+
+    input:not([type="checkbox"]), select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #dbe3e5;
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    input[aria-invalid="true"],
+    select[aria-invalid="true"] {
+      border: 2px solid #b91c1c;
+    }
+
+    input[aria-invalid="false"],
+    select[aria-invalid="false"] {
+      border-color: #15803d;
+    }
+
+    .hint {
+      color: #607079;
+      font-size: 13px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #24434a;
+      color: white;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    #message {
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
+
 <body>
 <header class="site-nav">
-<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
-<a class="nav-link" href="index.html">← Week 8</a>
+  <a class="wordmark" href="../index.html">
+    MM / <span>PORTFOLIO</span>
+  </a>
+  <a class="nav-link" href="index.html">← Week 8</a>
 </header>
+
 <main>
 <section class="form-card">
-<p>WEEK 08 / EXERCISE 01</p>
-<h1>Student Registration</h1>
-<p>Complete the form to register.</p>
+  <p>WEEK 08 / EXERCISE 06</p>
+  <h1>Student Registration</h1>
+  <p>Complete the form. JavaScript will validate your information.</p>
 
-<form id="registrationForm">
-<div class="form-group">
-<label for="name">Full name</label>
-<input id="name" name="name" type="text" required minlength="2" placeholder="Your full name">
-</div>
+  <form id="registrationForm" novalidate>
+    <fieldset>
+      <legend>Personal and account information</legend>
 
-<div class="form-group">
-<label for="email">Email address</label>
-<input id="email" name="email" type="email" required placeholder="name@example.com">
-</div>
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          minlength="2"
+          aria-describedby="nameHint nameError"
+          aria-invalid="false"
+        >
+        <p class="hint" id="nameHint">Enter at least two characters.</p>
+        <p class="error" id="nameError"></p>
+      </div>
 
-<div class="form-group">
-<label for="password">Password</label>
-<input id="password" name="password" type="password" required minlength="8" placeholder="At least 8 characters">
-<p class="hint">Use at least 8 characters.</p>
-</div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          aria-describedby="emailError"
+          aria-invalid="false"
+        >
+        <p class="error" id="emailError"></p>
+      </div>
 
-<div class="form-group">
-<label for="confirm">Confirm password</label>
-<input id="confirm" name="confirm" type="password" required placeholder="Enter password again">
-</div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          minlength="8"
+          aria-describedby="passwordHint passwordError"
+          aria-invalid="false"
+        >
+        <p class="hint" id="passwordHint">
+          Use at least eight characters.
+        </p>
+        <p class="error" id="passwordError"></p>
+      </div>
 
-<div class="form-group">
-<label for="course">Choose your course</label>
-<select id="course" name="course" required>
-<option value="">Select a course</option>
-<option>Web Programming</option>
-<option>Computer Science</option>
-<option>Cybersecurity</option>
-<option>Information Technology</option>
-</select>
-</div>
+      <div class="form-group">
+        <label for="confirm">Confirm password</label>
+        <input
+          id="confirm"
+          name="confirm"
+          type="password"
+          required
+          aria-describedby="confirmError"
+          aria-invalid="false"
+        >
+        <p class="error" id="confirmError"></p>
+      </div>
 
-<div class="form-group">
-<label>
-<input type="checkbox" id="terms" required style="width:auto">
- I agree to the terms and conditions.
-</label>
-</div>
+      <div class="form-group">
+        <label for="course">Choose your course</label>
+        <select
+          id="course"
+          name="course"
+          required
+          aria-describedby="courseError"
+          aria-invalid="false"
+        >
+          <option value="">Select a course</option>
+          <option value="Web Programming">Web Programming</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+          <option value="Information Technology">
+            Information Technology
+          </option>
+        </select>
+        <p class="error" id="courseError"></p>
+      </div>
 
-<button type="submit">Register</button>
-</form>
-<div id="message" role="status" aria-live="polite"></div>
+      <div class="form-group">
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          required
+          aria-describedby="termsError"
+          aria-invalid="false"
+        >
+        <label for="terms">
+          I agree to the terms and conditions.
+        </label>
+        <p class="error" id="termsError"></p>
+      </div>
+    </fieldset>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message" role="status" aria-live="polite"></div>
 </section>
 </main>
 
@@ -77,26 +210,105 @@ button { padding: 12px 20px; background: #24434a; color: white; border: 0; borde
 const form = document.getElementById("registrationForm");
 const message = document.getElementById("message");
 
-form.addEventListener("submit", function(event) {
+const fields = [
+  document.getElementById("name"),
+  document.getElementById("email"),
+  document.getElementById("password"),
+  document.getElementById("confirm"),
+  document.getElementById("course"),
+  document.getElementById("terms")
+];
+
+function validateField(field) {
+  field.setCustomValidity("");
+
+  let error = "";
+
+  if (!field.validity.valid) {
+    if (field.validity.valueMissing) {
+      error = "This field is required.";
+    } else if (field.validity.typeMismatch) {
+      error = "Please enter a valid email address.";
+    } else if (field.validity.tooShort) {
+      error = "This value is too short.";
+    } else {
+      error = field.validationMessage;
+    }
+  }
+
+  if (
+    field.id === "confirm" &&
+    field.value !== document.getElementById("password").value
+  ) {
+    error = "Passwords do not match.";
+  }
+
+  field.setCustomValidity(error);
+  field.setAttribute("aria-invalid", String(Boolean(error)));
+
+  const errorElement = document.getElementById(field.id + "Error");
+
+  if (errorElement) {
+    errorElement.textContent = error;
+  }
+
+  return error === "";
+}
+
+// Validate while the user types.
+fields.forEach(field => {
+  field.addEventListener("input", () => {
+    validateField(field);
+
+    if (field.id === "password") {
+      validateField(document.getElementById("confirm"));
+    }
+  });
+
+  field.addEventListener("change", () => {
+    validateField(field);
+  });
+});
+
+// Validate when the form is submitted.
+form.addEventListener("submit", event => {
   event.preventDefault();
 
-  const password = document.getElementById("password").value;
-  const confirm = document.getElementById("confirm").value;
+  const valid = fields.map(validateField).every(Boolean);
 
-  if (!form.checkValidity()) {
-    form.reportValidity();
+  if (!valid || !form.checkValidity()) {
+    message.textContent = "Please correct the errors above.";
+    message.style.color = "#b91c1c";
+
+    const firstInvalid = fields.find(
+      field => !field.validity.valid
+    );
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+    }
+
     return;
   }
 
-  if (password !== confirm) {
-    message.textContent = "Passwords do not match.";
-    message.style.color = "#b13b32";
-    return;
-  }
+  message.textContent =
+    "Registration successful! Thank you.";
 
-  message.textContent = "Registration successful! Thank you.";
-  message.style.color = "#24434a";
+  message.style.color = "#15803d";
+
   form.reset();
+
+  fields.forEach(field => {
+    field.setAttribute("aria-invalid", "false");
+
+    const errorElement = document.getElementById(
+      field.id + "Error"
+    );
+
+    if (errorElement) {
+      errorElement.textContent = "";
+    }
+  });
 });
 </script>
 </body>
