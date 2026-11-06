@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registration Form</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.form-card { max-width: 650px; margin: 35px auto; padding: 30px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+.form-group { margin: 18px 0; }
+label { display: block; margin-bottom: 7px; color: #24434a; font-weight: 600; }
+input, select { width: 100%; padding: 12px; border: 1px solid #dbe3e5; border-radius: 6px; font: inherit; box-sizing: border-box; }
+button { padding: 12px 20px; background: #24434a; color: white; border: 0; border-radius: 6px; cursor: pointer; }
+#message { margin-top: 18px; line-height: 1.6; }
+.hint { color: #607079; font-size: 13px; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+<a class="nav-link" href="index.html">← Week 8</a>
+</header>
+<main>
+<section class="form-card">
+<p>WEEK 08 / EXERCISE 01</p>
+<h1>Student Registration</h1>
+<p>Complete the form to register.</p>
+
+<form id="registrationForm">
+<div class="form-group">
+<label for="name">Full name</label>
+<input id="name" name="name" type="text" required minlength="2" placeholder="Your full name">
+</div>
+
+<div class="form-group">
+<label for="email">Email address</label>
+<input id="email" name="email" type="email" required placeholder="name@example.com">
+</div>
+
+<div class="form-group">
+<label for="password">Password</label>
+<input id="password" name="password" type="password" required minlength="8" placeholder="At least 8 characters">
+<p class="hint">Use at least 8 characters.</p>
+</div>
+
+<div class="form-group">
+<label for="confirm">Confirm password</label>
+<input id="confirm" name="confirm" type="password" required placeholder="Enter password again">
+</div>
+
+<div class="form-group">
+<label for="course">Choose your course</label>
+<select id="course" name="course" required>
+<option value="">Select a course</option>
+<option>Web Programming</option>
+<option>Computer Science</option>
+<option>Cybersecurity</option>
+<option>Information Technology</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>
+<input type="checkbox" id="terms" required style="width:auto">
+ I agree to the terms and conditions.
+</label>
+</div>
+
+<button type="submit">Register</button>
+</form>
+<div id="message" role="status" aria-live="polite"></div>
+</section>
+</main>
+
+<script>
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const password = document.getElementById("password").value;
+  const confirm = document.getElementById("confirm").value;
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  if (password !== confirm) {
+    message.textContent = "Passwords do not match.";
+    message.style.color = "#b13b32";
+    return;
+  }
+
+  message.textContent = "Registration successful! Thank you.";
+  message.style.color = "#24434a";
+  form.reset();
+});
+</script>
+</body>
+</html>
