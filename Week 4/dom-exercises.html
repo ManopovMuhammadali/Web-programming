@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 4 — DOM Exercises</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.exercise {
+  max-width: 850px;
+  margin: 22px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+button, input {
+  padding: 10px;
+  margin: 4px;
+  font: inherit;
+}
+button { cursor: pointer; }
+#darkCard.dark {
+  color: white;
+  background: #202b33;
+}
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.swatch {
+  width: 70px;
+  height: 50px;
+  border: 0;
+}
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 4</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 04 / DOM AND EVENTS</p>
+  <h1>JavaScript interaction</h1>
+  <p>Six exercises using DOM selection, events and dynamic page updates.</p>
+</header>
+
+<section class="exercise">
+  <h2>01 — Click Counter With Colour Change</h2>
+  <p id="counter">Count: 0</p>
+  <button id="countButton" type="button">Click me</button>
+</section>
+
+<section class="exercise">
+  <h2>02 — Dark Mode Toggle Card</h2>
+  <article id="darkCard" class="exercise">
+    <h3>Theme preview</h3>
+    <p>Press the button to change this card's theme.</p>
+  </article>
+  <button id="themeButton" type="button">Toggle dark mode</button>
+</section>
+
+<section class="exercise">
+  <h2>03 — Interactive To-do List</h2>
+  <form id="todoForm">
+    <label for="todoInput">New task</label>
+    <input id="todoInput" required>
+    <button type="submit">Add task</button>
+  </form>
+  <ul id="todoList"></ul>
+</section>
+
+<section class="exercise">
+  <h2>04 — Live Search Filter</h2>
+  <label for="filterInput">Search names</label>
+  <input id="filterInput" type="search" placeholder="Type a name">
+  <ul id="nameList">
+    <li>Ali</li>
+    <li>Muhammadali</li>
+    <li>Sarah</li>
+    <li>John</li>
+    <li>Madina</li>
+  </ul>
+  <p id="filterMessage" aria-live="polite"></p>
+</section>
+
+<section class="exercise">
+  <h2>05 — Interactive Color Palette</h2>
+  <p>Choose a color to change the preview background.</p>
+  <div class="palette">
+    <button class="swatch" style="background:#eab308" data-color="#eab308" aria-label="Yellow"></button>
+    <button class="swatch" style="background:#0f766e" data-color="#0f766e" aria-label="Teal"></button>
+    <button class="swatch" style="background:#2563eb" data-color="#2563eb" aria-label="Blue"></button>
+    <button class="swatch" style="background:#be123c" data-color="#be123c" aria-label="Red"></button>
+  </div>
+  <div id="colorPreview" style="padding:30px;margin-top:15px;background:#eab308">
+    Color preview
+  </div>
+</section>
+
+<section class="exercise">
+  <h2>06 — To-do List Mini Project</h2>
+  <form id="projectForm">
+    <label for="projectInput">Add a project task</label>
+    <input id="projectInput" required>
+    <button type="submit">Add</button>
+  </form>
+  <ul id="projectList"></ul>
+  <p id="projectStatus" aria-live="polite"></p>
+</section>
+</main>
+
+<script>
+let count = 0;
+const counter = document.getElementById("counter");
+
+document.getElementById("countButton").addEventListener("click", () => {
+  count++;
+  counter.textContent = "Count: " + count;
+  counter.style.color = count % 2 === 0 ? "#0f766e" : "#b45309";
+});
+
+document.getElementById("themeButton").addEventListener("click", () => {
+  document.getElementById("darkCard").classList.toggle("dark");
+});
+
+function addTask(formId, inputId, listId, statusId) {
+  const form = document.getElementById(formId);
+  const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+
+    const item = document.createElement("li");
+    const label = document.createElement("span");
+    label.textContent = value + " ";
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => item.remove());
+
+    item.append(label, remove);
+    list.appendChild(item);
+    input.value = "";
+
+    if (statusId) {
+      document.getElementById(statusId).textContent = "Task added.";
+    }
+  });
+}
+
+addTask("todoForm", "todoInput", "todoList");
+addTask("projectForm", "projectInput", "projectList", "projectStatus");
+
+const filterInput = document.getElementById("filterInput");
+const nameItems = [...document.querySelectorAll("#nameList li")];
+
+filterInput.addEventListener("input", () => {
+  const query = filterInput.value.toLowerCase();
+  let visible = 0;
+
+  nameItems.forEach(item => {
+    const match = item.textContent.toLowerCase().includes(query);
+    item.hidden = !match;
+    if (match) visible++;
+  });
+
+  document.getElementById("filterMessage").textContent =
+    visible + " result(s) found.";
+});
+
+document.querySelectorAll(".swatch").forEach(button => {
+  button.addEventListener("click", () => {
+    document.getElementById("colorPreview").style.backgroundColor =
+      button.dataset.color;
+  });
+});
+</script>
+</body>
+</html>
