@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8">
-  <link rel="stylesheet" href="../portfolio.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hover Card — Week 3</title>
+<link rel="stylesheet" href="../portfolio.css">
 <style>
-  body { padding: 40px; background: #f0fdfa; }
-  .card {
-    background: white;
-    border: 2px solid #14b8a6;
-    border-radius: 12px;
-    padding: 24px;
-    width: 240px;
-    color: #0f766e;
-    font-size: 16px;
-     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    /* TODO: add transition for transform and box-shadow */
-  }
-  .card:hover {
-     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(15,118,110,0.25);
-    /* TODO: translateY(-6px) and box-shadow */
-  }
+.card {
+  max-width: 320px;
+  margin: 60px auto;
+  padding: 28px;
+  color: #0f766e;
+  background: white;
+  border: 2px solid #14b8a6;
+  border-radius: 12px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(15,118,110,.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}
 </style>
 </head>
 <body>
-  <div class="card">Hover over me!</div>
-
-
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 3</a>
+</header>
+<main>
+  <header class="archive-intro">
+    <p>WEEK 03 / ADVANCED CSS 02</p>
+    <h1>Hover Card With Transition</h1>
+  </header>
+  <article class="card">
+    <h2>Hover over me!</h2>
+    <p>The card moves upward and gains a shadow.</p>
+  </article>
+</main>
 </body>
 </html>
