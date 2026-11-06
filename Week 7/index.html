@@ -1,176 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 7 — Web Programming Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Week 7 — Book Search Lab</title>
   <link rel="stylesheet" href="../portfolio.css">
-
-  <style>
-    .week7-content {
-      width: min(900px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 60px 0 80px;
-    }
-
-    .week7-label {
-      color: #b87b35;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .week7-content h1 {
-      margin: 12px 0;
-      font-size: clamp(38px, 6vw, 58px);
-      line-height: 1.1;
-      letter-spacing: -.05em;
-    }
-
-    .week7-intro {
-      margin: 0 0 32px;
-      color: #607079;
-    }
-
-    .week7-tasks {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .week7-task {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-height: 105px;
-      padding: 22px;
-      border: 1px solid #dbe3e5;
-      border-radius: 9px;
-      background: #fff;
-      color: #24434a;
-      text-decoration: none;
-      transition: transform .18s ease, border-color .18s ease;
-    }
-
-    .week7-task:hover {
-      transform: translateY(-3px);
-      border-color: #b87b35;
-    }
-
-    .week7-number {
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #e9dfcf;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .week7-task-title {
-      flex: 1;
-      font-size: 18px;
-      font-weight: 750;
-    }
-
-    .week7-arrow {
-      color: #b87b35;
-      font-size: 20px;
-    }
-
-    .week7-back {
-      display: inline-block;
-      margin-top: 28px;
-      color: #24434a;
-      font-size: 14px;
-      font-weight: 750;
-      text-decoration: none;
-    }
-
-    .week7-back:hover { color: #b87b35; }
-
-    @media (max-width: 520px) {
-      .week7-content {
-        width: calc(100% - 28px);
-        padding-top: 42px;
-      }
-
-      .week7-tasks {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .week7-task { padding: 17px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .week7-task { transition: none; }
-    }
-  </style>
 </head>
-
 <body>
-  <header class="wrap topbar">
-    <a class="brand" href="../index.html">MM / Portfolio</a>
-    <span class="top-note">Web Programming · 2026</span>
-  </header>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="../index.html">← Back to home</a>
+</header>
 
-  <main class="week7-content">
-    <div class="week7-label">Coursework archive · Week 07</div>
-    <h1>Week 7 Tasks.</h1>
-    <p class="week7-intro">
-      Select a task below to open the corresponding assignment.
-    </p>
-
-    <section class="week7-tasks" aria-label="Week 7 tasks">
-      <a class="week7-task" href="task1.html">
-        <span class="week7-number">01</span>
-        <span class="week7-task-title">Task 1</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-
-      <a class="week7-task" href="task2.html">
-        <span class="week7-number">02</span>
-        <span class="week7-task-title">Task 2</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-
-      <a class="week7-task" href="task3.html">
-        <span class="week7-number">03</span>
-        <span class="week7-task-title">Task 3</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-
-      <a class="week7-task" href="task4.html">
-        <span class="week7-number">04</span>
-        <span class="week7-task-title">Task 4</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-
-      <a class="week7-task" href="task5.html">
-        <span class="week7-number">05</span>
-        <span class="week7-task-title">Task 5</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-
-      <a class="week7-task" href="task6.html">
-        <span class="week7-number">06</span>
-        <span class="week7-task-title">Task 6</span>
-        <span class="week7-arrow">↗</span>
-      </a>
-    </section>
-
-    <a class="week7-back" href="../index.html">← Back to Home</a>
-  </main>
-
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© 2026 Muhammadali Manopov</span>
-      <span>Web Programming · Gachon University</span>
+<main>
+  <section class="archive-intro">
+    <div class="archive-meta">
+      <span>Web Programming</span>
+      <span>Week 07 / Practical Lab</span>
     </div>
-  </footer>
+    <h1>Book Search Application.</h1>
+    <p>A complete project combining HTML structure, CSS Grid, JavaScript DOM manipulation, Fetch API and dynamic rendering.</p>
+  </section>
+
+  <section class="archive-content">
+    <div class="archive-content-head">
+      <h2>Topic</h2>
+      <p>1 topic</p>
+    </div>
+    <div class="assignment-list">
+      <a class="assignment-link" href="book-search.html">
+        <span class="assignment-index">01</span>
+        <span class="assignment-title">Open Library API Explorer</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="archive-content-head">
+      <h2>Exercises</h2>
+      <p>6 practical steps</p>
+    </div>
+    <div class="assignment-list">
+      <a class="assignment-link" href="book-search.html#step1"><span class="assignment-index">01</span><span class="assignment-title">Step 1 — HTML Structure</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="book-search.html#step2"><span class="assignment-index">02</span><span class="assignment-title">Step 2 — CSS Layout & Cards</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="book-search.html#step3"><span class="assignment-index">03</span><span class="assignment-title">Step 3 — JS DOM: Wire the Form</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="book-search.html#step4"><span class="assignment-index">04</span><span class="assignment-title">Step 4 — Fetch: Call the API</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="book-search.html#step5"><span class="assignment-index">05</span><span class="assignment-title">Step 5 — Render: Display Cards</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="book-search.html#step6"><span class="assignment-index">06</span><span class="assignment-title">Step 6 — Bonus: Loading & Errors</span><span class="assignment-arrow">↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <p><a href="../index.html">Return to homepage ↑</a></p>
+</footer>
 </body>
 </html>
