@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility Exercises</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.exercise { max-width: 800px; margin: 25px auto; padding: 25px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+button, a { cursor: pointer; }
+button { padding: 11px 17px; border: 0; border-radius: 6px; background: #24434a; color: white; }
+input { padding: 10px; border: 1px solid #607079; border-radius: 5px; }
+:focus-visible { outline: 3px solid #b87b35; outline-offset: 3px; }
+.demo-nav a { margin-right: 15px; color: #24434a; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+<a class="nav-link" href="index.html">← Week 9</a>
+</header>
+<main>
+<section class="exercise" id="semantic">
+<p>WEEK 09 / EXERCISE 01</p>
+<h1>Semantic HTML</h1>
+<p>This page uses meaningful HTML elements to describe its structure.</p>
+<nav class="demo-nav" aria-label="Example navigation">
+<a href="#images">Images</a>
+<a href="#keyboard">Keyboard</a>
+</nav>
+<article>
+<h2>Why semantic HTML matters</h2>
+<p>Semantic elements help browsers, search engines, and assistive technologies understand webpage content.</p>
+</article>
+</section>
+
+<section class="exercise" id="images">
+<p>WEEK 09 / EXERCISE 02</p>
+<h2>Accessible Images and Forms</h2>
+<figure>
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700" alt="Laptop displaying a web development workspace" style="max-width:100%;height:auto;border-radius:8px">
+<figcaption>A workspace used for web development.</figcaption>
+</figure>
+<form onsubmit="event.preventDefault(); document.getElementById('formResult').textContent='Thank you for your message.';">
+<label for="visitorName">Your name</label><br>
+<input id="visitorName" type="text" required>
+<button type="submit">Send</button>
+<p id="formResult" role="status" aria-live="polite"></p>
+</form>
+</section>
+
+<section class="exercise" id="keyboard">
+<p>WEEK 09 / EXERCISE 03</p>
+<h2>Keyboard Navigation</h2>
+<p>Use the Tab key to move between these controls. Press Enter or Space to activate them.</p>
+<button onclick="document.getElementById('keyboardResult').textContent='You activated the first button.'">First button</button>
+<button onclick="document.getElementById('keyboardResult').textContent='You activated the second button.'">Second button</button>
+<a href="#semantic">Return to the first exercise</a>
+<p id="keyboardResult" role="status" aria-live="polite"></p>
+</section>
+</main>
+</body>
+</html>
