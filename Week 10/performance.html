@@ -4,85 +4,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Website Performance Report</title>
+<title>Website Performance Report — Week 10</title>
 <link rel="stylesheet" href="../portfolio.css">
+
 <style>
-.report { max-width: 850px; margin: 35px auto; padding: 28px; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
-.example { padding: 18px; margin: 18px 0; background: #f5f7f5; border-radius: 8px; overflow-wrap: anywhere; }
-.example img { max-width: 100%; height: auto; }
-code { color: #24434a; }
-table { width: 100%; border-collapse: collapse; margin: 18px 0; }
-th, td { text-align: left; padding: 12px; border-bottom: 1px solid #dbe3e5; }
+.report {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 28px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+
+.example {
+  padding: 18px;
+  margin: 18px 0;
+  background: #f5f7f5;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.example img {
+  max-width: 100%;
+  height: auto;
+}
+
+code {
+  color: #24434a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dbe3e5;
+}
 </style>
 </head>
+
 <body>
+
 <header class="site-nav">
-<a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
-<a class="nav-link" href="index.html">← Week 10</a>
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 10</a>
 </header>
+
 <main>
-<section class="report">
+<article class="report">
+
 <p>WEEK 10 / PERFORMANCE PROJECT</p>
-<h1>Website Optimization</h1>
-<p>This project demonstrates techniques that improve website loading speed, image delivery, and responsive design.</p>
+
+<h1>Website Optimization and Performance Report</h1>
+
+<p>
+This project demonstrates image optimization, responsive images,
+efficient loading, and performance testing.
+</p>
 
 <h2>01 — Image Optimization</h2>
-<p>Images should be compressed and delivered in modern formats such as WebP or AVIF to reduce file size.</p>
+
+<p>
+Images should be compressed and delivered in modern formats
+such as WebP or AVIF to reduce file size.
+</p>
+
 <div class="example">
-<p><strong>Example:</strong> Responsive image with lazy loading.</p>
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&auto=format&fit=crop&q=75" alt="Laptop on a desk used for web development" loading="lazy">
+  <p><strong>Example:</strong> Lazy-loaded image.</p>
+
+  <img
+    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&auto=format&fit=crop&q=75"
+    alt="Laptop and workspace for web development"
+    width="700"
+    height="467"
+    loading="lazy">
 </div>
 
 <h2>02 — Responsive Images</h2>
-<p>The browser can choose an image size based on the screen width.</p>
-<div class="example">
-<code>
-&lt;img<br>
-src="small-image.webp"<br>
-srcset="small-image.webp 480w, large-image.webp 1000w"<br>
-sizes="(max-width: 600px) 100vw, 700px"<br>
-alt="Example image"<br>
+
+<pre class="example"><code>
+&lt;img src="small.webp"
+srcset="small.webp 480w, large.webp 1000w"
+sizes="(max-width: 600px) 100vw, 700px"
+width="700" height="467"
+alt="Description"
 loading="lazy"&gt;
-</code>
-</div>
+</code></pre>
 
-<h2>03 — Loading Performance</h2>
-<p>Lazy loading prevents off-screen images from downloading before they are needed.</p>
-<div class="example">
-<code>&lt;img src="photo.webp" alt="Description" loading="lazy"&gt;</code>
-</div>
-<p>JavaScript files can use defer so the browser can parse the HTML without waiting for the script to execute.</p>
-<div class="example">
-<code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code>
-</div>
+<h2>03 — Efficient Script Loading</h2>
 
-<h2>04 — Performance Testing</h2>
-<p>Google Lighthouse can measure performance, accessibility, best practices, and SEO.</p>
+<p>
+The defer attribute allows HTML parsing to continue
+without waiting for the script to execute.
+</p>
+
+<pre class="example"><code>
+&lt;script src="app.js" defer&gt;&lt;/script&gt;
+</code></pre>
+
+<h2>04 — Lighthouse Testing</h2>
+
+<ol>
+  <li>Open your published portfolio in Google Chrome.</li>
+  <li>Open Developer Tools.</li>
+  <li>Select Lighthouse.</li>
+  <li>Choose Mobile mode.</li>
+  <li>Select all four categories.</li>
+  <li>Click Analyze page load.</li>
+  <li>Record your actual scores below.</li>
+</ol>
+
+<h2>05 — My Lighthouse Results</h2>
+
+<p><strong>Status:</strong> Pending actual testing.</p>
+
 <table>
 <thead>
-<tr><th>Category</th><th>What it measures</th></tr>
+<tr>
+  <th>Category</th>
+  <th>Score / 100</th>
+</tr>
 </thead>
+
 <tbody>
-<tr><td>Performance</td><td>Loading speed and responsiveness</td></tr>
-<tr><td>Accessibility</td><td>Ease of use for different users</td></tr>
-<tr><td>Best Practices</td><td>Modern web development standards</td></tr>
-<tr><td>SEO</td><td>Search engine optimization</td></tr>
+<tr><td>Performance</td><td>Pending test</td></tr>
+<tr><td>Accessibility</td><td>Pending test</td></tr>
+<tr><td>Best Practices</td><td>Pending test</td></tr>
+<tr><td>SEO</td><td>Pending test</td></tr>
 </tbody>
 </table>
 
-<h2>05 — My Optimization Report</h2>
-<p>After testing a website with Lighthouse, record your actual results here.</p>
-<table>
-<thead><tr><th>Category</th><th>My score</th></tr></thead>
-<tbody>
-<tr><td>Performance</td><td>Not tested yet</td></tr>
-<tr><td>Accessibility</td><td>Not tested yet</td></tr>
-<tr><td>Best Practices</td><td>Not tested yet</td></tr>
-<tr><td>SEO</td><td>Not tested yet</td></tr>
-</tbody>
-</table>
-<p><strong>Conclusion:</strong> Optimizing images, using responsive layouts, and loading resources efficiently can improve the user experience. Lighthouse helps identify areas that need improvement.</p>
-</section>
+<p>
+<strong>Test record:</strong>
+Date: Pending · Device: Pending · Mode: Mobile.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Image compression, responsive image delivery, and deferred scripts
+can improve website performance. Lighthouse helps identify
+problems and measure improvements.
+</p>
+
+</article>
 </main>
+
+<footer class="site-footer">
+  <span>MM / Web Programming Portfolio</span>
+  <a href="index.html">Back to Week 10</a>
+</footer>
+
 </body>
 </html>
