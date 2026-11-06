@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 2 — HTML and Semantic HTML</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.exercise {
+  max-width: 900px;
+  margin: 22px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.exercise h2 { margin-top: 0; }
+.example {
+  padding: 14px;
+  background: #f3f6f5;
+  border-radius: 8px;
+}
+figure { margin: 12px 0; }
+img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 2</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 02 / HTML FOUNDATIONS</p>
+  <h1>HTML essentials and semantic HTML</h1>
+  <p>Sixteen exercises covering HTML structure, links, images and semantic elements.</p>
+</header>
+
+<h2 class="wrap">Session 1 — HTML essentials</h2>
+
+<section class="exercise" id="html-skeleton">
+  <h2>01 — HTML Skeleton</h2>
+  <div class="example">
+    <p>This page uses the HTML doctype, html, head, title and body elements.</p>
+  </div>
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+
+<section class="exercise" id="headings">
+  <h2>02 — Headings, Paragraph and Emphasis</h2>
+  <h1>Main heading</h1>
+  <h2>Subheading</h2>
+  <p>This is a paragraph with <strong>important text</strong>
+  and <em>emphasized text</em>.</p>
+</section>
+
+<section class="exercise" id="navigation-list">
+  <h2>03 — Navigation List With Links</h2>
+  <nav aria-label="Example navigation">
+    <ul>
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#semantic-blog">Blog</a></li>
+    </ul>
+  </nav>
+</section>
+
+<section class="exercise" id="image-alt">
+  <h2>04 — Image With Meaningful Alt Text</h2>
+  <figure>
+    <img src="https://picsum.photos/600/250"
+         alt="A study desk with a laptop and notebooks">
+    <figcaption>A study workspace.</figcaption>
+  </figure>
+</section>
+
+<section class="exercise" id="profile">
+  <h2>05 — Complete Profile Page</h2>
+  <article>
+    <h3>Muhammadali Manopov</h3>
+    <p>Computer science student learning web development.</p>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </article>
+</section>
+
+<section class="exercise" id="fix-html">
+  <h2>06 — Fix Broken HTML</h2>
+  <p>The following is a correctly nested example:</p>
+  <div class="example">
+    <p>This paragraph contains <strong>bold text</strong>
+    and <em>emphasized text</em>.</p>
+  </div>
+  <pre><code>&lt;p&gt;This is &lt;strong&gt;correct&lt;/strong&gt; HTML.&lt;/p&gt;</code></pre>
+</section>
+
+<section class="exercise" id="ordered-steps">
+  <h2>07 — Ordered Steps With Nested List</h2>
+  <ol>
+    <li>Prepare the project
+      <ul>
+        <li>Create the project folder</li>
+        <li>Create index.html</li>
+      </ul>
+    </li>
+    <li>Write the HTML</li>
+    <li>Test the webpage</li>
+  </ol>
+</section>
+
+<section class="exercise" id="gallery">
+  <h2>08 — Favourites Gallery</h2>
+  <div class="example">
+    <figure>
+      <img src="https://picsum.photos/seed/book/300/160"
+           alt="Books on a shelf">
+      <figcaption>Favourite books</figcaption>
+    </figure>
+    <figure>
+      <img src="https://picsum.photos/seed/movie/300/160"
+           alt="A cinema screen">
+      <figcaption>Favourite films</figcaption>
+    </figure>
+  </div>
+</section>
+
+<h2 class="wrap">Session 2 — Semantic HTML</h2>
+
+<section class="exercise" id="semantic-blog">
+  <h2>01 — Convert Div Soup to Semantic HTML</h2>
+  <div class="example">
+    <header><h3>My Website</h3></header>
+    <nav aria-label="Site navigation"><a href="#semantic-article">Article</a></nav>
+    <main>
+      <article id="semantic-article">
+        <h4>Semantic elements</h4>
+        <p>Use header, nav, main, article, section and footer
+        to describe page structure.</p>
+      </article>
+    </main>
+    <footer>End of example</footer>
+  </div>
+</section>
+
+<section class="exercise">
+  <h2>02 — Blog Article With Header and Footer</h2>
+  <article>
+    <header>
+      <h3>Learning Web Programming</h3>
+      <p>Written by Muhammadali</p>
+    </header>
+    <p>I am learning how to create webpages with HTML and CSS.</p>
+    <footer>Category: Web Development</footer>
+  </article>
+</section>
+
+<section class="exercise">
+  <h2>03 — Figure, Figcaption and Time</h2>
+  <figure>
+    <img src="https://picsum.photos/seed/campus/500/180"
+         alt="A university campus building">
+    <figcaption>University campus.</figcaption>
+  </figure>
+  <p>Published on
+    <time datetime="2026-11-06">November 6, 2026</time>.
+  </p>
+</section>
+
+<section class="exercise">
+  <h2>04 — FAQ With Details and Summary</h2>
+  <details>
+    <summary>What is HTML?</summary>
+    <p>HTML is the markup language used to structure web content.</p>
+  </details>
+  <details>
+    <summary>What is CSS?</summary>
+    <p>CSS controls the presentation and layout of webpages.</p>
+  </details>
+</section>
+
+<section class="exercise">
+  <h2>05 — Full Semantic Portfolio Page</h2>
+  <div class="example">
+    <header><h3>Muhammadali's Portfolio</h3></header>
+    <nav aria-label="Portfolio navigation">
+      <a href="#portfolio-about">About</a> |
+      <a href="#portfolio-projects">Projects</a>
+    </nav>
+    <main>
+      <section id="portfolio-about">
+        <h4>About</h4>
+        <p>Computer science student.</p>
+      </section>
+      <section id="portfolio-projects">
+        <h4>Projects</h4>
+        <p>HTML, CSS and JavaScript practice.</p>
+      </section>
+    </main>
+    <footer>Portfolio example</footer>
+  </div>
+</section>
+
+<section class="exercise">
+  <h2>06 — Fix Semantic Errors</h2>
+  <p>Use one main landmark for the main page content.
+  Use headings in a logical order and use buttons for actions.</p>
+  <button type="button">Example action button</button>
+</section>
+
+<section class="exercise">
+  <h2>07 — Quotation and Citation Page</h2>
+  <blockquote cite="https://developer.mozilla.org/">
+    The web is built on open standards.
+  </blockquote>
+  <p>Reference: <cite>MDN Web Docs</cite>.</p>
+  <p>HTML uses the <code>&lt;blockquote&gt;</code> element
+  for extended quotations.</p>
+</section>
+
+<section class="exercise">
+  <h2>08 — News Article</h2>
+  <article>
+    <header>
+      <h3>Students Learn Web Development</h3>
+      <p>By Muhammadali ·
+        <time datetime="2026-11-06">November 6, 2026</time>
+      </p>
+    </header>
+    <p>Students are practicing HTML, CSS and JavaScript
+    by building accessible webpages.</p>
+    <footer>News category: Education</footer>
+  </article>
+</section>
+</main>
+
+<footer class="site-footer">
+  <a href="index.html">Back to Week 2</a>
+</footer>
+</body>
+</html>
