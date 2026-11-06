@@ -2,72 +2,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sale Card</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0fdfa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            position: relative;
-            width: 300px;
-            padding: 25px;
-            background: white;
-            border-radius: 14px;
-            border: 1px solid #d1e5df;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        }
-
-        .badge {
-            position: absolute;
-            top: -12px;
-            right: 15px;
-            background: #dc2626;
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        h2 {
-            color: #0f766e;
-        }
-
-        .price {
-            font-size: 25px;
-            font-weight: bold;
-            color: #dc2626;
-        }
-
-        .old-price {
-            color: #888;
-            text-decoration: line-through;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Position the Badge — Week 3</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.product {
+  position: relative;
+  max-width: 340px;
+  margin: 60px auto;
+  padding: 30px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 14px;
+}
+.badge {
+  position: absolute;
+  top: -14px;
+  right: -12px;
+  padding: 8px 13px;
+  color: white;
+  background: #b45309;
+  border-radius: 20px;
+  font-weight: bold;
+}
+</style>
 </head>
-
 <body>
-
-    <div class="card">
-        <span class="badge">SALE</span>
-
-        <h2>Wireless Headphones</h2>
-
-        <p>High-quality sound with comfortable design.</p>
-
-        <p class="price">$49.99</p>
-        <p class="old-price">$79.99</p>
-    </div>
-
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 3</a>
+</header>
+<main>
+  <header class="archive-intro">
+    <p>WEEK 03 / ADVANCED CSS 01</p>
+    <h1>Position the Badge</h1>
+    <p>Practice relative and absolute positioning.</p>
+  </header>
+  <article class="product">
+    <span class="badge">NEW</span>
+    <h2>Web Programming</h2>
+    <p>This badge is positioned relative to its parent card.</p>
+  </article>
+</main>
 </body>
 </html>
