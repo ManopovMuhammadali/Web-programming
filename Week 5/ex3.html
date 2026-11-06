@@ -1,67 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interactive Counter — Week 5</title>
-  <link rel="stylesheet" href="exercises.css">
+  <title>Interactive Counter</title>
+  <link rel="stylesheet" href="../portfolio.css">
+  <style>
+    .task-card { max-width: 620px; margin: 50px auto; padding: 32px; text-align: center; background: white; border: 1px solid #dbe3e5; border-radius: 12px; }
+    #count { margin: 30px; font-size: 64px; color: #24434a; }
+    button { margin: 5px; padding: 12px 20px; background: #24434a; color: white; border: 0; border-radius: 7px; cursor: pointer; }
+    button.reset { background: #b87b35; }
+  </style>
 </head>
 <body>
   <header class="site-nav">
     <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
     <a class="nav-link" href="index.html">← Week 5</a>
   </header>
-
   <main>
-    <div class="page-meta">
-      <span>Web Programming</span>
-      <span>Week 05 / Exercise 03</span>
-    </div>
-    <h1>Interactive counter.</h1>
-    <p class="intro">Use the buttons to change the count.</p>
-
-    <section class="exercise-card">
-      <div class="counter-value" id="count" aria-live="polite">0</div>
-
-      <div class="button-row">
-        <button class="button-secondary" type="button"
-                id="subtract">− Subtract</button>
-        <button type="button" id="add">+ Add</button>
-        <button class="button-secondary" type="button"
-                id="reset">Reset</button>
-      </div>
+    <section class="task-card">
+      <p>WEEK 05 / EXERCISE 03</p>
+      <h1>Interactive Counter</h1>
+      <p>Click the buttons to change the number.</p>
+      <div id="count">0</div>
+      <button onclick="changeCount(1)">Increase +</button>
+      <button onclick="changeCount(-1)">Decrease −</button>
+      <button class="reset" onclick="resetCount()">Reset</button>
     </section>
-
-    <a class="back-link" href="index.html">← Back to Week 5 exercises</a>
   </main>
-
-  <footer class="site-footer">
-    <p>MM / Web Programming Portfolio</p>
-    <p><a href="../index.html">Return to homepage ↑</a></p>
-  </footer>
-
   <script>
     let count = 0;
-    const countEl = document.getElementById('count');
 
-    function updateCount() {
-      countEl.textContent = count;
+    function changeCount(amount) {
+      count += amount;
+      document.getElementById("count").textContent = count;
     }
 
-    document.getElementById('subtract').addEventListener('click', () => {
-      count--;
-      updateCount();
-    });
-
-    document.getElementById('add').addEventListener('click', () => {
-      count++;
-      updateCount();
-    });
-
-    document.getElementById('reset').addEventListener('click', () => {
+    function resetCount() {
       count = 0;
-      updateCount();
-    });
+      document.getElementById("count").textContent = count;
+    }
   </script>
 </body>
 </html>
