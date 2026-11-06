@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 — CSS Fundamentals</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.demo {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.color-card {
+  padding: 20px;
+  background: #24434a;
+  color: white;
+  border-radius: 10px;
+}
+.box-demo {
+  width: 180px;
+  padding: 20px;
+  border: 8px solid #b87b35;
+  margin: 20px;
+  background: #f3e7d7;
+}
+.flex-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.flex-demo span {
+  padding: 12px;
+  background: #e5efec;
+  border-radius: 6px;
+}
+.profile-demo {
+  max-width: 320px;
+  padding: 20px;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.profile-demo img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+</style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 3</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 03 / CSS FUNDAMENTALS</p>
+  <h1>CSS essentials</h1>
+  <p>Eight exercises covering selectors, colors, the box model and layout.</p>
+</header>
+
+<section class="demo">
+  <h2>01 — Style Your First Heading</h2>
+  <h1 style="color:#24434a;font-size:2.5rem;">My First Styled Heading</h1>
+  <p>This heading uses CSS color and font-size properties.</p>
+</section>
+
+<section class="demo">
+  <h2>02 — Three Ways to Add CSS</h2>
+  <p style="color:#b45309;">Inline CSS example.</p>
+  <p class="external-example">Internal or external CSS can style this paragraph too.</p>
+  <style>
+    .external-example { color: #166534; font-weight: bold; }
+  </style>
+  <pre><code>/* External stylesheet */
+p {
+  line-height: 1.6;
+}</code></pre>
+</section>
+
+<section class="demo">
+  <h2>03 — Color Palette Card</h2>
+  <div class="color-card">
+    <h3>My color palette</h3>
+    <p>Deep teal · Warm gold · Soft cream</p>
+  </div>
+</section>
+
+<section class="demo">
+  <h2>04 — Box Model Explorer</h2>
+  <div class="box-demo">Content area</div>
+  <p>The box includes content, padding, border and margin.</p>
+</section>
+
+<section class="demo">
+  <h2>05 — Fix the Broken CSS</h2>
+  <p>The corrected rule below uses valid CSS syntax.</p>
+  <pre><code>.card {
+  color: #24434a;
+  background: white;
+  padding: 20px;
+  border: 1px solid #dbe3e5;
+  border-radius: 10px;
+}</code></pre>
+</section>
+
+<section class="demo">
+  <h2>06 — Flexbox Navigation Bar</h2>
+  <nav class="flex-demo" aria-label="Flexbox example">
+    <span>Home</span><span>About</span><span>Projects</span><span>Contact</span>
+  </nav>
+</section>
+
+<section class="demo">
+  <h2>07 — Profile Card With CSS</h2>
+  <article class="profile-demo">
+    <div aria-hidden="true">MM</div>
+    <h3>Muhammadali Manopov</h3>
+    <p>Computer science student learning web development.</p>
+  </article>
+</section>
+
+<section class="demo">
+  <h2>08 — Full Style Sheet From Scratch</h2>
+  <p>This page combines typography, colors, spacing, borders and responsive layout.</p>
+  <pre><code>* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  width: min(900px, 92%);
+  margin: auto;
+}</code></pre>
+</section>
+</main>
+
+<footer class="site-footer">
+  <a href="index.html">Back to Week 3</a>
+</footer>
+</body>
+</html>
