@@ -313,3 +313,435 @@ form.addEventListener("submit", event => {
 </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Registration — Week 8</title>
+  <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    .form-card {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 28px;
+      background: white;
+      border: 1px solid #dbe3e5;
+      border-radius: 12px;
+    }
+
+    .form-group {
+      margin: 19px 0;
+    }
+
+    fieldset {
+      border: 1px solid #dbe3e5;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 22px;
+    }
+
+    legend {
+      font-weight: 800;
+      color: #24434a;
+      padding: 0 8px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 650;
+    }
+
+    input:not([type="checkbox"]):not([type="range"]),
+    select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #dbe3e5;
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    input[aria-invalid="true"],
+    select[aria-invalid="true"] {
+      border: 2px solid #b91c1c;
+    }
+
+    input[aria-invalid="false"],
+    select[aria-invalid="false"] {
+      border-color: #15803d;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #24434a;
+    }
+
+    .hint {
+      color: #607079;
+      font-size: 13px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .terms-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .terms-row label {
+      margin: 0;
+    }
+
+    button {
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 6px;
+      background: #24434a;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #message {
+      min-height: 28px;
+      margin-top: 18px;
+      font-weight: 650;
+    }
+  </style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="index.html">← Week 8</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 08 / EXERCISE 06</p>
+  <h1>Student Registration.</h1>
+  <p>
+    HTML5 constraint validation, regular expressions,
+    JavaScript custom validation and accessible feedback.
+  </p>
+</header>
+
+<section class="form-card">
+  <h2>Gachon University Registration</h2>
+  <p>Complete the fields below to test the validation rules.</p>
+
+  <form id="registrationForm" novalidate>
+
+    <fieldset>
+      <legend>Personal Information</legend>
+
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          minlength="2"
+          autocomplete="name"
+          aria-describedby="nameError"
+        >
+        <p class="error" id="nameError"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input
+          id="studentId"
+          name="studentId"
+          type="text"
+          required
+          pattern="[0-9]{9}"
+          maxlength="9"
+          inputmode="numeric"
+          title="Enter exactly 9 digits."
+          placeholder="9-digit student ID"
+          aria-describedby="studentIdHint studentIdError"
+        >
+        <p class="hint" id="studentIdHint">
+          Enter exactly nine numbers.
+        </p>
+        <p class="error" id="studentIdError"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="name@example.com"
+          aria-describedby="emailError"
+        >
+        <p class="error" id="emailError"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          pattern="01[0-9]-?[0-9]{3,4}-?[0-9]{4}"
+          title="Enter a mobile number such as 010-1234-5678."
+          placeholder="010-1234-5678"
+          autocomplete="tel"
+          aria-describedby="phoneError"
+        >
+        <p class="error" id="phoneError"></p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Account Information</legend>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          minlength="8"
+          autocomplete="new-password"
+          aria-describedby="passwordError"
+        >
+        <p class="hint">Use at least eight characters.</p>
+        <p class="error" id="passwordError"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm">Confirm password</label>
+        <input
+          id="confirm"
+          name="confirm"
+          type="password"
+          required
+          autocomplete="new-password"
+          aria-describedby="confirmError"
+        >
+        <p class="error" id="confirmError"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="course">Select your course</label>
+        <select
+          id="course"
+          name="course"
+          required
+          aria-describedby="courseError"
+        >
+          <option value="">Choose a course</option>
+          <option value="Web Programming">Web Programming</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+          <option value="Information Technology">
+            Information Technology
+          </option>
+        </select>
+        <p class="error" id="courseError"></p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Additional Information</legend>
+
+      <div class="form-group">
+        <label for="experience">
+          Coding experience:
+          <output id="experienceValue">0</output> years
+        </label>
+        <input
+          id="experience"
+          name="experience"
+          type="range"
+          min="0"
+          max="10"
+          value="0"
+        >
+      </div>
+
+      <div class="form-group">
+        <div class="terms-row">
+          <input
+            id="terms"
+            name="terms"
+            type="checkbox"
+            required
+            aria-describedby="termsError"
+          >
+          <label for="terms">
+            I agree to the terms and conditions.
+          </label>
+        </div>
+        <p class="error" id="termsError"></p>
+      </div>
+    </fieldset>
+
+    <button type="submit">Register</button>
+
+    <div
+      id="message"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </form>
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 8</a>
+</footer>
+
+<script>
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("message");
+
+const fields = [
+  document.getElementById("name"),
+  document.getElementById("studentId"),
+  document.getElementById("email"),
+  document.getElementById("phone"),
+  document.getElementById("password"),
+  document.getElementById("confirm"),
+  document.getElementById("course"),
+  document.getElementById("terms")
+];
+
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirm");
+
+function validateField(field) {
+  // Remove previous custom validation errors.
+  field.setCustomValidity("");
+
+  let error = "";
+
+  if (!field.validity.valid) {
+    if (field.validity.valueMissing) {
+      error = "This field is required.";
+    } else if (field.validity.typeMismatch) {
+      error = "Please enter a valid email address.";
+    } else if (field.validity.patternMismatch) {
+      error = field.title || "Please follow the required format.";
+    } else if (field.validity.tooShort) {
+      error = "Your input is too short.";
+    } else {
+      error = field.validationMessage;
+    }
+  }
+
+  // Password confirmation check.
+  if (
+    field.id === "confirm" &&
+    field.value !== password.value
+  ) {
+    error = "Passwords do not match.";
+  }
+
+  field.setCustomValidity(error);
+
+  field.setAttribute(
+    "aria-invalid",
+    String(Boolean(error))
+  );
+
+  const errorElement = document.getElementById(
+    field.id + "Error"
+  );
+
+  if (errorElement) {
+    errorElement.textContent = error;
+  }
+
+  return error === "";
+}
+
+// Live validation when typing or changing fields.
+fields.forEach(field => {
+  field.addEventListener("input", () => {
+    validateField(field);
+
+    // Changing the original password affects confirmation.
+    if (field.id === "password") {
+      validateField(confirmPassword);
+    }
+  });
+
+  field.addEventListener("change", () => {
+    validateField(field);
+  });
+});
+
+// Update the experience slider.
+const experience = document.getElementById("experience");
+const experienceValue = document.getElementById("experienceValue");
+
+experience.addEventListener("input", () => {
+  experienceValue.textContent = experience.value;
+});
+
+// Prevent default submission and validate with JavaScript.
+form.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const results = fields.map(validateField);
+  const allFieldsValid = results.every(Boolean);
+
+  if (!allFieldsValid || !form.checkValidity()) {
+    message.textContent = "Please correct the errors above.";
+    message.style.color = "#b91c1c";
+
+    const firstInvalid = fields.find(
+      field => !field.validity.valid
+    );
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+    }
+
+    return;
+  }
+
+  message.textContent =
+    "Registration successful! Your form is valid.";
+
+  message.style.color = "#15803d";
+
+  form.reset();
+  experienceValue.textContent = "0";
+
+  fields.forEach(field => {
+    field.setCustomValidity("");
+    field.setAttribute("aria-invalid", "false");
+
+    const errorElement = document.getElementById(
+      field.id + "Error"
+    );
+
+    if (errorElement) {
+      errorElement.textContent = "";
+    }
+  });
+});
+</script>
+</body>
+</html>
