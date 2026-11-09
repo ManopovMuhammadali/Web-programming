@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git & GitHub — Muhammadali Manopov</title>
+  <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    .git-content {
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    .git-section {
+      padding: 24px;
+      margin-bottom: 20px;
+      background: white;
+      border: 1px solid #dbe3e5;
+      border-radius: 10px;
+    }
+
+    .git-section h2 {
+      color: #24434a;
+    }
+
+    .command {
+      padding: 17px;
+      margin: 15px 0;
+      overflow-x: auto;
+      background: #17242b;
+      color: #e9dfd1;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .git-note {
+      padding: 14px;
+      background: #f5f7f5;
+      border-left: 4px solid #b87b35;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="nav-link" href="../index.html">← All coursework</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <div class="archive-meta">
+    <span>ADDITIONAL COURSEWORK</span>
+    <span>VERSION CONTROL</span>
+  </div>
+
+  <h1>Git & GitHub.</h1>
+
+  <p>
+    Version control, repositories, commits, branches,
+    collaboration and website deployment.
+  </p>
+</header>
+
+<div class="git-content">
+
+  <section class="git-section">
+    <h2>01 — My GitHub Repository</h2>
+
+    <p>
+      A Git repository stores project files and their
+      revision history. GitHub hosts the repository
+      remotely and supports collaboration.
+    </p>
+
+    <p>
+      <strong>My repository:</strong>
+      <a href="https://github.com/ManopovMuhammadali/Web-programming"
+         target="_blank" rel="noopener noreferrer">
+        Web-programming on GitHub ↗
+      </a>
+    </p>
+
+    <p>
+      <strong>Commit history:</strong>
+      <a href="https://github.com/ManopovMuhammadali/Web-programming/commits/main/"
+         target="_blank" rel="noopener noreferrer">
+        View repository commits ↗
+      </a>
+    </p>
+
+    <p>
+      <strong>Live website:</strong>
+      <a href="https://manopovmuhammadali.github.io/Web-programming/">
+        Open my portfolio ↗
+      </a>
+    </p>
+  </section>
+
+  <section class="git-section">
+    <h2>02 — Git Basic Commands</h2>
+
+    <p>Check the current repository status:</p>
+
+    <pre class="command"><code>git status</code></pre>
+
+    <p>Stage a changed file:</p>
+
+    <pre class="command"><code>git add index.html</code></pre>
+
+    <p>Create a commit:</p>
+
+    <pre class="command"><code>git commit -m "Update portfolio homepage"</code></pre>
+
+    <p>Upload your changes to GitHub:</p>
+
+    <pre class="command"><code>git push origin main</code></pre>
+
+    <div class="git-note">
+      <strong>Important:</strong>
+      These commands assume you are already inside
+      the cloned repository and that your main branch
+      is connected to the origin remote.
+    </div>
+  </section>
+
+  <section class="git-section">
+    <h2>03 — Creating and Managing Branches</h2>
+
+    <p>
+      A branch allows you to work on new features
+      without changing the main branch immediately.
+    </p>
+
+    <p>Create a new branch:</p>
+
+    <pre class="command"><code>git switch -c feature/portfolio-update</code></pre>
+
+    <p>Stage and commit your changes:</p>
+
+    <pre class="command"><code>git add index.html
+git commit -m "Improve portfolio layout"</code></pre>
+
+    <p>Push your branch:</p>
+
+    <pre class="command"><code>git push -u origin feature/portfolio-update</code></pre>
+
+    <p>
+      Then open GitHub, create a Pull Request from
+      your feature branch into main, review the changes,
+      and merge it.
+    </p>
+
+    <p>Update your local main branch after merging:</p>
+
+    <pre class="command"><code>git switch main
+git pull origin main</code></pre>
+  </section>
+
+  <section class="git-section">
+    <h2>04 — GitHub Pages Deployment</h2>
+
+    <p>
+      GitHub Pages publishes static websites directly
+      from a GitHub repository.
+    </p>
+
+    <ol>
+      <li>Open the repository on GitHub.</li>
+      <li>Open Settings.</li>
+      <li>Select Pages.</li>
+      <li>Choose Deploy from a branch.</li>
+      <li>Select main as the branch.</li>
+      <li>Select the root folder (/).</li>
+      <li>Save your configuration.</li>
+      <li>Visit the published HTTPS address.</li>
+    </ol>
+
+    <p class="git-note">
+      My portfolio is already published using GitHub Pages.
+      This section documents the deployment process.
+    </p>
+  </section>
+
+  <section class="git-section">
+    <h2>05 — Custom 404 Error Page</h2>
+
+    <p>
+      A 404 error appears when a visitor requests
+      a page that does not exist.
+    </p>
+
+    <p>
+      A custom 404 page can guide visitors back to
+      the homepage instead of displaying an unhelpful
+      generic error.
+    </p>
+
+    <p>
+      <a href="../404.html">View my custom 404 page ↗</a>
+    </p>
+
+    <p>
+      The file must be named exactly
+      <code>404.html</code> and placed in the repository root.
+    </p>
+  </section>
+
+  <section class="git-section">
+    <h2>06 — Practical Checklist</h2>
+
+    <ul>
+      <li>Understand repository initialization and status.</li>
+      <li>Stage and commit changes.</li>
+      <li>Push changes to a remote repository.</li>
+      <li>Create and switch branches.</li>
+      <li>Understand pull requests and merging.</li>
+      <li>Publish a website with GitHub Pages.</li>
+      <li>Create and test a custom 404 page.</li>
+    </ul>
+
+    <p class="git-note">
+      This is a learning checklist, not proof that every
+      exercise has already been completed. Complete and
+      verify the branch and pull-request exercises in GitHub.
+    </p>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="../index.html">Return to homepage ↑</a>
+</footer>
+
+</body>
+</html>
