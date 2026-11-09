@@ -2,54 +2,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Website Performance Report — Week 10</title>
-<link rel="stylesheet" href="../portfolio.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Website performance optimization and Core Web Vitals report by Muhammadali Manopov.">
+  <title>Website Performance Report — Week 10</title>
+  <link rel="stylesheet" href="../portfolio.css">
 
-<style>
-.report {
-  max-width: 850px;
-  margin: 35px auto;
-  padding: 28px;
-  background: white;
-  border: 1px solid #dbe3e5;
-  border-radius: 12px;
-}
+  <style>
+    .report {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 28px;
+      background: white;
+      border: 1px solid #dbe3e5;
+      border-radius: 12px;
+    }
 
-.example {
-  padding: 18px;
-  margin: 18px 0;
-  background: #f5f7f5;
-  border-radius: 8px;
-  overflow-wrap: anywhere;
-}
+    .report-section {
+      margin: 35px 0;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #dbe3e5;
+    }
 
-.example img {
-  max-width: 100%;
-  height: auto;
-}
+    .report-section h2 {
+      color: #24434a;
+    }
 
-code {
-  color: #24434a;
-}
+    .example {
+      padding: 18px;
+      margin: 17px 0;
+      background: #f5f7f5;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 18px 0;
-}
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
 
-th, td {
-  text-align: left;
-  padding: 12px;
-  border-bottom: 1px solid #dbe3e5;
-}
-</style>
+    code {
+      color: #24434a;
+    }
+
+    .before {
+      border-left: 4px solid #b91c1c;
+    }
+
+    .after {
+      border-left: 4px solid #15803d;
+    }
+
+    .status {
+      padding: 14px;
+      border-radius: 8px;
+      background: #f5f7f5;
+      color: #68787b;
+    }
+
+    .report table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .report th,
+    .report td {
+      padding: 12px;
+      border-bottom: 1px solid #dbe3e5;
+      text-align: left;
+    }
+
+    .report th {
+      background: #f5f7f5;
+    }
+
+    .metric {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      padding: 16px;
+      border: 1px solid #dbe3e5;
+      border-radius: 8px;
+    }
+
+    .metric-card strong {
+      display: block;
+      color: #b87b35;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .report {
+        padding: 17px;
+      }
+
+      .metric {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
 <header class="site-nav">
   <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
   <a class="nav-link" href="index.html">← Week 10</a>
@@ -58,105 +116,370 @@ th, td {
 <main>
 <article class="report">
 
-<p>WEEK 10 / PERFORMANCE PROJECT</p>
+  <p>WEEK 10 / PERFORMANCE PROJECT</p>
 
-<h1>Website Optimization and Performance Report</h1>
+  <h1>Website Optimization and Performance Report</h1>
 
-<p>
-This project demonstrates image optimization, responsive images,
-efficient loading, and performance testing.
-</p>
+  <p>
+    This report explores five website performance techniques,
+    their implementation, and the effect they can have on
+    loading speed and user experience.
+  </p>
 
-<h2>01 — Image Optimization</h2>
+  <div class="status">
+    <strong>Testing status:</strong>
+    The optimization examples are documented below.
+    Actual Lighthouse measurements must be entered after testing.
+  </div>
 
-<p>
-Images should be compressed and delivered in modern formats
-such as WebP or AVIF to reduce file size.
-</p>
+  <!-- OPTIMIZATION 1 -->
 
-<div class="example">
-  <p><strong>Example:</strong> Lazy-loaded image.</p>
+  <section class="report-section">
+    <h2>01 — Image Optimization</h2>
 
-  <img
-    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&auto=format&fit=crop&q=75"
-    alt="Laptop and workspace for web development"
-    width="700"
-    height="467"
-    loading="lazy">
-</div>
+    <p>
+      Large images increase page size and can delay the
+      Largest Contentful Paint (LCP). Modern formats such
+      as WebP and AVIF can reduce image file sizes.
+    </p>
 
-<h2>02 — Responsive Images</h2>
+    <h3>Before optimization</h3>
 
-<pre class="example"><code>
-&lt;img src="small.webp"
-srcset="small.webp 480w, large.webp 1000w"
-sizes="(max-width: 600px) 100vw, 700px"
-width="700" height="467"
-alt="Description"
-loading="lazy"&gt;
-</code></pre>
+    <pre class="example before"><code>
+&lt;img src="large-image.jpg"
+     alt="Web development workspace"&gt;
+    </code></pre>
 
-<h2>03 — Efficient Script Loading</h2>
+    <h3>After optimization</h3>
 
-<p>
-The defer attribute allows HTML parsing to continue
-without waiting for the script to execute.
-</p>
+    <pre class="example after"><code>
+&lt;picture&gt;
+  &lt;source
+    srcset="workspace.avif"
+    type="image/avif"&gt;
 
-<pre class="example"><code>
-&lt;script src="app.js" defer&gt;&lt;/script&gt;
-</code></pre>
+  &lt;source
+    srcset="workspace.webp"
+    type="image/webp"&gt;
 
-<h2>04 — Lighthouse Testing</h2>
+  &lt;img
+    src="workspace.jpg"
+    alt="Web development workspace"
+    width="800"
+    height="500"&gt;
+&lt;/picture&gt;
+    </code></pre>
 
-<ol>
-  <li>Open your published portfolio in Google Chrome.</li>
-  <li>Open Developer Tools.</li>
-  <li>Select Lighthouse.</li>
-  <li>Choose Mobile mode.</li>
-  <li>Select all four categories.</li>
-  <li>Click Analyze page load.</li>
-  <li>Record your actual scores below.</li>
-</ol>
+    <p>
+      The browser selects a supported image format.
+      Width and height reserve the image space and help
+      prevent layout shifts.
+    </p>
+  </section>
 
-<h2>05 — My Lighthouse Results</h2>
+  <!-- OPTIMIZATION 2 -->
 
-<p><strong>Status:</strong> Pending actual testing.</p>
+  <section class="report-section">
+    <h2>02 — Lazy Loading</h2>
 
-<table>
-<thead>
-<tr>
-  <th>Category</th>
-  <th>Score / 100</th>
-</tr>
-</thead>
+    <p>
+      Images outside the initial viewport do not need
+      to load immediately. Lazy loading delays their
+      download until they approach the visible area.
+    </p>
 
-<tbody>
-<tr><td>Performance</td><td>Pending test</td></tr>
-<tr><td>Accessibility</td><td>Pending test</td></tr>
-<tr><td>Best Practices</td><td>Pending test</td></tr>
-<tr><td>SEO</td><td>Pending test</td></tr>
-</tbody>
-</table>
+    <h3>Before optimization</h3>
 
-<p>
-<strong>Test record:</strong>
-Date: Pending · Device: Pending · Mode: Mobile.
-</p>
+    <pre class="example before"><code>
+&lt;img src="gallery-photo.jpg"
+     alt="Gallery photo"&gt;
+    </code></pre>
 
-<h2>Conclusion</h2>
+    <h3>After optimization</h3>
 
-<p>
-Image compression, responsive image delivery, and deferred scripts
-can improve website performance. Lighthouse helps identify
-problems and measure improvements.
-</p>
+    <pre class="example after"><code>
+&lt;img
+  src="gallery-photo.webp"
+  alt="Gallery photo"
+  width="700"
+  height="450"
+  loading="lazy"
+  decoding="async"&gt;
+    </code></pre>
+
+    <p>
+      Important: do not lazy-load the main hero image
+      if it is the page's Largest Contentful Paint element.
+    </p>
+  </section>
+
+  <!-- OPTIMIZATION 3 -->
+
+  <section class="report-section">
+    <h2>03 — JavaScript Loading Strategy</h2>
+
+    <p>
+      Normal scripts in the document head can block HTML
+      parsing. The defer attribute allows the browser to
+      continue parsing before executing the script.
+    </p>
+
+    <h3>Before optimization</h3>
+
+    <pre class="example before"><code>
+&lt;head&gt;
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+    </code></pre>
+
+    <h3>After optimization</h3>
+
+    <pre class="example after"><code>
+&lt;head&gt;
+  &lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+    </code></pre>
+
+    <p>
+      Deferred scripts execute after HTML parsing and
+      before the DOMContentLoaded event.
+    </p>
+  </section>
+
+  <!-- OPTIMIZATION 4 -->
+
+  <section class="report-section">
+    <h2>04 — Font Loading Optimization</h2>
+
+    <p>
+      External fonts can delay text rendering.
+      Using appropriate font loading hints and
+      font-display can improve the experience.
+    </p>
+
+    <h3>Before optimization</h3>
+
+    <pre class="example before"><code>
+@font-face {
+  font-family: "MyFont";
+  src: url("my-font.woff2");
+}
+    </code></pre>
+
+    <h3>After optimization</h3>
+
+    <pre class="example after"><code>
+@font-face {
+  font-family: "MyFont";
+  src: url("my-font.woff2") format("woff2");
+  font-display: swap;
+}
+    </code></pre>
+
+    <p>
+      The swap value allows fallback text to appear
+      while the custom font loads.
+    </p>
+
+    <p>
+      For externally hosted fonts, consider preconnect
+      hints when the external origin is actually used.
+    </p>
+
+    <pre class="example after"><code>
+&lt;link rel="preconnect"
+      href="https://fonts.googleapis.com"&gt;
+
+&lt;link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin&gt;
+    </code></pre>
+  </section>
+
+  <!-- OPTIMIZATION 5 -->
+
+  <section class="report-section">
+    <h2>05 — Minification and Caching</h2>
+
+    <p>
+      Minification removes unnecessary spaces and
+      comments from CSS and JavaScript files.
+      This reduces the amount of code that needs
+      to be downloaded.
+    </p>
+
+    <h3>Before optimization</h3>
+
+    <pre class="example before"><code>
+function greetUser(name) {
+  // Display a welcome message
+  const message = "Hello " + name;
+
+  console.log(message);
+}
+    </code></pre>
+
+    <h3>After optimization</h3>
+
+    <pre class="example after"><code>
+function greetUser(n){const m="Hello "+n;console.log(m)}
+    </code></pre>
+
+    <p>
+      Caching allows browsers to reuse downloaded
+      resources instead of requesting every file again.
+      Proper cache headers must be configured by the
+      hosting platform or server.
+    </p>
+
+    <p>
+      Example server configuration concept:
+    </p>
+
+    <pre class="example after"><code>
+Cache-Control: public, max-age=31536000, immutable
+    </code></pre>
+
+    <p>
+      This long-lived policy should only be used for
+      versioned static files whose URLs change when
+      their contents change. It is not automatically
+      configured by adding this text to an HTML page.
+    </p>
+  </section>
+
+  <!-- CORE WEB VITALS -->
+
+  <section class="report-section">
+    <h2>06 — Core Web Vitals</h2>
+
+    <p>
+      Core Web Vitals measure important parts of
+      real-world user experience.
+    </p>
+
+    <div class="metric">
+      <div class="metric-card">
+        <strong>LCP</strong>
+        Largest Contentful Paint
+        <p>How quickly the main content appears.</p>
+      </div>
+
+      <div class="metric-card">
+        <strong>INP</strong>
+        Interaction to Next Paint
+        <p>How responsive the page feels to interactions.</p>
+      </div>
+
+      <div class="metric-card">
+        <strong>CLS</strong>
+        Cumulative Layout Shift
+        <p>How much content unexpectedly moves.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTHOUSE -->
+
+  <section class="report-section">
+    <h2>07 — Lighthouse Performance Audit</h2>
+
+    <ol>
+      <li>Open the published portfolio in Chrome.</li>
+      <li>Open Developer Tools.</li>
+      <li>Select Lighthouse.</li>
+      <li>Choose Mobile mode.</li>
+      <li>Select Performance and run the audit.</li>
+      <li>Save the original report.</li>
+      <li>Apply optimizations and publish the changes.</li>
+      <li>Run the audit again under the same conditions.</li>
+      <li>Compare the results.</li>
+    </ol>
+
+    <h3>Before optimization</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Actual result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Performance score</td><td>Enter actual score</td></tr>
+        <tr><td>LCP</td><td>Enter actual result</td></tr>
+        <tr><td>INP</td><td>Enter actual result</td></tr>
+        <tr><td>CLS</td><td>Enter actual result</td></tr>
+      </tbody>
+    </table>
+
+    <h3>After optimization</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Actual result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Performance score</td><td>Enter actual score</td></tr>
+        <tr><td>LCP</td><td>Enter actual result</td></tr>
+        <tr><td>INP</td><td>Enter actual result</td></tr>
+        <tr><td>CLS</td><td>Enter actual result</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Test conditions:</strong>
+      Record the date, device mode, browser and network
+      conditions for both tests.
+    </p>
+  </section>
+
+  <!-- REFLECTION -->
+
+  <section class="report-section">
+    <h2>08 — Critical Rendering Path Reflection</h2>
+
+    <p>
+      The Critical Rendering Path describes the browser's
+      process of turning HTML, CSS and JavaScript into
+      pixels on the screen.
+    </p>
+
+    <p>
+      The browser parses HTML to build the DOM and CSS
+      to build the CSSOM. These structures are combined
+      to create the render tree. Layout determines
+      element positions and painting displays the result.
+    </p>
+
+    <p>
+      Large images, render-blocking resources and
+      unnecessary JavaScript can delay this process.
+      Image optimization, deferred scripts and
+      efficient font loading help reduce unnecessary
+      work during initial page rendering.
+    </p>
+  </section>
+
+  <h2>Conclusion</h2>
+
+  <p>
+    Website performance is not only about loading speed.
+    It also includes visual stability and interaction
+    responsiveness. These five optimization techniques
+    can improve the experience when applied correctly.
+    Lighthouse helps identify issues and measure actual
+    changes after optimization.
+  </p>
 
 </article>
 </main>
 
 <footer class="site-footer">
-  <span>MM / Web Programming Portfolio</span>
+  <p>MM / Web Programming Portfolio</p>
   <a href="index.html">Back to Week 10</a>
 </footer>
 
