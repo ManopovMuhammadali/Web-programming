@@ -24,7 +24,7 @@ Fetch API, forms, accessibility and practical projects.
 | 8 | HTML Forms and Validation |
 | 9 | Web Accessibility |
 | 10 | Additional Performance Practice |
-
+| Additional | Git, GitHub, Version Control and Custom 404 |
 ## Technologies
 
 - HTML5
