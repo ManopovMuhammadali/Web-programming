@@ -2,139 +2,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interactive Colour Palette — Week 5</title>
-  <link rel="stylesheet" href="../portfolio.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colour Palette — Week 5</title>
+<link rel="stylesheet" href="../portfolio.css">
 
-  <style>
-    .palette-app {
-      max-width: 900px;
-      margin: 35px auto;
-      padding: 25px;
-      background: white;
-      border: 1px solid #dbe3e5;
-      border-radius: 12px;
-    }
-
-    .palette-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 22px 0;
-    }
-
-    .palette-controls input {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .palette-controls button {
-      padding: 10px 17px;
-      border: 0;
-      border-radius: 6px;
-      background: #24434a;
-      color: white;
-      cursor: pointer;
-    }
-
-    .palette-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-    }
-
-    .color-box {
-      min-height: 125px;
-      padding: 16px;
-      border: 1px solid #dbe3e5;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      cursor: pointer;
-      transition: transform .2s;
-    }
-
-    .color-box:hover {
-      transform: translateY(-4px);
-    }
-
-    .color-box strong {
-      background: white;
-      color: #17242b;
-      width: fit-content;
-      padding: 5px 9px;
-      border-radius: 5px;
-    }
-
-    .color-box small {
-      margin-top: 7px;
-      color: #17242b;
-      background: white;
-      width: fit-content;
-      padding: 3px 7px;
-      border-radius: 4px;
-    }
-
-    .color-box small[hidden] {
-      display: none;
-    }
-
-    .palette-message {
-      min-height: 24px;
-      color: #24434a;
-    }
-
-    .empty-message {
-      color: #68787b;
-      grid-column: 1 / -1;
-    }
-  </style>
+<style>
+.palette-app {
+  max-width: 900px;
+  margin: 35px auto;
+  padding: 25px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 12px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+.controls input { flex: 1; min-width: 180px; }
+.controls button {
+  padding: 10px 17px;
+  background: #24434a;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 15px;
+}
+.color-card {
+  min-height: 140px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  cursor: pointer;
+}
+.color-card strong, .color-card small {
+  width: fit-content;
+  padding: 5px 8px;
+  background: white;
+  color: #17242b;
+  border-radius: 4px;
+}
+.color-card small[hidden] { display: none; }
+#message { min-height: 25px; }
+</style>
 </head>
 
 <body>
 <header class="site-nav">
-  <a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a>
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
   <a class="nav-link" href="index.html">← Week 5</a>
 </header>
 
 <main>
-  <header class="archive-intro">
-    <p>WEEK 05 / JAVASCRIPT PRACTICE</p>
-    <h1>Interactive Colour Palette.</h1>
-    <p>
-      Build a dynamic colour palette using JavaScript,
-      DOM manipulation, events and localStorage.
-    </p>
-  </header>
+<header class="archive-intro">
+  <p>WEEK 05 / JAVASCRIPT PRACTICE</p>
+  <h1>Interactive Colour Palette.</h1>
+  <p>Add colours, reveal HEX codes, remove colours and export your palette.</p>
+</header>
 
-  <section class="palette-app">
-    <h2>My Colour Palette</h2>
+<section class="palette-app">
+  <h2>My Colour Palette</h2>
+  <p>Click a colour to reveal its HEX code. Double-click to remove it.</p>
 
-    <p>
-      Click a colour to reveal its HEX code.
-      Double-click a colour to remove it.
-    </p>
+  <div class="controls">
+    <label for="colorInput">HEX colour</label>
+    <input id="colorInput" type="text"
+           placeholder="#ff5733" maxlength="7">
+    <button id="addButton" type="button">Add Colour</button>
+    <button id="exportButton" type="button">Export PNG</button>
+  </div>
 
-    <div class="palette-controls">
-      <label for="hexInput">Enter HEX colour</label>
-      <input
-        id="hexInput"
-        type="text"
-        placeholder="#ff5733"
-        maxlength="7"
-      >
-
-      <button id="addButton" type="button">+ Add Colour</button>
-      <button id="exportButton" type="button">Export PNG</button>
-    </div>
-
-    <p id="paletteMessage" class="palette-message"
-       role="status" aria-live="polite"></p>
-
-    <div id="paletteGrid" class="palette-grid"></div>
-  </section>
+  <p id="message" role="status" aria-live="polite"></p>
+  <div id="paletteGrid" class="palette-grid"></div>
+</section>
 </main>
 
 <footer class="site-footer">
@@ -143,132 +94,119 @@
 </footer>
 
 <script>
+const input = document.getElementById("colorInput");
 const grid = document.getElementById("paletteGrid");
-const input = document.getElementById("hexInput");
-const message = document.getElementById("paletteMessage");
-
-const STORAGE_KEY = "muhammadali-colour-palette";
-
-let colors = loadColors();
+const message = document.getElementById("message");
+const KEY = "muhammadali-colour-palette";
 
 function loadColors() {
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-    if (
-      Array.isArray(saved) &&
-      saved.every(color =>
-        typeof color === "string" &&
-        /^#[0-9a-fA-F]{6}$/.test(color)
-      )
-    ) {
+    const saved = JSON.parse(localStorage.getItem(KEY));
+    if (Array.isArray(saved) &&
+        saved.every(c => typeof c === "string" &&
+          /^#[0-9a-f]{6}$/i.test(c))) {
       return saved;
     }
   } catch (error) {
-    console.error("Could not load saved colours:", error);
+    console.error(error);
   }
 
   return ["#24434a", "#b87b35", "#e9dfd1", "#7b9e89"];
 }
 
+let colors = loadColors();
+
 function saveColors() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
+    localStorage.setItem(KEY, JSON.stringify(colors));
   } catch (error) {
-    console.error("Could not save palette:", error);
-    message.textContent = "Could not save palette in this browser.";
+    message.textContent = "Could not save colours.";
   }
 }
 
-function renderPalette() {
-  grid.innerHTML = "";
+function render() {
+  grid.replaceChildren();
 
-  if (colors.length === 0) {
-    grid.innerHTML =
-      '<p class="empty-message">Your palette is empty. Add a colour!</p>';
+  if (!colors.length) {
+    grid.textContent = "Your palette is empty.";
     return;
   }
 
   colors.forEach((color, index) => {
-    const box = document.createElement("div");
-    box.className = "color-box";
-    box.style.backgroundColor = color;
+    const card = document.createElement("div");
+    card.className = "color-card";
+    card.style.backgroundColor = color;
 
-    const name = document.createElement("strong");
-    name.textContent = "Colour " + (index + 1);
+    const title = document.createElement("strong");
+    title.textContent = "Colour " + (index + 1);
 
     const hex = document.createElement("small");
     hex.textContent = color;
     hex.hidden = true;
 
-    box.append(name, hex);
+    card.append(title, hex);
 
-    box.addEventListener("click", () => {
+    card.addEventListener("click", () => {
       hex.hidden = !hex.hidden;
     });
 
-    box.addEventListener("dblclick", () => {
+    card.addEventListener("dblclick", () => {
       colors.splice(index, 1);
       saveColors();
-      renderPalette();
-      message.textContent = color + " removed.";
+      render();
+      message.textContent = "Colour removed.";
     });
 
-    grid.appendChild(box);
+    grid.appendChild(card);
   });
 }
 
 function addColor() {
-  const color = input.value.trim();
+  const color = input.value.trim().toLowerCase();
 
-  if (!/^#[0-9a-fA-F]{6}$/.test(color)) {
+  if (!/^#[0-9a-f]{6}$/i.test(color)) {
     message.textContent =
-      "Please enter a valid HEX code, for example #ff5733.";
-    input.focus();
+      "Enter a valid HEX colour, e.g. #ff5733.";
     return;
   }
 
-  if (colors.includes(color.toLowerCase())) {
-    message.textContent = "This colour is already in your palette.";
+  if (colors.includes(color)) {
+    message.textContent = "Colour already exists.";
     return;
   }
 
-  colors.push(color.toLowerCase());
-
+  colors.push(color);
   saveColors();
-  renderPalette();
-
+  render();
   input.value = "";
-  message.textContent = color + " added successfully.";
+  message.textContent = "Colour added successfully.";
 }
 
 function exportPNG() {
-  if (colors.length === 0) {
-    message.textContent = "Add at least one colour before exporting.";
+  if (!colors.length) {
+    message.textContent = "Add a colour first.";
     return;
   }
 
   const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-
+  const ctx = canvas.getContext("2d");
+  const width = 300;
+  const height = 140;
   const columns = 2;
-  const cellWidth = 300;
-  const cellHeight = 150;
-  const rows = Math.ceil(colors.length / columns);
 
-  canvas.width = columns * cellWidth;
-  canvas.height = rows * cellHeight;
+  canvas.width = columns * width;
+  canvas.height = Math.ceil(colors.length / columns) * height;
 
-  colors.forEach((color, index) => {
-    const x = (index % columns) * cellWidth;
-    const y = Math.floor(index / columns) * cellHeight;
+  colors.forEach((color, i) => {
+    const x = (i % columns) * width;
+    const y = Math.floor(i / columns) * height;
 
-    context.fillStyle = color;
-    context.fillRect(x, y, cellWidth, cellHeight);
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, height);
 
-    context.fillStyle = "#ffffff";
-    context.font = "bold 24px Arial";
-    context.fillText(color, x + 20, y + 80);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 22px Arial";
+    ctx.fillText(color, x + 18, y + 75);
   });
 
   const link = document.createElement("a");
@@ -276,7 +214,7 @@ function exportPNG() {
   link.href = canvas.toDataURL("image/png");
   link.click();
 
-  message.textContent = "Your PNG palette was exported.";
+  message.textContent = "PNG exported successfully.";
 }
 
 document.getElementById("addButton")
@@ -285,13 +223,11 @@ document.getElementById("addButton")
 document.getElementById("exportButton")
   .addEventListener("click", exportPNG);
 
-input.addEventListener("keydown", event => {
-  if (event.key === "Enter") {
-    addColor();
-  }
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") addColor();
 });
 
-renderPalette();
+render();
 </script>
 </body>
 </html>
