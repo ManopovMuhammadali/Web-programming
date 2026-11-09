@@ -149,14 +149,16 @@ button, a, input {
 </main>
 
 <script>
-document.getElementById("accessibleButton").addEventListener("click", () => {
-  document.getElementById("buttonMessage").textContent =
-    "The native button works with keyboard and pointer input.";
-});
 
-document.getElementById("keyboardButton").addEventListener("click", () => {
-  document.getElementById("keyboardMessage").textContent =
-    "The button was activated.";
+const accessibleButton =
+  document.getElementById("accessibleButton");
+
+const buttonMessage =
+  document.getElementById("buttonMessage");
+
+accessibleButton.addEventListener("click", () => {
+  buttonMessage.textContent =
+    "The native button works with keyboard and pointer input.";
 });
 </script>
 </body>
