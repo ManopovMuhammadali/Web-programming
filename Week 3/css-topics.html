@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Lecture Topics — Week 3</title>
+<link rel="stylesheet" href="../portfolio.css">
+<style>
+.topic-section {
+  padding: 30px 0;
+}
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 13px;
+}
+.topic-card {
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 9px;
+  padding: 17px;
+}
+.topic-card summary {
+  color: #24434a;
+  font-weight: 750;
+  cursor: pointer;
+}
+.topic-card p {
+  color: #607079;
+  font-size: 14px;
+}
+.topic-card code {
+  color: #b87b35;
+  overflow-wrap: anywhere;
+}
+</style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 3</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 03 / LECTURE NOTES</p>
+  <h1>CSS fundamentals & advanced CSS.</h1>
+  <p>
+    A collection of CSS concepts covering styling,
+    selectors, layouts, responsive design and animation.
+  </p>
+</header>
+
+<section class="topic-section">
+  <h2>Monday — CSS Fundamentals</h2>
+  <p>Topics 01–25</p>
+  <div class="topic-grid" id="fundamentals"></div>
+</section>
+
+<section class="topic-section">
+  <h2>Friday — Advanced CSS</h2>
+  <p>Topics 01–15</p>
+  <div class="topic-grid" id="advanced"></div>
+</section>
+
+<section class="archive-content">
+  <h2>Related practical exercises</h2>
+  <div class="assignment-list">
+    <a class="assignment-link" href="fundamentals.html">
+      <span class="assignment-index">01</span>
+      <span class="assignment-title">CSS Fundamentals Exercises</span>
+      <span class="assignment-arrow">↗</span>
+    </a>
+    <a class="assignment-link" href="index.html">
+      <span class="assignment-index">02</span>
+      <span class="assignment-title">All Week 3 Assignments</span>
+      <span class="assignment-arrow">↗</span>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 3</a>
+</footer>
+
+<script>
+const fundamentals = [
+  ["CSS Syntax", "A CSS rule contains a selector and one or more declarations.", "selector { color: blue; }"],
+  ["CSS Selectors", "Selectors target the HTML elements that should receive styles.", "p { color: #24434a; }"],
+  ["Class Selectors", "A class selector styles every element with a matching class.", ".card { padding: 20px; }"],
+  ["ID Selectors", "An ID selector targets an element with a unique ID.", "#header { background: white; }"],
+  ["Grouping Selectors", "Multiple selectors can share the same declarations.", "h1, h2, p { font-family: Arial; }"],
+  ["Descendant Selectors", "A descendant selector targets elements inside another element.", ".nav a { text-decoration: none; }"],
+  ["Pseudo-classes", "Pseudo-classes style elements in a particular state.", "a:hover { color: orange; }"],
+  ["Pseudo-elements", "Pseudo-elements style a specific part of an element.", "p::first-letter { font-size: 2em; }"],
+  ["The Cascade", "The cascade decides which matching declaration is applied.", "color: navy;"],
+  ["Specificity", "Specificity helps determine which selector takes priority.", "#main .card { color: black; }"],
+  ["Inheritance", "Some CSS properties pass from parent elements to children.", "body { color: #17242b; }"],
+  ["CSS Colors", "Colors can be written with names, HEX, RGB or HSL values.", "color: #24434a;"],
+  ["CSS Units", "CSS uses units such as px, rem, em, %, vw and vh.", "padding: 1rem;"],
+  ["Typography", "Typography controls font family, size, weight and spacing.", "font-size: 1.2rem;"],
+  ["Box Model", "The box model includes content, padding, border and margin.", "box-sizing: border-box;"],
+  ["Width and Height", "Sizing properties control element dimensions.", "max-width: 900px;"],
+  ["Display Property", "Display controls how an element participates in layout.", "display: block;"],
+  ["Positioning", "Positioning controls how an element is placed.", "position: relative;"],
+  ["Backgrounds", "Background properties add color, images and positioning.", "background-color: white;"],
+  ["Borders", "Borders define the edge of an element.", "border: 1px solid #dbe3e5;"],
+  ["Margin and Padding", "Margin creates outside space; padding creates inside space.", "margin: 20px; padding: 10px;"],
+  ["Flexbox", "Flexbox arranges items along a row or column.", "display: flex; gap: 1rem;"],
+  ["CSS Grid", "Grid creates two-dimensional row and column layouts.", "display: grid; grid-template-columns: 1fr 1fr;"],
+  ["Responsive Design", "Responsive layouts adapt to different screen sizes.", "width: min(100%, 900px);"],
+  ["Media Queries", "Media queries apply styles under selected conditions.", "@media (max-width: 600px) { ... }"]
+];
+
+const advanced = [
+  ["CSS Custom Properties", "Variables store reusable values in a stylesheet.", "--accent: #b87b35;"],
+  ["Advanced Selectors", "Attribute and structural selectors target specific elements.", "input[type='email'] { ... }"],
+  ["calc(), min(), max() and clamp()", "CSS math functions create flexible responsive values.", "font-size: clamp(2rem, 5vw, 4rem);"],
+  ["Flexbox Alignment", "Justify-content and align-items control item alignment.", "justify-content: space-between;"],
+  ["Grid Fractions", "The fr unit distributes available grid space.", "grid-template-columns: 2fr 1fr;"],
+  ["Auto-fit and minmax", "Grid can automatically fit columns to available space.", "repeat(auto-fit, minmax(200px, 1fr))"],
+  ["Responsive Breakpoints", "Breakpoints adapt layout rules for different viewports.", "@media (max-width: 720px) { ... }"],
+  ["Object Fit", "Object-fit controls how replaced content fills its box.", "object-fit: cover;"],
+  ["Aspect Ratio", "Aspect-ratio preserves a consistent width-to-height relationship.", "aspect-ratio: 16 / 9;"],
+  ["Box Shadows", "Shadows add depth to cards and interface elements.", "box-shadow: 0 8px 25px #0001;"],
+  ["Filters", "Filters apply visual effects such as blur or grayscale.", "filter: grayscale(100%);"],
+  ["Transitions", "Transitions animate changes between property values.", "transition: transform .2s ease;"],
+  ["Transforms", "Transforms move, rotate or scale an element.", "transform: translateY(-4px);"],
+  ["Keyframe Animations", "Keyframes define the stages of an animation.", "@keyframes fade { from { opacity: 0; } to { opacity: 1; } }"],
+  ["Accessible Motion and Focus", "Reduced-motion preferences and visible focus states improve usability.", "@media (prefers-reduced-motion: reduce) { ... }"]
+];
+
+function renderTopics(list, targetId) {
+  const target = document.getElementById(targetId);
+
+  list.forEach((item, index) => {
+    const details = document.createElement("details");
+    details.className = "topic-card";
+
+    const summary = document.createElement("summary");
+    summary.textContent =
+      String(index + 1).padStart(2, "0") + " — " + item[0];
+
+    const description = document.createElement("p");
+    description.textContent = item[1];
+
+    const example = document.createElement("code");
+    example.textContent = item[2];
+
+    details.append(summary, description, example);
+    target.appendChild(details);
+  });
+}
+
+renderTopics(fundamentals, "fundamentals");
+renderTopics(advanced, "advanced");
+</script>
+</body>
+</html>
