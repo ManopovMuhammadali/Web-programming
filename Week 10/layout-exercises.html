@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 10 CSS Grid and Flexbox exercises.">
+  <title>Week 10 — Layout Exercises</title>
+  <link rel="stylesheet" href="../portfolio.css">
+
+  <style>
+    .exercise {
+      margin: 24px 0;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #dce3e1;
+      border-radius: 10px;
+    }
+
+    .demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+      padding: 18px;
+      background: #f5f7f5;
+      border-radius: 8px;
+    }
+
+    .item {
+      display: grid;
+      place-items: center;
+      min-height: 65px;
+      padding: 12px;
+      background: #24434a;
+      color: white;
+      border-radius: 6px;
+      flex: 1 1 120px;
+    }
+
+    .grid-demo {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .responsive-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .code {
+      padding: 18px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #17242b;
+      color: white;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .variable-demo {
+      --demo-bg: #24434a;
+      --demo-text: #ffffff;
+      --demo-accent: #f1d2a6;
+      --demo-radius: 10px;
+
+      padding: 24px;
+      color: var(--demo-text);
+      background: var(--demo-bg);
+      border-radius: var(--demo-radius);
+    }
+
+    .variable-demo strong {
+      color: var(--demo-accent);
+    }
+
+    .reflection {
+      padding: 16px;
+      background: #f5f7f5;
+      border-left: 4px solid #b87b35;
+    }
+
+    @media (max-width: 600px) {
+      .grid-demo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .exercise {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 10</a>
+</header>
+
+<main>
+
+  <header class="archive-intro">
+    <div class="archive-meta">
+      <span>Web Programming</span>
+      <span>Week 10 / Exercises</span>
+    </div>
+    <h1>CSS Grid & Flexbox.</h1>
+    <p>
+      Practical exercises covering modern CSS layouts,
+      responsive design and reusable custom properties.
+    </p>
+  </header>
+
+  <section class="exercise" id="flexbox">
+    <h2>01 — Flexbox Layout</h2>
+    <p>
+      Flexbox arranges elements in a row or column.
+      It helps control alignment, spacing and wrapping.
+    </p>
+
+    <div class="demo">
+      <div class="item">Item 1</div>
+      <div class="item">Item 2</div>
+      <div class="item">Item 3</div>
+    </div>
+
+    <h3>CSS Code</h3>
+    <pre class="code"><code>.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.item {
+  flex: 1 1 120px;
+}</code></pre>
+
+    <div class="reflection">
+      <strong>Result:</strong> The items are displayed in a
+      flexible row and wrap when space becomes limited.
+    </div>
+  </section>
+
+  <section class="exercise" id="grid">
+    <h2>02 — CSS Grid Layout</h2>
+    <p>
+      CSS Grid creates two-dimensional layouts using
+      rows and columns.
+    </p>
+
+    <div class="demo grid-demo">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+
+    <h3>CSS Code</h3>
+    <pre class="code"><code>.container {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}</code></pre>
+
+    <div class="reflection">
+      <strong>Result:</strong> Six elements are arranged
+      in three equal columns.
+    </div>
+  </section>
+
+  <section class="exercise" id="responsive">
+    <h2>03 — Responsive Layout</h2>
+    <p>
+      Responsive Grid automatically adjusts the number
+      of columns according to available screen width.
+    </p>
+
+    <div class="demo responsive-demo">
+      <div class="item">Card 1</div>
+      <div class="item">Card 2</div>
+      <div class="item">Card 3</div>
+      <div class="item">Card 4</div>
+    </div>
+
+    <h3>CSS Code</h3>
+    <pre class="code"><code>.container {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}</code></pre>
+
+    <div class="reflection">
+      <strong>Result:</strong> The cards automatically
+      rearrange when the browser window becomes smaller.
+      Try resizing the browser to test it.
+    </div>
+  </section>
+
+  <section class="exercise" id="variables">
+    <h2>04 — CSS Custom Properties</h2>
+    <p>
+      Custom properties allow reusable values to be
+      stored and accessed using the var() function.
+    </p>
+
+    <div class="demo">
+      <div class="variable-demo">
+        <strong>Reusable CSS variables</strong>
+        <p>This example uses variables for background,
+        text color, accent color and border radius.</p>
+      </div>
+    </div>
+
+    <h3>CSS Code</h3>
+    <pre class="code"><code>:root {
+  --background: #24434a;
+  --text: #ffffff;
+  --accent: #f1d2a6;
+  --radius: 10px;
+}
+
+.card {
+  background: var(--background);
+  color: var(--text);
+  border-radius: var(--radius);
+}</code></pre>
+
+    <div class="reflection">
+      <strong>Result:</strong> Reusable variables make
+      styles easier to maintain and update.
+    </div>
+  </section>
+
+  <section class="exercise" id="reflection">
+    <h2>05 — Layout Reflection</h2>
+
+    <h3>What is the difference between Flexbox and Grid?</h3>
+    <p>
+      Flexbox is mainly used for one-dimensional layouts,
+      arranging elements in a row or column. Grid is used
+      for two-dimensional layouts with rows and columns.
+    </p>
+
+    <h3>When should each be used?</h3>
+    <p>
+      Flexbox is useful for navigation bars, buttons and
+      aligning content. Grid is useful for galleries,
+      card collections and complete page layouts.
+    </p>
+
+    <h3>Why are custom properties useful?</h3>
+    <p>
+      They allow common CSS values to be reused throughout
+      a website, making styles easier to maintain.
+    </p>
+
+    <h3>Conclusion</h3>
+    <p>
+      Flexbox, Grid and CSS custom properties are important
+      tools for building organized and responsive websites.
+      Choosing the correct layout method improves the
+      experience on desktop and mobile devices.
+    </p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 10 ↑</a>
+</footer>
+
+</body>
+</html>
