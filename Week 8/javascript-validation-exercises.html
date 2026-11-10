@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript Validation Exercises — Week 8</title>
+<link rel="stylesheet" href="../portfolio.css">
+
+<style>
+.exercise {
+  max-width: 760px;
+  margin: 25px auto;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 10px;
+}
+.exercise label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 700;
+}
+.exercise input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #dbe3e5;
+  border-radius: 6px;
+  font: inherit;
+}
+.exercise button {
+  margin-top: 13px;
+  padding: 11px 17px;
+  border: 0;
+  border-radius: 6px;
+  background: #24434a;
+  color: white;
+  cursor: pointer;
+}
+.error {
+  color: #b91c1c;
+  min-height: 20px;
+  font-size: 13px;
+}
+.success {
+  color: #15803d;
+}
+.hint {
+  color: #607079;
+  font-size: 13px;
+}
+input[aria-invalid="true"] {
+  border: 2px solid #b91c1c;
+}
+</style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 8</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 08 / FRIDAY EXERCISES</p>
+  <h1>JavaScript form validation.</h1>
+  <p>
+    Practice customValidity, real-time feedback,
+    password matching and accessible form messages.
+  </p>
+</header>
+
+<!-- EXERCISE 1 -->
+
+<section class="exercise">
+  <h2>01 — Custom Error Messages</h2>
+  <p>
+    A username must contain at least four characters
+    and cannot include spaces.
+  </p>
+
+  <label for="username">Username</label>
+  <input
+    id="username"
+    type="text"
+    placeholder="Enter username"
+    aria-describedby="usernameError"
+  >
+
+  <p id="usernameError" class="error" role="status"></p>
+  <button id="usernameButton" type="button">Validate username</button>
+</section>
+
+<!-- EXERCISE 2 -->
+
+<section class="exercise">
+  <h2>02 — Real-time Email Validation</h2>
+  <p>
+    The email address is checked while the user types.
+  </p>
+
+  <label for="email">Email address</label>
+  <input
+    id="email"
+    type="email"
+    placeholder="name@example.com"
+    aria-describedby="emailStatus"
+  >
+
+  <p id="emailStatus" class="hint" aria-live="polite">
+    Enter your email address.
+  </p>
+</section>
+
+<!-- EXERCISE 3 -->
+
+<section class="exercise">
+  <h2>03 — Password Confirmation and ARIA</h2>
+
+  <form id="passwordForm" novalidate>
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      minlength="8"
+      required
+      aria-describedby="passwordError"
+    >
+    <p id="passwordError" class="error"></p>
+
+    <label for="confirm">Confirm password</label>
+    <input
+      id="confirm"
+      type="password"
+      required
+      aria-describedby="confirmError"
+    >
+    <p id="confirmError" class="error"></p>
+
+    <button type="submit">Check passwords</button>
+
+    <p id="passwordStatus" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 8</a>
+</footer>
+
+<script>
+// Exercise 1: setCustomValidity()
+const username = document.getElementById("username");
+const usernameError = document.getElementById("usernameError");
+
+document.getElementById("usernameButton")
+.addEventListener("click", () => {
+  username.setCustomValidity("");
+
+  const value = username.value.trim();
+
+  if (value.length < 4) {
+    username.setCustomValidity(
+      "Username must contain at least 4 characters."
+    );
+  } else if (/\s/.test(value)) {
+    username.setCustomValidity(
+      "Username cannot contain spaces."
+    );
+  }
+
+  if (!username.checkValidity()) {
+    usernameError.textContent =
+      username.validationMessage;
+    username.setAttribute("aria-invalid", "true");
+    username.reportValidity();
+  } else {
+    usernameError.textContent = "Username is valid.";
+    usernameError.className = "success";
+    username.setAttribute("aria-invalid", "false");
+  }
+});
+
+// Exercise 2: Real-time email validation
+const email = document.getElementById("email");
+const emailStatus = document.getElementById("emailStatus");
+
+email.addEventListener("input", () => {
+  emailStatus.className = "hint";
+
+  if (!email.value) {
+    emailStatus.textContent = "Enter your email address.";
+  } else if (email.validity.typeMismatch) {
+    emailStatus.textContent = "Please enter a valid email.";
+    emailStatus.className = "error";
+  } else {
+    emailStatus.textContent = "Email format looks valid.";
+    emailStatus.className = "success";
+  }
+});
+
+// Exercise 3: Password matching and ARIA feedback
+const passwordForm = document.getElementById("passwordForm");
+const password = document.getElementById("password");
+const confirm = document.getElementById("confirm");
+
+function checkPassword(field) {
+  field.setCustomValidity("");
+
+  let error = "";
+
+  if (field.validity.valueMissing) {
+    error = "This field is required.";
+  } else if (field.validity.tooShort) {
+    error = "Password must contain at least 8 characters.";
+  }
+
+  if (field === confirm && field.value !== password.value) {
+    error = "Passwords do not match.";
+  }
+
+  field.setCustomValidity(error);
+  field.setAttribute("aria-invalid", String(Boolean(error)));
+
+  document.getElementById(field.id + "Error").textContent = error;
+
+  return !error;
+}
+
+password.addEventListener("input", () => {
+  checkPassword(password);
+  checkPassword(confirm);
+});
+
+confirm.addEventListener("input", () => {
+  checkPassword(confirm);
+});
+
+passwordForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const valid = [
+    checkPassword(password),
+    checkPassword(confirm)
+  ].every(Boolean);
+
+  const status = document.getElementById("passwordStatus");
+
+  if (valid) {
+    status.textContent = "Passwords match successfully.";
+    status.className = "success";
+  } else {
+    status.textContent = "Please fix the errors above.";
+    status.className = "error";
+  }
+});
+</script>
+</body>
+</html>
