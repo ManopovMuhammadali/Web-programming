@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Practical Exercises — Week 10</title>
+<link rel="stylesheet" href="../portfolio.css">
+
+<style>
+.git-exercise {
+  margin: 24px 0;
+  padding: 24px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 10px;
+}
+.git-exercise h2 { color: #24434a; }
+.git-exercise p { color: #607079; }
+pre {
+  padding: 17px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #17242b;
+  color: #e9dfd1;
+  border-radius: 8px;
+}
+.note {
+  padding: 13px;
+  background: #f5f7f5;
+  border-left: 4px solid #b87b35;
+}
+</style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Git & GitHub</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 10 / PRACTICAL WORK</p>
+  <h1>Git & GitHub exercises.</h1>
+  <p>
+    Repository setup, commits, branches, merging,
+    remote repositories and GitHub Pages deployment.
+  </p>
+</header>
+
+<section class="git-exercise">
+  <h2>01 — Repository Setup</h2>
+
+  <p>
+    A Git repository stores a project's files
+    and revision history.
+  </p>
+
+  <p>For a new project:</p>
+
+  <pre><code>mkdir git-practice
+cd git-practice
+git init
+git status</code></pre>
+
+  <p>For an existing GitHub project:</p>
+
+  <pre><code>git clone https://github.com/ManopovMuhammadali/Web-programming.git
+cd Web-programming
+git status</code></pre>
+
+  <div class="note">
+    This portfolio already has a GitHub repository.
+    Use the clone commands when working with a fresh copy.
+  </div>
+</section>
+
+<section class="git-exercise">
+  <h2>02 — Staging and Commits</h2>
+
+  <p>
+    Staging selects which changes will be included
+    in the next commit.
+  </p>
+
+  <pre><code>git status
+git add index.html
+git status
+git commit -m "Update portfolio homepage"
+git log --oneline -5</code></pre>
+
+  <p>
+    A commit creates a snapshot of the staged changes.
+    Meaningful commit messages help explain the project history.
+  </p>
+</section>
+
+<section class="git-exercise">
+  <h2>03 — Creating a Feature Branch</h2>
+
+  <p>
+    A branch lets you work on a feature independently
+    of the main branch.
+  </p>
+
+  <pre><code>git switch main
+git pull origin main
+
+git switch -c feature/portfolio-update
+
+git status
+git add .
+git commit -m "Add portfolio feature"
+git push -u origin feature/portfolio-update</code></pre>
+</section>
+
+<section class="git-exercise">
+  <h2>04 — Pull Request and Merge</h2>
+
+  <ol>
+    <li>Open your repository on GitHub.</li>
+    <li>Select the feature branch.</li>
+    <li>Choose Compare &amp; pull request.</li>
+    <li>Set main as the base branch.</li>
+    <li>Review the changed files.</li>
+    <li>Create the pull request.</li>
+    <li>Merge it after reviewing the changes.</li>
+  </ol>
+
+  <p>Update your local main branch:</p>
+
+  <pre><code>git switch main
+git pull origin main</code></pre>
+</section>
+
+<section class="git-exercise">
+  <h2>05 — Push Changes to GitHub</h2>
+
+  <p>
+    The remote repository stores your project
+    online and allows other people to access it.
+  </p>
+
+  <pre><code>git remote -v
+git add .
+git commit -m "Complete coursework task"
+git push origin main</code></pre>
+
+  <p>Check your repository and commit history:</p>
+
+  <p>
+    <a href="https://github.com/ManopovMuhammadali/Web-programming">
+      Open my GitHub repository ↗
+    </a>
+  </p>
+
+  <p>
+    <a href="https://github.com/ManopovMuhammadali/Web-programming/commits/main/">
+      View commit history ↗
+    </a>
+  </p>
+</section>
+
+<section class="git-exercise">
+  <h2>06 — GitHub Pages Deployment</h2>
+
+  <ol>
+    <li>Open your repository on GitHub.</li>
+    <li>Go to Settings.</li>
+    <li>Open Pages.</li>
+    <li>Choose Deploy from a branch.</li>
+    <li>Select main as the branch.</li>
+    <li>Select the root folder.</li>
+    <li>Save the configuration.</li>
+    <li>Open the published website.</li>
+  </ol>
+
+  <p>
+    <a href="https://manopovmuhammadali.github.io/Web-programming/">
+      Open my deployed portfolio ↗
+    </a>
+  </p>
+</section>
+
+<section class="git-exercise">
+  <h2>07 — Custom 404 Page</h2>
+
+  <p>
+    A 404 page is displayed when a visitor requests
+    a page that does not exist.
+  </p>
+
+  <p>
+    GitHub Pages supports a custom error page when
+    a file named 404.html is placed in the repository root.
+  </p>
+
+  <p>
+    <a href="../404.html">View my 404 page ↗</a>
+  </p>
+</section>
+
+<section class="git-exercise">
+  <h2>Practical Verification Checklist</h2>
+
+  <ul>
+    <li>Initialize or clone a repository.</li>
+    <li>Check changes using git status.</li>
+    <li>Stage and commit files.</li>
+    <li>Create a feature branch.</li>
+    <li>Push the branch to GitHub.</li>
+    <li>Create and merge a pull request.</li>
+    <li>Deploy the project using GitHub Pages.</li>
+    <li>Test a custom 404 page.</li>
+  </ul>
+
+  <p class="note">
+    Mark these tasks as completed only after actually
+    performing and verifying them.
+  </p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Git & GitHub</a>
+</footer>
+</body>
+</html>
