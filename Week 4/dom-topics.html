@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOM Lecture Topics — Week 4</title>
+<link rel="stylesheet" href="../portfolio.css">
+
+<style>
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 14px;
+  padding: 30px 0;
+}
+.topic-card {
+  padding: 19px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 9px;
+}
+.topic-card h2 {
+  color: #24434a;
+  font-size: 17px;
+}
+.topic-card p {
+  color: #607079;
+  font-size: 14px;
+}
+.topic-card code {
+  color: #b87b35;
+  overflow-wrap: anywhere;
+}
+</style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 4</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 04 / LECTURE NOTES</p>
+  <h1>JavaScript and the DOM.</h1>
+  <p>
+    Learn how JavaScript accesses HTML elements,
+    changes page content and responds to user events.
+  </p>
+</header>
+
+<div class="topic-grid" id="topics"></div>
+
+<section class="archive-content">
+  <h2>Practical work</h2>
+  <div class="assignment-list">
+    <a class="assignment-link" href="dom-exercises.html">
+      <span class="assignment-index">01–06</span>
+      <span class="assignment-title">DOM Practical Exercises</span>
+      <span class="assignment-arrow">↗</span>
+    </a>
+    <a class="assignment-link" href="Week%204/ClassTask.html">
+      <span class="assignment-index">07</span>
+      <span class="assignment-title">Web Programming Class Task</span>
+      <span class="assignment-arrow">↗</span>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 4</a>
+</footer>
+
+<script>
+const topics = [
+  ["Introduction to the DOM", "The Document Object Model represents an HTML document as a tree of objects.", "document"],
+  ["The DOM Tree", "HTML elements become nodes that JavaScript can inspect and change.", "document.documentElement"],
+  ["Selecting by ID", "getElementById selects one element using its unique ID.", "document.getElementById('title')"],
+  ["Selecting with querySelector", "querySelector selects the first element matching a CSS selector.", "document.querySelector('.card')"],
+  ["Selecting Multiple Elements", "querySelectorAll returns a collection of matching elements.", "document.querySelectorAll('li')"],
+  ["Changing Text Content", "textContent safely changes the text inside an element.", "element.textContent = 'Hello';"],
+  ["Changing HTML Content", "innerHTML reads or replaces the HTML inside an element. Untrusted input should not be inserted this way.", "element.innerHTML"],
+  ["Changing Styles and Classes", "style and classList update an element's presentation.", "element.classList.toggle('active')"],
+  ["Creating Elements", "createElement creates a new DOM element.", "document.createElement('li')"],
+  ["Appending and Removing Elements", "append and remove change the document structure.", "list.append(newItem)"],
+  ["Event Listeners", "addEventListener runs a function when an event occurs.", "button.addEventListener('click', handler)"],
+  ["The Event Object", "An event object provides information about the interaction.", "event.target"],
+  ["Form Events and preventDefault", "preventDefault prevents the browser's default action, allowing custom form handling.", "event.preventDefault()"],
+  ["Event Bubbling", "Events normally travel from the target element through its ancestors.", "event.stopPropagation()"],
+  ["Event Delegation", "A parent can handle events from many child elements.", "list.addEventListener('click', handler)"],
+  ["Keyboard Events", "Keyboard events allow interfaces to respond to keys.", "event.key === 'Enter'"],
+  ["Input Events", "The input event responds as users change form values.", "input.addEventListener('input', handler)"],
+  ["Form Validation", "JavaScript can inspect validity and show custom feedback.", "input.checkValidity()"]
+];
+
+const container = document.getElementById("topics");
+
+topics.forEach((topic, index) => {
+  const card = document.createElement("article");
+  card.className = "topic-card";
+
+  const heading = document.createElement("h2");
+  heading.textContent =
+    String(index + 1).padStart(2, "0") + " — " + topic[0];
+
+  const paragraph = document.createElement("p");
+  paragraph.textContent = topic[1];
+
+  const example = document.createElement("code");
+  example.textContent = topic[2];
+
+  card.append(heading, paragraph, example);
+  container.appendChild(card);
+});
+</script>
+</body>
+</html>
