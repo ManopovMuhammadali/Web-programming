@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance Exercises — Week 9</title>
+<link rel="stylesheet" href="../portfolio.css">
+
+<style>
+.lab-card {
+  margin: 24px 0;
+  padding: 23px;
+  background: white;
+  border: 1px solid #dbe3e5;
+  border-radius: 10px;
+}
+.example {
+  padding: 16px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f3f5f3;
+  border-radius: 8px;
+  color: #24434a;
+}
+.lab-card p { color: #607079; }
+</style>
+</head>
+
+<body>
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
+  <a class="nav-link" href="index.html">← Week 9</a>
+</header>
+
+<main>
+<header class="archive-intro">
+  <p>WEEK 09 / PERFORMANCE LAB</p>
+  <h1>Web performance exercises.</h1>
+  <p>
+    Practice modern image formats, lazy loading,
+    script optimization and Lighthouse testing.
+  </p>
+</header>
+
+<section class="lab-card">
+  <h2>01 — Modern Image Formats</h2>
+  <p>
+    WebP and AVIF can reduce image size.
+    The picture element allows the browser to choose
+    a supported format with a fallback.
+  </p>
+
+  <pre class="example"><code>&lt;picture&gt;
+  &lt;source
+    srcset="image.avif"
+    type="image/avif"&gt;
+
+  &lt;source
+    srcset="image.webp"
+    type="image/webp"&gt;
+
+  &lt;img
+    src="image.jpg"
+    alt="Description of the image"
+    width="800"
+    height="500"&gt;
+&lt;/picture&gt;</code></pre>
+</section>
+
+<section class="lab-card">
+  <h2>02 — Lazy Loading</h2>
+  <p>
+    Lazy loading delays downloading images that are
+    not initially visible.
+  </p>
+
+  <pre class="example"><code>&lt;img
+  src="gallery.webp"
+  alt="Gallery photograph"
+  width="700"
+  height="450"
+  loading="lazy"
+  decoding="async"&gt;</code></pre>
+
+  <p>
+    Do not lazy-load the main hero image if it is
+    the Largest Contentful Paint element.
+  </p>
+</section>
+
+<section class="lab-card">
+  <h2>03 — Deferred JavaScript</h2>
+  <p>
+    The defer attribute allows the browser to parse
+    HTML while downloading an external script.
+  </p>
+
+  <pre class="example"><code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre>
+
+  <p>
+    Deferred scripts execute after HTML parsing,
+    in document order.
+  </p>
+</section>
+
+<section class="lab-card">
+  <h2>04 — Lighthouse Performance Test</h2>
+
+  <ol>
+    <li>Open your portfolio in Google Chrome.</li>
+    <li>Open Developer Tools.</li>
+    <li>Select Lighthouse.</li>
+    <li>Choose Mobile and Performance.</li>
+    <li>Run the audit and save the report.</li>
+    <li>Apply your selected optimizations.</li>
+    <li>Publish the updated site.</li>
+    <li>Run the audit again under the same conditions.</li>
+    <li>Compare both reports.</li>
+  </ol>
+
+  <p>
+    Record actual results for Performance, LCP,
+    INP and CLS. Lighthouse lab testing may report
+    Total Blocking Time instead of field INP.
+  </p>
+
+  <p>
+    <strong>Evidence to add:</strong>
+    Save your real before-and-after screenshots
+    in this Week 9 folder.
+  </p>
+</section>
+
+<section class="lab-card">
+  <h2>05 — Performance Report</h2>
+  <p>
+    The full optimization report, with five optimization
+    techniques and the Critical Rendering Path reflection,
+    is documented in your Week 10 report.
+  </p>
+
+  <a href="../Week%2010/performance.html">
+    Open Website Performance Report ↗
+  </a>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 9</a>
+</footer>
+</body>
+</html>
