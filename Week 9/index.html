@@ -1,90 +1,173 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Week 9 — Accessibility and Performance</title>
-<link rel="stylesheet" href="../portfolio.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 9 coursework: accessibility, performance, Git and GitHub deployment.">
+  <title>Week 9 — Accessibility and Deployment</title>
+  <link rel="stylesheet" href="../portfolio.css">
 </head>
-
 <body>
+
 <header class="site-nav">
   <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
   <a class="nav-link" href="../index.html">← Back to home</a>
 </header>
 
 <main>
-<header class="archive-intro">
-  <div class="archive-meta">
-    <span>Web Programming</span>
-    <span>Week 09 / Coursework</span>
-  </div>
-  <h1>Accessibility & performance.</h1>
-  <p>
-    Accessible interfaces, Lighthouse auditing,
-    web performance and optimization techniques.
-  </p>
-</header>
+  <header class="archive-intro">
+    <div class="archive-meta">
+      <span>Web Programming</span>
+      <span>Week 09 / Coursework</span>
+    </div>
+    <h1>Accessibility & deployment.</h1>
+    <p>
+      Accessible interfaces, Lighthouse testing, performance
+      optimization, Git, GitHub and website deployment.
+    </p>
+  </header>
 
-<section class="archive-content">
-  <div class="archive-content-head">
-    <h2>Assignments</h2>
-    <p>Accessibility and performance exercises</p>
-  </div>
+  <section class="archive-content">
+    <div class="archive-content-head">
+      <h2>Assignments</h2>
+      <p>Accessibility and performance exercises</p>
+    </div>
 
-  <div class="assignment-list">
+    <div class="assignment-list">
+      <a class="assignment-link" href="accessibility.html#lighthouse">
+        <span class="assignment-index">01</span>
+        <span class="assignment-title">Lighthouse Accessibility Audit</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="accessibility.html#lighthouse">
-      <span class="assignment-index">01</span>
-      <span class="assignment-title">Lighthouse Accessibility Audit</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="accessibility.html#skip">
+        <span class="assignment-index">02</span>
+        <span class="assignment-title">Accessible Skip Link</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="accessibility.html#skip">
-      <span class="assignment-index">02</span>
-      <span class="assignment-title">Accessible Skip Link</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="accessibility.html#native-button">
+        <span class="assignment-index">03</span>
+        <span class="assignment-title">Native HTML Buttons</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="accessibility.html#native-button">
-      <span class="assignment-index">03</span>
-      <span class="assignment-title">Native HTML Buttons</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="accessibility.html#alt-text">
+        <span class="assignment-index">04</span>
+        <span class="assignment-title">Accessible Images and Alt Text</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="accessibility.html#alt-text">
-      <span class="assignment-index">04</span>
-      <span class="assignment-title">Accessible Images and Alt Text</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="accessibility.html#lighthouse-fix">
+        <span class="assignment-index">05</span>
+        <span class="assignment-title">Lighthouse Accessibility Fixes</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="accessibility.html#lighthouse-fix">
-      <span class="assignment-index">05</span>
-      <span class="assignment-title">Lighthouse Accessibility Fixes</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="performance-exercises.html">
+        <span class="assignment-index">06</span>
+        <span class="assignment-title">Performance Optimization Exercises</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
 
-    <a class="assignment-link" href="performance-exercises.html">
-      <span class="assignment-index">06</span>
-      <span class="assignment-title">Performance Optimization Exercises</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+      <a class="assignment-link" href="../Week%2010/performance.html">
+        <span class="assignment-index">07</span>
+        <span class="assignment-title">Lighthouse Performance Report</span>
+        <span class="assignment-arrow">↗</span>
+      </a>
+    </div>
+  </section>
 
-    <a class="assignment-link" href="../Week%2010/performance.html">
-      <span class="assignment-index">07</span>
-      <span class="assignment-title">Lighthouse Performance Report</span>
-      <span class="assignment-arrow">↗</span>
-    </a>
+  <section class="archive-content">
+    <div class="archive-content-head">
+      <h2>Lighthouse Evidence</h2>
+      <p>Accessibility audit of my deployed portfolio</p>
+    </div>
 
-  </div>
-</section>
+    <div style="background:#fff;padding:24px;border:1px solid #dbe3e5;border-radius:10px;">
+      <h3>Initial Accessibility Audit — 94/100</h3>
+      <p><strong>Test date:</strong> November 10, 2026</p>
+      <p><strong>Website tested:</strong> Personal portfolio homepage</p>
+      <p>
+        The initial Lighthouse report gave my portfolio an
+        accessibility score of 94/100. It identified a color
+        contrast issue between foreground and background colors.
+      </p>
+      <p>
+        This screenshot is the evidence from the initial audit.
+        A new audit should be performed after fixing the contrast issue.
+      </p>
+
+      <figure style="margin:20px 0 0;">
+        <img
+          src="week9-lighthouse-accessibility.png"
+          alt="Lighthouse accessibility report showing a score of 94 out of 100 and a color contrast warning"
+          style="width:100%;height:auto;border-radius:8px;border:1px solid #dbe3e5;"
+        >
+        <figcaption style="margin-top:10px;color:#53646a;font-size:13px;">
+          Initial Lighthouse accessibility report — November 10, 2026.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="archive-content">
+    <div class="archive-content-head">
+      <h2>Week 9 GitHub Homework</h2>
+      <p>Repository creation and deployment tasks</p>
+    </div>
+
+    <div style="background:#fff;padding:24px;border:1px solid #dbe3e5;border-radius:10px;">
+      <h3>Monday — Git and GitHub</h3>
+      <ol>
+        <li>Create a public GitHub repository named <code>webpro-w9</code>.</li>
+        <li>Initialize a local Git repository.</li>
+        <li>Create an <code>index.html</code> containing your name and date.</li>
+        <li>Commit your changes and push them to GitHub.</li>
+        <li>Enable GitHub Pages using the main branch and root folder.</li>
+        <li>Submit the repository URL and live website URL on the LMS.</li>
+      </ol>
+
+      <h3>Friday — Deploy the Book Search App</h3>
+      <ol>
+        <li>Use the Book Search App developed in Weeks 6–7.</li>
+        <li>Check that its search functionality works.</li>
+        <li>Fix incorrect file paths and remove debugging messages.</li>
+        <li>Create a public repository named <code>webpro-book-search</code>.</li>
+        <li>Push the app files and enable GitHub Pages.</li>
+        <li>Test the deployed website and submit its live URL.</li>
+      </ol>
+
+      <h3>My Portfolio Links</h3>
+      <p>
+        <strong>GitHub repository:</strong>
+        <a href="https://github.com/ManopovMuhammadali/Web-programming"
+           target="_blank" rel="noopener noreferrer">
+          Web-programming ↗
+        </a>
+      </p>
+      <p>
+        <strong>Deployed portfolio:</strong>
+        <a href="https://manopovmuhammadali.github.io/Web-programming/"
+           target="_blank" rel="noopener noreferrer">
+          Open my portfolio ↗
+        </a>
+      </p>
+
+      <p style="color:#53646a;font-size:13px;">
+        These links identify my existing portfolio repository and website.
+        They are not substitutes for the separate webpro-w9 and
+        webpro-book-search repositories if those are required on the LMS.
+      </p>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
   <p>MM / Web Programming Portfolio</p>
   <a href="../index.html">Return to homepage ↑</a>
 </footer>
+
 </body>
 </html>
