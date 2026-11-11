@@ -1,241 +1,335 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Muhammadali Manopov's Web Programming portfolio at Gachon University.">
-  <title>Muhammadali Manopov — Web Programming</title>
-  <style>
-    :root {
-      --paper: #f5f7f5;
-      --card: #ffffff;
-      --ink: #24434a;
-      --muted: #68787b;
-      --accent: #b87b35;
-      --line: #dce3e1;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Muhammadali Manopov is a web development student at Gachon University, building responsive interfaces, API-powered tools and accessible web experiences.">
+  <meta name="theme-color" content="#F4EEE7">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Muhammadali Manopov — Web Developer">
+  <meta property="og:description" content="Selected web projects, practical coursework and front-end development skills by Muhammadali Manopov.">
+  <meta property="og:url" content="https://manopovmuhammadali.github.io/Web-programming/">
+  <title>Muhammadali Manopov — Web Developer</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/site.css">
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('mm-portfolio-theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch (error) {
+        /* The site still works when browser storage is unavailable. */
+      }
+    }());
+  </script>
+  <script src="./assets/js/site.js" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muhammadali Manopov",
+      "url": "https://manopovmuhammadali.github.io/Web-programming/",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "Gachon University"
+      },
+      "knowsAbout": [
+        "HTML", "CSS", "JavaScript", "Responsive Web Design",
+        "Fetch API", "Web Accessibility", "Git", "GitHub"
+      ]
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-    a { color: inherit; }
-    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
-    .topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 23px 0; border-bottom: 1px solid var(--line);
-      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
-    }
-    .brand { text-decoration: none; font-weight: 850; }
-    .top-note { color: var(--muted); letter-spacing: .08em; }
-    .hero {
-      display: grid; grid-template-columns: 1.4fr .6fr; gap: 44px;
-      align-items: center; padding: clamp(58px, 9vw, 105px) 0 72px;
-    }
-    .eyebrow {
-      color: var(--accent); font-size: 12px; font-weight: 800;
-      letter-spacing: .17em; text-transform: uppercase;
-    }
-    h1 {
-      margin: 14px 0 18px; font-size: clamp(44px, 7vw, 76px);
-      line-height: .99; letter-spacing: -.065em;
-    }
-    h1 span { color: var(--accent); }
-    .intro { max-width: 600px; color: var(--muted); font-size: 17px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 27px; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 45px; padding: 0 17px; border: 1px solid var(--ink);
-      border-radius: 5px; background: var(--ink); color: white;
-      text-decoration: none; font-size: 13px; font-weight: 750;
-    }
-    .button.secondary { background: transparent; color: var(--ink); }
-    .profile {
-      padding: 27px; background: var(--card); border: 1px solid var(--line);
-      border-radius: 10px; box-shadow: 0 16px 42px rgba(36,67,74,.06);
-    }
-    .monogram {
-      display: grid; place-items: center; width: 76px; height: 76px;
-      margin-bottom: 23px; border-radius: 50%; background: #eee5d8;
-      color: var(--ink); font-size: 25px; font-weight: 850;
-    }
-    .profile h2 { margin: 0; font-size: 21px; letter-spacing: -.04em; }
-    .profile p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
-    .profile-meta { display: grid; gap: 9px; margin-top: 21px; padding-top: 17px; border-top: 1px solid var(--line); }
-    .meta-row { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; }
-    .meta-row span:first-child { color: var(--muted); }
-    .meta-row span:last-child { font-weight: 700; text-align: right; }
-    .quick { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding-bottom: 38px; }
-    .quick a {
-      display: flex; justify-content: space-between; align-items: center;
-      min-height: 49px; padding: 0 13px; border: 1px solid var(--line);
-      border-radius: 6px; background: var(--card); color: var(--ink);
-      text-decoration: none; font-size: 13px; font-weight: 750;
-      transition: .18s ease;
-    }
-    .quick a span { color: var(--accent); font-size: 11px; }
-    .quick a:hover { transform: translateY(-2px); border-color: var(--ink); background: var(--ink); color: white; }
-    .quick a:hover span { color: #f1d2a6; }
-    .coursework { padding: 30px 0 82px; border-top: 1px solid var(--line); }
-    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 22px; }
-    .section-head h2 { margin: 0; font-size: clamp(27px, 4vw, 36px); letter-spacing: -.05em; }
-    .section-head p { margin: 0; color: var(--muted); font-size: 13px; }
-    .weeks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
-    .week {
-      display: flex; flex-direction: column; min-height: 174px; padding: 22px;
-      border: 1px solid var(--line); border-radius: 8px; background: var(--card);
-      text-decoration: none; transition: .18s ease;
-    }
-    .week:hover { transform: translateY(-3px); border-color: #c6a06e; box-shadow: 0 12px 26px rgba(36,67,74,.06); }
-    .week-label { color: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
-    .week h3 { margin: 9px 0 5px; font-size: 22px; letter-spacing: -.04em; }
-    .week p { margin: 0; color: var(--muted); font-size: 13px; }
-    .open { margin-top: auto; padding-top: 17px; font-size: 12px; font-weight: 800; }
-    footer { padding: 21px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 14px; }
-    @media (max-width: 720px) {
-      .hero { grid-template-columns: 1fr; gap: 25px; }
-      .profile { max-width: 430px; }
-      .quick { grid-template-columns: repeat(2, 1fr); }
-      .section-head { align-items: start; flex-direction: column; gap: 5px; }
-    }
-    @media (max-width: 520px) {
-      .wrap { width: calc(100% - 28px); }
-      .weeks { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; gap: 4px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; }
-    }
-  </style>
+  </script>
 </head>
 <body>
-  <header class="wrap topbar">
-    <a class="brand" href="index.html">MM / Portfolio</a>
-    <span class="top-note">Web Programming · 2026</span>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Muhammadali Manopov, homepage">
+        <span class="brand-mark">M<span>.</span></span>
+        <span class="brand-name">MUHAMMADALI MANOPOV<small>WEB DEVELOPER PORTFOLIO</small></span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+        <span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-navigation" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#coursework">Coursework</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme" aria-pressed="false">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.6"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.6 8.6 0 1 0 20.2 15.4Z"></path></svg>
+        </button>
+        <a class="nav-cta" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section class="wrap hero" aria-labelledby="page-title">
-      <div>
-        <div class="eyebrow">Student profile &amp; coursework</div>
-        <h1 id="page-title">Muhammadali<br><span>Manopov.</span></h1>
-        <p class="intro">Welcome to my Web Programming portfolio. Explore my weekly coursework, practice projects, and progress in building for the web.</p>
-        <div class="actions">
-          <a class="button" href="#coursework">Explore coursework ↓</a>
-          <a class="button secondary" href="Week%206/index.html">Open Week 6</a>
+  <main id="main">
+    <section class="hero section-wrap" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> GACHON UNIVERSITY <span class="eyebrow-divider">/</span> WEB PROGRAMMING</p>
+        <p class="hero-pretitle">Hello, I'm</p>
+        <h1 id="hero-title">Muhammadali<br><span>Manopov<span class="title-period">.</span></span></h1>
+        <p class="hero-role">Web development student <span>·</span> Front-end focused</p>
+        <p class="hero-description">I turn ideas into clear, responsive web experiences — combining thoughtful interface design with practical JavaScript and real API data.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
+          <a class="button button-secondary" href="https://github.com/ManopovMuhammadali" target="_blank" rel="noopener noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-note">
+          <span class="note-line"></span>
+          <span>Learning by building. Improving with every iteration.</span>
         </div>
       </div>
-      <aside class="profile">
-        <div class="monogram" aria-hidden="true">MM</div>
-        <h2>Muhammadali Manopov</h2>
-        <p>Web Programming student</p>
-        <div class="profile-meta">
-          <div class="meta-row"><span>University</span><span>Gachon University</span></div>
-          <div class="meta-row"><span>Course</span><span>Web Programming</span></div>
-          <div class="meta-row"><span>Focus</span><span>Front-end development</span></div>
+
+      <aside class="hero-visual reveal" aria-label="Development focus snapshot">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="snapshot-card">
+          <div class="snapshot-topline">
+            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="mono snapshot-file">DEVELOPMENT / SNAPSHOT</span>
+            <span class="snapshot-index">MM—01</span>
+          </div>
+          <div class="snapshot-body">
+            <p class="mono snapshot-kicker">CURRENT APPROACH</p>
+            <h2>Build with<br><span>intent.</span></h2>
+            <p class="snapshot-copy">Make it useful first. Make every detail count.</p>
+            <div class="snapshot-divider"></div>
+            <div class="focus-list">
+              <div class="focus-item">
+                <span class="focus-number">01</span>
+                <div><strong>STRUCTURE</strong><small>Semantic HTML · clean layout</small></div>
+                <span class="focus-symbol">↗</span>
+              </div>
+              <div class="focus-item">
+                <span class="focus-number">02</span>
+                <div><strong>INTERACTION</strong><small>JavaScript · APIs · validation</small></div>
+                <span class="focus-symbol">↗</span>
+              </div>
+              <div class="focus-item">
+                <span class="focus-number">03</span>
+                <div><strong>QUALITY</strong><small>Responsive · accessible · tested</small></div>
+                <span class="focus-symbol">↗</span>
+              </div>
+            </div>
+          </div>
+          <div class="snapshot-footer"><span class="live-dot"></span> ALWAYS LEARNING <span class="mono">GACHON / 2026</span></div>
         </div>
+        <div class="floating-tag tag-html"><span>&lt;/&gt;</span> HTML</div>
+        <div class="floating-tag tag-js"><span>JS</span> JavaScript</div>
+        <div class="visual-caption mono">A WORK IN PROGRESS, BY DESIGN.</div>
       </aside>
     </section>
 
-    <nav class="wrap quick" aria-label="Quick links to coursework weeks">
-      <a href="Week%201/index.html">Week 1 <span>01 ↗</span></a>
-      <a href="Week%202/index.html">Week 2 <span>02 ↗</span></a>
-      <a href="Week%203/index.html">Week 3 <span>03 ↗</span></a>
-      <a href="Week%204/index.html">Week 4 <span>04 ↗</span></a>
-      <a href="Week%205/index.html">Week 5 <span>05 ↗</span></a>
-      <a href="Week%206/index.html">Week 6 <span>06 ↗</span></a>
-      <a href="Week%207/index.html">Week 7 <span>07 ↗</span></a>
-      <a href="Week%208/index.html">Week 8 <span>08 ↗</span></a>
-      <a href="Week%209/index.html">Week 9 <span>09 ↗</span></a>
-      <a href="Week%2010/index.html">Week 10 <span>10 ↗</span></a>
-    </nav>
+    <section class="proof-strip section-wrap" aria-label="Portfolio overview">
+      <div class="proof-item"><strong>10</strong><span>weeks of coursework</span></div>
+      <div class="proof-item"><strong>6</strong><span>API practice exercises</span></div>
+      <div class="proof-item"><strong>3</strong><span>featured builds</span></div>
+      <p class="proof-note">A growing body of practical work — built, tested and documented.</p>
+    </section>
 
-    <section class="coursework" id="coursework">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Coursework archive</h2>
-          <p>Select a week to open its assignment page.</p>
+    <section class="section section-wrap" id="work" aria-labelledby="work-title">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index mono">01 / SELECTED WORK</p>
+          <h2 id="work-title">Proof beats<br><em>promises.</em></h2>
         </div>
-        <div class="weeks">
-          <a class="week" href="Week%201/index.html"><span class="week-label">Week 01</span><h3>HTML foundations</h3><p>Introductory HTML structure and page-building exercises.</p><span class="open">View Week 1 ↗</span></a>
-          <a class="week" href="Week%202/index.html"><span class="week-label">Week 02</span><h3>Web page practice</h3><p>Weekly exercises and practice tasks.</p><span class="open">View Week 2 ↗</span></a>
-          <a class="week" href="Week%203/index.html"><span class="week-label">Week 03</span><h3>CSS &amp; page styling</h3><p>Styling, layout, and page presentation exercises.</p><span class="open">View Week 3 ↗</span></a>
-          <a class="week" href="Week%204/index.html"><span class="week-label">Week 04</span><h3>JavaScript &amp; DOM</h3><p>JavaScript practice and browser document interaction.</p><span class="open">View Week 4 ↗</span></a>
-          <a class="week" href="Week%205/index.html"><span class="week-label">Week 05</span><h3>JavaScript exercises</h3><p>Grade calculator, loops and arrays, and counter practice.</p><span class="open">View Week 5 ↗</span></a>
-          <a class="week" href="Week%206/index.html"><span class="week-label">Week 06</span><h3>Fetch API &amp; asynchronous JavaScript</h3><p>Working with API requests, JSON data, async/await, and errors.</p><span class="open">View Week 6 ↗</span></a>
-          <a class="week" href="Week%207/index.html"><span class="week-label">Week 07</span><h3>Week 7 assignments</h3><p>Open the Week 7 coursework page.</p><span class="open">View Week 7 ↗</span></a>
-          <a class="week" href="Week%208/index.html"><span class="week-label">Week 08</span><h3>HTML forms &amp; validation</h3><p>Form controls, validation attributes, feedback, and registration forms.</p><span class="open">View Week 8 ↗</span></a>
-          <a class="week" href="Week%209/index.html"><span class="week-label">Week 09</span><h3>Accessibility & deployment</h3><p>Accessibility testing, Lighthouse evidence, GitHub and website deployment.</p><span class="open">View Week 9 ↗</span></a>
-          <a class="week" href="Week%2010/index.html"><span class="week-label">Week 10</span><h3>CSS Grid & Flexbox</h3><p>Responsive layouts, Flexbox, CSS Grid and custom properties.</p><span class="open">View Week 10 ↗</span></a>          <a class="week" href="Git-and-GitHub/index.html"><span class="week-label">ADDITIONAL COURSEWORK</span><h3>Git &amp; GitHub</h3><p>Version control, commits, branching, pull requests,deployment and custom 404 pages.</p><span class="open">View Git &amp; GitHub ↗</span></a>
+        <p class="section-summary">A selection of practical builds from my web development coursework. Open the live projects, try the interactions and inspect the source.</p>
+      </div>
+
+      <div class="project-toolbar reveal">
+        <p class="mono">BROWSE PROJECTS</p>
+        <div class="project-filters" role="group" aria-label="Filter projects">
+          <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
+          <button class="filter-button" type="button" data-filter="api" aria-pressed="false">API</button>
+          <button class="filter-button" type="button" data-filter="javascript" aria-pressed="false">JavaScript</button>
+          <button class="filter-button" type="button" data-filter="forms" aria-pressed="false">Forms</button>
+        </div>
+      </div>
+
+      <div class="project-grid" id="project-grid">
+        <article class="project-card reveal" data-category="api javascript">
+          <div class="project-art art-api" aria-hidden="true">
+            <div class="mock-window">
+              <div class="mock-window-top"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mono">api-explorer.js</span><span class="mock-status">CONNECTED</span></div>
+              <div class="api-mock-content">
+                <span class="mono mock-method">GET /api/data</span>
+                <div class="mock-code-line line-wide"></div><div class="mock-code-line line-mid"></div><div class="mock-code-line line-short"></div>
+                <div class="mock-data-grid"><div><small>STATUS</small><strong>200 OK</strong></div><div><small>FORMAT</small><strong>JSON</strong></div><div><small>MODE</small><strong>ASYNC</strong></div></div>
+              </div>
+            </div>
+            <span class="art-stamp">01</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span>API INTEGRATION</span><span>WEEK 06</span></div>
+            <h3>API Explorer</h3>
+            <p>Six hands-on exercises that fetch and display live information — from weather and posts to Pokémon and country data.</p>
+            <div class="tag-list"><span>JavaScript</span><span>Fetch API</span><span>JSON</span><span>Async / Await</span></div>
+            <div class="project-links">
+              <a href="./Week%206/api-exercises.html" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/ManopovMuhammadali/Web-programming/tree/main/Week%206" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-category="api javascript">
+          <div class="project-art art-books" aria-hidden="true">
+            <div class="book-mock-window">
+              <div class="book-mock-top"><span class="mono">OPEN LIBRARY / SEARCH</span><span class="book-mock-icon">⌕</span></div>
+              <div class="book-search-mock"><span>Search books, authors, subjects...</span><b>SEARCH</b></div>
+              <div class="book-result-heading"><span class="mono">RESULTS</span><span class="mono">12 ITEMS</span></div>
+              <div class="book-result"><i class="book-cover cover-a"></i><div><b>Book title</b><small>Author information</small><small>Publication details</small></div></div>
+              <div class="book-result"><i class="book-cover cover-b"></i><div><b>Book title</b><small>Author information</small><small>Publication details</small></div></div>
+            </div>
+            <span class="art-stamp">02</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span>SEARCH APPLICATION</span><span>WEEK 07</span></div>
+            <h3>Open Library Book Finder</h3>
+            <p>A searchable book catalogue that requests Open Library data and renders titles, authors, cover images and publication details.</p>
+            <div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Open Library API</span></div>
+            <div class="project-links">
+              <a href="./Week%207/book-search.html" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/ManopovMuhammadali/Web-programming/tree/main/Week%207" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-category="javascript forms">
+          <div class="project-art art-form" aria-hidden="true">
+            <div class="form-mock-window">
+              <div class="form-mock-top"><span class="mono">STUDENT / REGISTER</span><span class="form-mock-mark">MM</span></div>
+              <div class="form-mock-title">Create your<br>account<span>.</span></div>
+              <div class="mock-field"><small>FULL NAME</small><span>Muhammad Ali</span><b>✓</b></div>
+              <div class="mock-field"><small>EMAIL ADDRESS</small><span>name@example.com</span><b>✓</b></div>
+              <div class="mock-field mock-field-error"><small>PASSWORD</small><span>••••••••</span><b>!</b></div>
+              <div class="mock-form-button">VALIDATE DETAILS <span>↗</span></div>
+            </div>
+            <span class="art-stamp">03</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span>FORM EXPERIENCE</span><span>WEEK 08</span></div>
+            <h3>Student Registration</h3>
+            <p>A structured registration form with HTML constraints, custom JavaScript validation, field-level errors and accessible feedback.</p>
+            <div class="tag-list"><span>HTML5</span><span>JavaScript</span><span>Validation</span><span>Accessibility</span></div>
+            <div class="project-links">
+              <a href="./Week%208/registration.html" target="_blank" rel="noopener noreferrer">Live project <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/ManopovMuhammadali/Web-programming/tree/main/Week%208" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="project-footnote mono">THESE ARE COURSEWORK PROJECTS — BUILT TO PRACTISE REAL FRONT-END WORKFLOWS.</p>
+    </section>
+
+    <section class="section section-about" id="about" aria-labelledby="about-title">
+      <div class="section-wrap about-layout">
+        <div class="about-title reveal">
+          <p class="section-index mono">02 / THE PERSON BEHIND THE CODE</p>
+          <h2 id="about-title">Curious by nature.<br><em>Practical by habit.</em></h2>
+          <div class="about-mark" aria-hidden="true">M<span>.</span></div>
+        </div>
+        <div class="about-copy reveal">
+          <p class="about-lead">I'm Muhammadali, a Web Programming student at Gachon University with a growing focus on front-end development.</p>
+          <p>I enjoy taking an idea from a blank page to something people can actually use. My coursework has pushed me to work with semantic HTML, responsive CSS, JavaScript interactions, external APIs, form validation and accessibility.</p>
+          <p>I'm building a strong foundation through practical projects and careful iteration. I care about interfaces that feel clear, work across screen sizes and handle the details — including loading states, errors and keyboard access.</p>
+          <div class="about-facts">
+            <div><span class="mono">01</span><strong>Study</strong><small>Gachon University</small></div>
+            <div><span class="mono">02</span><strong>Focus</strong><small>Front-end development</small></div>
+            <div><span class="mono">03</span><strong>Mindset</strong><small>Build · Test · Improve</small></div>
+          </div>
         </div>
       </div>
     </section>
-    
-<section class="coursework" id="selected-work">
-  <div class="wrap">
 
-    <div class="section-head">
-      <h2>Skills &amp; selected projects</h2>
-      <p>Technologies and practical work from my coursework.</p>
-    </div>
+    <section class="section section-wrap" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index mono">03 / TOOLS & CAPABILITIES</p>
+          <h2 id="skills-title">The tools I use<br>to make things <em>work.</em></h2>
+        </div>
+        <p class="section-summary">A practical front-end toolkit, organised by how I use it. These are skills developed and applied through my coursework and projects.</p>
+      </div>
 
-    <div class="weeks">
+      <div class="skills-grid">
+        <article class="skill-group reveal"><div class="skill-group-head"><span class="skill-icon">&lt;/&gt;</span><span class="mono">01 / FRONT END</span></div><h3>Build the interface</h3><p>Structure, presentation and responsive behaviour.</p><div class="skill-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>CSS Grid</span><span>Flexbox</span><span>Responsive Design</span></div></article>
+        <article class="skill-group reveal"><div class="skill-group-head"><span class="skill-icon">{ }</span><span class="mono">02 / BROWSER & DATA</span></div><h3>Make it interactive</h3><p>Work with browser events, asynchronous requests and data.</p><div class="skill-tags"><span>DOM</span><span>Fetch API</span><span>REST APIs</span><span>JSON</span><span>Async / Await</span></div></article>
+        <article class="skill-group reveal"><div class="skill-group-head"><span class="skill-icon">✓</span><span class="mono">03 / QUALITY</span></div><h3>Make it dependable</h3><p>Improve usability, feedback and behaviour across devices.</p><div class="skill-tags"><span>Form Validation</span><span>Accessibility Basics</span><span>Lighthouse</span><span>Performance</span></div></article>
+        <article class="skill-group reveal"><div class="skill-group-head"><span class="skill-icon">⌘</span><span class="mono">04 / WORKFLOW</span></div><h3>Build with a process</h3><p>Track changes, organise work and publish projects.</p><div class="skill-tags"><span>Git</span><span>GitHub</span><span>GitHub Pages</span><span>Browser DevTools</span></div></article>
+      </div>
+    </section>
 
-      <article class="week">
-        <span class="week-label">TECHNICAL SKILLS</span>
-        <h3>Front-end development</h3>
-        <p>
-          HTML5 · CSS3 · JavaScript · DOM manipulation ·
-          Fetch API · Responsive design · Form validation ·
-          Web accessibility · GitHub Pages
-        </p>
-      </article>
+    <section class="section section-process" aria-labelledby="process-title">
+      <div class="section-wrap">
+        <div class="section-heading reveal">
+          <div><p class="section-index mono">04 / HOW I APPROACH A BUILD</p><h2 id="process-title">Good work lives<br>in the <em>details.</em></h2></div>
+          <p class="section-summary">I try to make decisions that improve the whole experience, not just the screenshot.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card reveal"><span class="process-number mono">01</span><h3>Start with structure</h3><p>Use semantic HTML and a clear content hierarchy before adding visual detail.</p><span class="process-line"></span></article>
+          <article class="process-card reveal"><span class="process-number mono">02</span><h3>Make interactions useful</h3><p>Build responsive layouts and JavaScript behaviour that solve a specific user need.</p><span class="process-line"></span></article>
+          <article class="process-card reveal"><span class="process-number mono">03</span><h3>Test the edges</h3><p>Check validation, errors, keyboard access and smaller screens — not only the happy path.</p><span class="process-line"></span></article>
+        </div>
+      </div>
+    </section>
 
-      <a class="week" href="Week%206/index.html">
-        <span class="week-label">PROJECT 01</span>
-        <h3>API Explorer Collection</h3>
-        <p>
-          Six practical applications using external APIs,
-          asynchronous JavaScript and JSON data.
-        </p>
-        <span class="open">View API projects ↗</span>
-      </a>
+    <section class="section section-wrap" id="coursework" aria-labelledby="coursework-title">
+      <div class="section-heading reveal">
+        <div><p class="section-index mono">05 / LEARNING ARCHIVE</p><h2 id="coursework-title">The work behind<br>the <em>progress.</em></h2></div>
+        <p class="section-summary">A transparent record of the weekly exercises and topics that built the foundation for the projects above.</p>
+      </div>
+      <div class="coursework-grid">
+        <a class="course-card reveal" href="./Week%201/index.html"><span class="course-number mono">01</span><span class="course-topic">HTML Foundations</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%202/index.html"><span class="course-number mono">02</span><span class="course-topic">Semantic HTML</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%203/index.html"><span class="course-number mono">03</span><span class="course-topic">CSS Fundamentals</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%204/index.html"><span class="course-number mono">04</span><span class="course-topic">JavaScript & DOM</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%205/index.html"><span class="course-number mono">05</span><span class="course-topic">JavaScript Practice</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%206/index.html"><span class="course-number mono">06</span><span class="course-topic">Fetch API & Async JavaScript</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%207/index.html"><span class="course-number mono">07</span><span class="course-topic">Book Search & JS Exercises</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%208/index.html"><span class="course-number mono">08</span><span class="course-topic">Forms & Validation</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%209/index.html"><span class="course-number mono">09</span><span class="course-topic">Accessibility & Performance</span><span class="course-arrow">↗</span></a>
+        <a class="course-card reveal" href="./Week%2010/index.html"><span class="course-number mono">10</span><span class="course-topic">CSS Grid & Flexbox</span><span class="course-arrow">↗</span></a>
+      </div>
+      <a class="extra-course reveal" href="./Git-and-GitHub/index.html"><span class="extra-icon">⌘</span><span><strong>Additional practice: Git & GitHub</strong><small>Version control · commits · branches · deployment</small></span><span class="course-arrow">↗</span></a>
+    </section>
 
-      <a class="week" href="Week%207/book-search.html">
-        <span class="week-label">PROJECT 02</span>
-        <h3>Open Library Book Finder</h3>
-        <p>
-          Book search application using HTML, CSS,
-          JavaScript and the Open Library API.
-        </p>
-        <span class="open">View Book Finder ↗</span>
-      </a>
-
-      <a class="week" href="Week%208/registration.html">
-        <span class="week-label">PROJECT 03</span>
-        <h3>Student Registration</h3>
-        <p>
-          Interactive form with HTML5 constraints,
-          JavaScript validation and accessible feedback.
-        </p>
-        <span class="open">View Registration ↗</span>
-      </a>
-    </div>
-  </div>
-</section>
-
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="section-wrap contact-layout">
+        <div class="contact-copy reveal">
+          <p class="section-index mono">06 / START A CONVERSATION</p>
+          <h2 id="contact-title">Let's build<br>something <em>useful.</em></h2>
+          <p>I'm interested in opportunities where I can contribute, learn from experienced developers and keep growing through real work.</p>
+          <div class="contact-actions">
+            <a class="button button-light" href="https://github.com/ManopovMuhammadali" target="_blank" rel="noopener noreferrer">Connect on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="contact-repo-link" href="https://github.com/ManopovMuhammadali/Web-programming" target="_blank" rel="noopener noreferrer">Explore my repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="contact-aside reveal"><span class="contact-aside-index mono">MM / 2026</span><div class="contact-aside-mark">M<span>.</span></div><p>Curiosity starts the work.<br><strong>Consistency moves it forward.</strong></p><span class="contact-aside-bottom mono">THANK YOU FOR STOPPING BY.</span></div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© 2026 Muhammadali Manopov</span>
-      <span>Web Programming · Gachon University</span>
+  <footer class="site-footer">
+    <div class="section-wrap footer-inner">
+      <a class="footer-brand" href="#top">MM<span>.</span></a>
+      <p>Designed and built by Muhammadali Manopov.</p>
+      <div class="footer-links"><a href="https://github.com/ManopovMuhammadali" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#top">Back to top ↑</a></div>
+      <span class="footer-year mono">© <span id="current-year">2026</span></span>
     </div>
   </footer>
 </body>
