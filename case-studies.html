@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Project Case Studies — Muhammadali Manopov</title>
-  <meta name="description" content="Technical case studies of Muhammadali Manopov's front-end coursework projects: API integration, book search and form validation.">
-  <meta name="theme-color" content="#F4EEE7">
-
+  <meta name="description" content="Project case studies by Muhammadali Manopov, covering individual front-end coursework and the collaborative FindIt AI lost-and-found project.">  <meta name="theme-color" content="#F4EEE7">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Project Case Studies — Muhammadali Manopov">
-  <meta property="og:description" content="How I approached, built and documented three front-end projects.">
-  <meta property="og:url" content="https://manopovmuhammadali.github.io/Web-programming/case-studies.html">
-
+  <meta property="og:description" content="Four project case studies covering individual coursework and collaborative front-end development.">  <meta property="og:url" content="https://manopovmuhammadali.github.io/Web-programming/case-studies.html">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -67,10 +62,11 @@
       </button>
 
       <nav class="primary-nav" id="primary-navigation" aria-label="Case study navigation">
-        <a href="#api-explorer">API Explorer</a>
-        <a href="#book-finder">Book Finder</a>
-        <a href="#registration">Registration</a>
-        <a href="#evidence">Evidence</a>
+       <a href="#api-explorer">API Explorer</a>
+       <a href="#book-finder">Book Finder</a>
+       <a href="#registration">Registration</a>
+       <a href="#findit-ai">FindIt AI</a>
+       <a href="#evidence">Evidence</a>
       </nav>
 
       <div class="nav-actions">
@@ -118,15 +114,15 @@
 
       <p class="case-hero-description">
         I learn front-end development by building practical projects.
-        These case studies explain what each project does, how I
-        approached the implementation, the decisions I made and
-        what I would improve in another iteration.
+        These case studies explain what each project does, how it was
+        built, the decisions behind it and what could be improved next.
+        They include individual coursework and a collaborative team project.
       </p>
 
       <div class="case-stats">
         <div>
-          <strong>03</strong>
-          <span>Detailed project studies</span>
+         <strong>04</strong>
+         <span>Detailed project studies</span>
         </div>
 
         <div>
@@ -141,9 +137,11 @@
       </div>
 
       <p class="case-honesty-note">
-        These are coursework projects, not commercial client projects.
-        The implementation notes describe the current code; future
-        improvements are labelled separately.
+       The first three studies document individual coursework.
+       FindIt AI is a collaborative project completed with Alisher.
+       The published demo's sample data and technical limitations
+       are identified clearly. None of these entries are presented
+       as commercial client projects.
       </p>
     </section>
 
@@ -565,14 +563,230 @@ if (errorElement) {
         </div>
       </div>
     </section>
+    <!-- PROJECT 04 / COLLABORATIVE TEAM PROJECT -->
 
+    <section class="case-study section-wrap" id="findit-ai">
+
+      <div class="case-heading">
+
+        <div>
+          <p class="section-index mono">CASE STUDY 04 / TEAM PROJECT</p>
+
+          <h2>FindIt AI — Lost &amp; Found<span>.</span></h2>
+
+          <p class="case-subtitle">
+            Building a lost-and-found discovery experience with a teammate.
+          </p>
+        </div>
+
+        <span class="case-type">Collaborative project · With Alisher</span>
+
+      </div>
+
+      <div class="case-grid">
+
+        <!-- PROJECT OVERVIEW -->
+
+        <article class="case-overview">
+
+          <p class="case-kicker mono">THE PROJECT</p>
+
+          <h3>Making lost-and-found discovery easier.</h3>
+
+          <p>
+            FindIt AI is a front-end lost-and-found discovery experience
+            created collaboratively with Alisher. It provides a
+            responsive interface for exploring lost-and-found categories
+            and browsing a global discovery experience.
+          </p>
+
+          <p>
+            The project includes an interactive map, illustrative
+            sample listings, local photo stories and search/report
+            interface previews. We built the published interface
+            using React, TypeScript and Vite.
+          </p>
+
+          <div class="case-tags">
+            <span>React</span>
+            <span>TypeScript</span>
+            <span>Vite</span>
+            <span>Responsive Design</span>
+            <span>GitHub Pages</span>
+          </div>
+
+          <div class="case-actions">
+
+            <a href="https://alisherice.github.io/FindIt-AI/"
+               target="_blank"
+               rel="noopener noreferrer">
+              Open live project ↗
+            </a>
+
+            <a href="https://github.com/alisherIce/FindIt-AI"
+               target="_blank"
+               rel="noopener noreferrer">
+              Inspect source code ↗
+            </a>
+
+          </div>
+
+        </article>
+
+        <!-- PROJECT DETAILS -->
+
+        <div class="case-detail-stack">
+
+          <article class="case-detail">
+
+            <span class="case-detail-number mono">01 / FEATURES</span>
+
+            <h3>What the project includes</h3>
+
+            <ul>
+              <li>
+                Responsive lost-and-found interface for different
+                screen sizes.
+              </li>
+
+              <li>
+                Global discovery categories and illustrative
+                sample listings.
+              </li>
+
+              <li>
+                Interactive global map with 26 city hotspots
+                across 24 countries.
+              </li>
+
+              <li>
+                Local cultural photo stories with source credits.
+              </li>
+
+              <li>
+                Search and report interface previews.
+              </li>
+            </ul>
+
+          </article>
+
+          <article class="case-detail">
+
+            <span class="case-detail-number mono">02 / TECHNOLOGY</span>
+
+            <h3>How the application is built</h3>
+
+            <ul>
+
+              <li>
+                <strong>React:</strong>
+                used to build the interactive front-end interface.
+              </li>
+
+              <li>
+                <strong>TypeScript:</strong>
+                used for the application's typed JavaScript code.
+              </li>
+
+              <li>
+                <strong>Vite:</strong>
+                used for development and production builds.
+              </li>
+
+              <li>
+                <strong>GitHub Pages:</strong>
+                hosts the published static website.
+              </li>
+
+              <li>
+                <strong>GitHub Actions:</strong>
+                builds and deploys the frontend when changes
+                are pushed to the main branch.
+              </li>
+
+            </ul>
+
+          </article>
+
+          <article class="case-detail">
+
+            <span class="case-detail-number mono">03 / COLLABORATION</span>
+
+            <h3>Working as a team</h3>
+
+            <ul>
+
+              <li>
+                <strong>Team members:</strong>
+                Muhammadali Manopov and Alisher.
+              </li>
+
+              <li>
+                <strong>Project type:</strong>
+                collaborative front-end development.
+              </li>
+
+              <li>
+                <strong>My role:</strong>
+                co-developer working on the project with Alisher.
+              </li>
+
+              <li>
+                <strong>Shared goal:</strong>
+                create a responsive and accessible lost-and-found
+                discovery experience.
+              </li>
+
+            </ul>
+
+          </article>
+
+        </div>
+
+      </div>
+
+      <!-- PROJECT REFLECTION -->
+
+      <div class="case-reflection">
+
+        <div>
+
+          <p class="case-kicker mono">WHAT I LEARNED</p>
+
+          <p>
+            This project gave me experience working on a larger
+            front-end application with another developer. It also
+            exposed me to a React and TypeScript workflow beyond
+            my individual HTML, CSS and JavaScript coursework.
+          </p>
+
+        </div>
+
+        <div>
+
+          <p class="case-kicker mono">IMPORTANT DEMO LIMITATION</p>
+
+          <p>
+            The published GitHub Pages version is a static
+            front-end demo. Map hotspot counts and sample listings
+            are illustrative. It does not include a hosted API,
+            database, authentication service or live AI matching
+            backend.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+    
     <!-- EVIDENCE -->
 
     <section class="case-evidence section-wrap" id="evidence">
 
       <div class="section-heading">
         <div>
-          <p class="section-index mono">04 / SUPPORTING EVIDENCE</p>
+          <p class="section-index mono">05 / SUPPORTING EVIDENCE</p>
           <h2>Show the work.<br><em>Show the evidence.</em></h2>
         </div>
 
