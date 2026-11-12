@@ -714,13 +714,13 @@ body::before {
   --surface-strong: #FFFFFF;
 
   --ink: #353B34;
-  --muted: #73786F;
+  --muted: #62685F;
 
   --line: rgba(53, 59, 52, .13);
 
   /* One main accent: muted sage */
-  --accent: #74866F;
-  --accent-dark: #586A54;
+  --accent: #586A54;
+  --accent-dark: #455640;
   --accent-soft: rgba(116, 134, 111, .12);
 
   /* Secondary accent: soft terracotta */
