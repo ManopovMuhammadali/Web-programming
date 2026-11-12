@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../site.css">
   <link rel="stylesheet" href="../weeks.css">
   <script src="../site.js" defer></script>
+  </head>
 <body>
-
 <header class="site-nav">
   <a class="wordmark" href="../index.html">MM / PORTFOLIO</a>
   <a class="nav-link" href="../index.html">← Back to home</a>
@@ -93,32 +93,54 @@
     </div>
 
     <div style="background:#fff;padding:24px;border:1px solid #dbe3e5;border-radius:10px;">
-     <h3>Lighthouse Accessibility Audit</h3>
-      <p><strong>Website tested:</strong> Personal portfolio homepage</p>
-      <p>This screenshot documents the Lighthouse accessibility audit performed on my deployed personal portfolio.</p>
-      <p><strong>Test date:</strong> November 10, 2026</p>
-      <p><strong>Website tested:</strong> Personal portfolio homepage</p>
-      <p>
-        The initial Lighthouse report gave my portfolio an
-        accessibility score of 94/100. It identified a color
-        contrast issue between foreground and background colors.
-      </p>
-      <p>
-        This screenshot is the evidence from the initial audit.
-        A new audit should be performed after fixing the contrast issue.
-      </p>
 
-      <figure style="margin:20px 0 0;">
-        <img
-          src="week9-lighthouse-accessibility.png"
-          alt="Lighthouse accessibility report showing a score of 94 out of 100 and a color contrast warning"
-          style="width:100%;height:auto;border-radius:8px;border:1px solid #dbe3e5;"
-        >
-        <figcaption style="margin-top:10px;color:#53646a;font-size:13px;">
-          Initial Lighthouse accessibility report — November 10, 2026.
-        </figcaption>
-      </figure>
-    </div>
+  <h3>Initial Audit — November 10, 2026</h3>
+
+  <p><strong>Accessibility score:</strong> 94/100</p>
+
+  <p>
+    The initial audit identified a color contrast issue
+    between foreground and background colors.
+  </p>
+
+  <figure style="margin:20px 0;">
+    <img
+      src="week9-lighthouse-accessibility.png"
+      alt="Initial Lighthouse accessibility result showing 94 out of 100."
+      style="width:100%;height:auto;border-radius:8px;"
+    >
+    <figcaption>Initial audit — November 10, 2026.</figcaption>
+  </figure>
+
+  <hr>
+
+  <h3>Follow-up Audit — November 12, 2026</h3>
+
+  <p><strong>Accessibility score:</strong> 100/100</p>
+  <p><strong>Tool:</strong> Lighthouse 13.5.0</p>
+  <p><strong>Configuration:</strong> Emulated Desktop</p>
+
+  <p>
+    The follow-up audit recorded a score of 100/100.
+    Lighthouse reported 21 passed audits and 10 items
+    for manual checking.
+  </p>
+
+  <figure style="margin:20px 0;">
+    <img
+      src="week9-lighthouse-accessibility-followup.png"
+      alt="Follow-up Lighthouse accessibility result showing 100 out of 100."
+      style="width:100%;height:auto;border-radius:8px;"
+    >
+    <figcaption>Follow-up audit — November 12, 2026.</figcaption>
+  </figure>
+
+  <p>
+    Automated accessibility testing is useful, but manual
+    keyboard and assistive technology testing is still needed.
+  </p>
+
+</div>
   </section>
 
   <section class="archive-content">
