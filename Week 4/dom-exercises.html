@@ -104,14 +104,47 @@ li { margin: 6px 0; }
 </section>
 
 <section class="exercise">
-  <h2>06 — To-do List Mini Project</h2>
+
+  <h2>06 — Task Tracker Mini Project</h2>
+
+  <p>
+    Create tasks, mark them as completed, remove them,
+    and track the remaining work.
+  </p>
+
   <form id="projectForm">
-    <label for="projectInput">Add a project task</label>
-    <input id="projectInput" required>
-    <button type="submit">Add</button>
+
+    <label for="projectInput">New task</label>
+
+    <input
+      id="projectInput"
+      type="text"
+      placeholder="Enter a task..."
+      maxlength="160"
+      autocomplete="off"
+      required
+    >
+
+    <button type="submit">Add task</button>
+
   </form>
-  <ul id="projectList"></ul>
-  <p id="projectStatus" aria-live="polite"></p>
+
+  <h3>My tasks</h3>
+
+  <ul
+    id="projectList"
+    aria-label="Task tracker"
+  ></ul>
+
+  <p
+    id="projectStatus"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    No tasks added yet.
+  </p>
+
 </section>
 </main>
 
