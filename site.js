@@ -56,8 +56,40 @@
     });
 
     navigation.addEventListener('click', function (event) {
-      if (event.target.closest('a')) closeMenu(false);
-    });
+  var link = event.target.closest('a');
+
+  if (!link) return;
+
+  var href = link.getAttribute('href') || '';
+
+  // Let normal page links work, but close the mobile menu.
+  if (!href.startsWith('#')) {
+    closeMenu(false);
+    return;
+  }
+
+  var target = document.getElementById(href.slice(1));
+
+  if (!target) {
+    closeMenu(false);
+    return;
+  }
+
+  event.preventDefault();
+  closeMenu(false);
+
+  // Keep the URL hash in sync with the section.
+  try {
+    window.history.pushState(null, '', href);
+  } catch (error) {
+    // Scrolling still works if history updates are unavailable.
+  }
+
+  target.scrollIntoView({
+    behavior: reducedMotion ? 'auto' : 'smooth',
+    block: 'start'
+  });
+});
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && navigation.classList.contains('is-open')) closeMenu(true);
@@ -135,7 +167,7 @@
           else link.removeAttribute('aria-current');
         });
       });
-    }, { rootMargin: '-42% 0px -52% 0px' });
+    }, { rootMargin: '-20% 0px -65% 0px' });
     observedSections.forEach(function (section) { navObserver.observe(section); });
   }
 
