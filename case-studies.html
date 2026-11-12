@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Project Case Studies — Muhammadali Manopov</title>
+  <meta name="description" content="Technical case studies of Muhammadali Manopov's front-end coursework projects: API integration, book search and form validation.">
+  <meta name="theme-color" content="#F4EEE7">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Project Case Studies — Muhammadali Manopov">
+  <meta property="og:description" content="How I approached, built and documented three front-end projects.">
+  <meta property="og:url" content="https://manopovmuhammadali.github.io/Web-programming/case-studies.html">
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./case-studies.css">
+
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("mm-portfolio-theme");
+
+        if (savedTheme === "dark" || savedTheme === "light") {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+      } catch (error) {
+        /* The page works when browser storage is unavailable. */
+      }
+    }());
+  </script>
+
+  <script src="./site.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-shell">
+
+      <a class="brand" href="./index.html" aria-label="Muhammadali Manopov homepage">
+        <span class="brand-mark">M<span>.</span></span>
+        <span class="brand-name">
+          MUHAMMADALI MANOPOV
+          <small>PROJECT CASE STUDIES</small>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        <span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-navigation" aria-label="Case study navigation">
+        <a href="#api-explorer">API Explorer</a>
+        <a href="#book-finder">Book Finder</a>
+        <a href="#registration">Registration</a>
+        <a href="#evidence">Evidence</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch to dark theme"
+          title="Switch theme"
+          aria-pressed="false"
+        >
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.6"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+          </svg>
+
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.6 8.6 0 1 0 20.2 15.4Z"></path>
+          </svg>
+        </button>
+
+        <a class="nav-cta" href="./index.html#contact">
+          Contact <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- INTRODUCTION -->
+
+    <section class="case-hero section-wrap">
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        WEB PROGRAMMING / PROJECT DOCUMENTATION
+      </p>
+
+      <p class="case-hero-pretitle">Beyond the finished interface</p>
+
+      <h1>
+        The thinking<br>
+        behind the <em>builds.</em>
+      </h1>
+
+      <p class="case-hero-description">
+        I learn front-end development by building practical projects.
+        These case studies explain what each project does, how I
+        approached the implementation, the decisions I made and
+        what I would improve in another iteration.
+      </p>
+
+      <div class="case-stats">
+        <div>
+          <strong>03</strong>
+          <span>Detailed project studies</span>
+        </div>
+
+        <div>
+          <strong>06</strong>
+          <span>API practice exercises</span>
+        </div>
+
+        <div>
+          <strong>10</strong>
+          <span>Weeks of coursework</span>
+        </div>
+      </div>
+
+      <p class="case-honesty-note">
+        These are coursework projects, not commercial client projects.
+        The implementation notes describe the current code; future
+        improvements are labelled separately.
+      </p>
+    </section>
+
+    <!-- PROJECT 01 -->
+
+    <section class="case-study section-wrap" id="api-explorer">
+
+      <div class="case-heading">
+        <div>
+          <p class="section-index mono">CASE STUDY 01 / WEEK 06</p>
+          <h2>API Explorer<span>.</span></h2>
+          <p class="case-subtitle">
+            Connecting a browser interface to external data.
+          </p>
+        </div>
+
+        <span class="case-type">Individual coursework</span>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case-overview">
+          <p class="case-kicker mono">THE PROJECT</p>
+
+          <h3>Making external data useful.</h3>
+
+          <p>
+            I built a small API playground containing six separate
+            exercises. Each exercise requests data from an external
+            service and displays the response in the browser.
+          </p>
+
+          <p>
+            The project covers more than making a request. It also
+            practises asynchronous JavaScript, response handling,
+            loading messages, error feedback and creating interface
+            elements from returned data.
+          </p>
+
+          <div class="case-tags">
+            <span>JavaScript</span>
+            <span>Fetch API</span>
+            <span>JSON</span>
+            <span>Async / Await</span>
+            <span>DOM</span>
+          </div>
+
+          <div class="case-actions">
+            <a href="./Week%206/api-exercises.html" target="_blank" rel="noopener noreferrer">
+              Open live project ↗
+            </a>
+
+            <a href="https://github.com/ManopovMuhammadali/Web-programming/blob/main/Week%206/api-exercises.html" target="_blank" rel="noopener noreferrer">
+              Inspect source code ↗
+            </a>
+          </div>
+        </article>
+
+        <div class="case-detail-stack">
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">01 / FEATURES</span>
+            <h3>What it does</h3>
+
+            <ul>
+              <li>Random Joke Fetcher — retrieves a joke from an external API.</li>
+              <li>Posts — loads five sample posts from JSONPlaceholder.</li>
+              <li>Seoul Weather — displays current weather data from Open-Meteo.</li>
+              <li>Random Users — displays four generated profiles.</li>
+              <li>Pokédex — searches Pokémon by name or number.</li>
+              <li>Country Table — sorts country data and displays the first twenty results.</li>
+            </ul>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">02 / IMPLEMENTATION</span>
+            <h3>How I handled requests</h3>
+
+            <p>
+              I used a shared helper function to avoid repeating the
+              same basic request and response-checking logic in every
+              exercise.
+            </p>
+
+            <pre class="case-code"><code>async function getJSON(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      "Request failed: " + response.status
+    );
+  }
+
+  return response.json();
+}</code></pre>
+
+            <p>
+              The individual exercises use <code>try</code> and
+              <code>catch</code> to handle failures and update their
+              own output areas.
+            </p>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">03 / ENGINEERING DECISIONS</span>
+            <h3>Why I structured it this way</h3>
+
+            <ul>
+              <li>
+                <strong>One request helper:</strong>
+                centralises the basic HTTP status check and JSON parsing.
+              </li>
+              <li>
+                <strong>Async / await:</strong>
+                keeps asynchronous request logic readable.
+              </li>
+              <li>
+                <strong>DOM methods:</strong>
+                several exercises use <code>createElement()</code>,
+                <code>textContent</code> and <code>append()</code>
+                to render returned data.
+              </li>
+              <li>
+                <strong>Separate output areas:</strong>
+                each exercise can display its own loading state,
+                result or error message.
+              </li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="case-reflection">
+        <div>
+          <p class="case-kicker mono">WHAT I LEARNED</p>
+          <p>
+            A request can fail even when the JavaScript syntax is
+            correct. I learned to check the HTTP response, parse JSON,
+            handle errors and update the page after asynchronous work.
+          </p>
+        </div>
+
+        <div>
+          <p class="case-kicker mono">NEXT ITERATION</p>
+          <p>
+            I would add request cancellation, more consistent button
+            loading states and caching. I would also avoid downloading
+            an entire country dataset when only a small subset is
+            required.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 02 -->
+
+    <section class="case-study section-wrap" id="book-finder">
+
+      <div class="case-heading">
+        <div>
+          <p class="section-index mono">CASE STUDY 02 / WEEK 07</p>
+          <h2>Open Library Book Finder<span>.</span></h2>
+          <p class="case-subtitle">
+            Turning a search query into useful book results.
+          </p>
+        </div>
+
+        <span class="case-type">Individual coursework</span>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case-overview">
+          <p class="case-kicker mono">THE PROJECT</p>
+
+          <h3>A search interface backed by real data.</h3>
+
+          <p>
+            I created a book search page that sends a query to the
+            Open Library Search API and displays matching books
+            as individual result cards.
+          </p>
+
+          <p>
+            Each result can show a title, an author, a first
+            publication year and a cover image when the API
+            provides one.
+          </p>
+
+          <div class="case-tags">
+            <span>HTML</span>
+            <span>CSS Grid</span>
+            <span>JavaScript</span>
+            <span>Fetch API</span>
+            <span>Open Library API</span>
+          </div>
+
+          <div class="case-actions">
+            <a href="./Week%207/book-search.html" target="_blank" rel="noopener noreferrer">
+              Open live project ↗
+            </a>
+
+            <a href="https://github.com/ManopovMuhammadali/Web-programming/blob/main/Week%207/book-search.html" target="_blank" rel="noopener noreferrer">
+              Inspect source code ↗
+            </a>
+          </div>
+        </article>
+
+        <div class="case-detail-stack">
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">01 / USER FLOW</span>
+            <h3>How a search works</h3>
+
+            <ol>
+              <li>A visitor enters a book title, author or subject.</li>
+              <li>The form listens for a submit event.</li>
+              <li>JavaScript sends an encoded query to Open Library.</li>
+              <li>The response is converted from JSON.</li>
+              <li>The first twelve available results are displayed.</li>
+              <li>The interface shows a message when there are no results or a request fails.</li>
+            </ol>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">02 / IMPLEMENTATION</span>
+            <h3>Handling search input and results</h3>
+
+            <pre class="case-code"><code>const response = await fetch(
+  "https://openlibrary.org/search.json?q=" +
+  encodeURIComponent(query) +
+  "&amp;limit=12"
+);
+
+if (!response.ok) {
+  throw new Error("Search failed.");
+}
+
+const data = await response.json();</code></pre>
+
+            <p>
+              I used <code>encodeURIComponent()</code> so spaces and
+              special characters in a search query are safely included
+              in the request URL.
+            </p>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">03 / DATA PRESENTATION</span>
+            <h3>Making results readable</h3>
+
+            <ul>
+              <li>Titles and author information are displayed in separate cards.</li>
+              <li>Missing author or publication details receive fallback text.</li>
+              <li>Cover images are requested only when a cover ID is available.</li>
+              <li>The <code>escapeHTML()</code> function escapes API text before it is inserted into the result markup.</li>
+              <li>The status area communicates loading, result count, empty results and connection errors.</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="case-reflection">
+        <div>
+          <p class="case-kicker mono">WHAT I LEARNED</p>
+          <p>
+            This project helped me connect form submission, URL
+            encoding, API requests and dynamic result rendering in
+            one complete user flow.
+          </p>
+        </div>
+
+        <div>
+          <p class="case-kicker mono">NEXT ITERATION</p>
+          <p>
+            I would add pagination, a visible clear-search action,
+            better handling for unavailable cover images and the
+            ability to show more than one author.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 03 -->
+
+    <section class="case-study section-wrap" id="registration">
+
+      <div class="case-heading">
+        <div>
+          <p class="section-index mono">CASE STUDY 03 / WEEK 08</p>
+          <h2>Student Registration<span>.</span></h2>
+          <p class="case-subtitle">
+            Designing a form that explains errors instead of hiding them.
+          </p>
+        </div>
+
+        <span class="case-type">Individual coursework</span>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case-overview">
+          <p class="case-kicker mono">THE PROJECT</p>
+
+          <h3>Validation with clear feedback.</h3>
+
+          <p>
+            I developed a student registration form that checks
+            user input before showing a successful validation
+            message.
+          </p>
+
+          <p>
+            The form combines built-in HTML constraints with
+            JavaScript validation. It checks required information,
+            input patterns, password confirmation and the
+            user's agreement to the terms.
+          </p>
+
+          <div class="case-tags">
+            <span>HTML5</span>
+            <span>Forms</span>
+            <span>JavaScript</span>
+            <span>Regular Expressions</span>
+            <span>Constraint Validation</span>
+            <span>ARIA</span>
+          </div>
+
+          <div class="case-actions">
+            <a href="./Week%208/registration.html" target="_blank" rel="noopener noreferrer">
+              Open live project ↗
+            </a>
+
+            <a href="https://github.com/ManopovMuhammadali/Web-programming/blob/main/Week%208/registration.html" target="_blank" rel="noopener noreferrer">
+              Inspect source code ↗
+            </a>
+          </div>
+        </article>
+
+        <div class="case-detail-stack">
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">01 / VALIDATION RULES</span>
+            <h3>What the form checks</h3>
+
+            <ul>
+              <li>Name is required and must contain at least two characters.</li>
+              <li>Student ID must contain exactly nine digits.</li>
+              <li>Email must use a valid email format.</li>
+              <li>Phone number must match the configured Korean mobile number pattern.</li>
+              <li>Password must contain at least eight characters.</li>
+              <li>Confirmation password must match the original password.</li>
+              <li>A course must be selected and the terms checkbox must be checked.</li>
+            </ul>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">02 / IMPLEMENTATION</span>
+            <h3>Custom validation feedback</h3>
+
+            <pre class="case-code"><code>field.setCustomValidity(error);
+
+field.setAttribute(
+  "aria-invalid",
+  String(Boolean(error))
+);
+
+const errorElement = document.getElementById(
+  field.id + "-error"
+);
+
+if (errorElement) {
+  errorElement.textContent = error;
+}</code></pre>
+
+            <p>
+              The validation function sets a custom error message,
+              updates the field's invalid state and places feedback
+              beside the related input.
+            </p>
+          </article>
+
+          <article class="case-detail">
+            <span class="case-detail-number mono">03 / ACCESSIBILITY</span>
+            <h3>Helping users understand mistakes</h3>
+
+            <ul>
+              <li>Inputs use associated labels.</li>
+              <li>Error messages are connected through <code>aria-describedby</code>.</li>
+              <li>The field's <code>aria-invalid</code> state is updated after validation.</li>
+              <li>A live status area announces the form result.</li>
+              <li>The first invalid field receives focus when submission fails.</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="case-reflection">
+        <div>
+          <p class="case-kicker mono">WHAT I LEARNED</p>
+          <p>
+            Validation should tell people how to fix a problem.
+            A form should not simply reject an input without
+            explaining what went wrong.
+          </p>
+        </div>
+
+        <div>
+          <p class="case-kicker mono">IMPORTANT LIMITATION</p>
+          <p>
+            This is a front-end validation exercise. It does not
+            create a real account, connect to a database or store
+            submitted registration data. The success message is
+            a browser-side demonstration.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVIDENCE -->
+
+    <section class="case-evidence section-wrap" id="evidence">
+
+      <div class="section-heading">
+        <div>
+          <p class="section-index mono">04 / SUPPORTING EVIDENCE</p>
+          <h2>Show the work.<br><em>Show the evidence.</em></h2>
+        </div>
+
+        <p class="section-summary">
+          Reports and repository links that support the work
+          shown in this portfolio. Results are described as
+          recorded, not assumed.
+        </p>
+      </div>
+
+      <div class="evidence-grid">
+
+        <article class="evidence-card">
+          <span class="evidence-number mono">01 / ACCESSIBILITY</span>
+          <h3>Lighthouse audit</h3>
+
+          <p class="evidence-metric">94<span>/100</span></p>
+
+          <p>
+            The Week 9 record documents an initial accessibility
+            audit dated November 10, 2026. It identified a
+            foreground/background contrast issue.
+          </p>
+
+          <p class="evidence-caveat">
+            This is the initial recorded result. A new audit
+            is required to verify the current published page.
+          </p>
+
+          <a href="./Week%209/accessibility.html#lighthouse">
+            View audit record ↗
+          </a>
+
+          <a href="./Week%209/week9-lighthouse-accessibility.png">
+            Open original screenshot ↗
+          </a>
+        </article>
+
+        <article class="evidence-card">
+          <span class="evidence-number mono">02 / PERFORMANCE</span>
+          <h3>Optimization report</h3>
+
+          <p class="evidence-metric evidence-word">5 techniques</p>
+
+          <p>
+            The Week 10 report explains image optimization,
+            lazy loading, deferred JavaScript, font loading,
+            minification and caching concepts.
+          </p>
+
+          <p class="evidence-caveat">
+            Before-and-after Lighthouse measurements have
+            not been entered in the current report.
+          </p>
+
+          <a href="./Week%2010/performance.html">
+            Read performance report ↗
+          </a>
+        </article>
+
+        <article class="evidence-card">
+          <span class="evidence-number mono">03 / VERSION CONTROL</span>
+          <h3>GitHub repository</h3>
+
+          <p class="evidence-metric evidence-word">Public source</p>
+
+          <p>
+            The repository contains the homepage, shared styles,
+            JavaScript, weekly coursework and project files.
+            The commit history provides a record of code changes.
+          </p>
+
+          <p class="evidence-caveat">
+            Repository history is available for inspection;
+            it is not presented as proof of commercial experience.
+          </p>
+
+          <a href="https://github.com/ManopovMuhammadali/Web-programming" target="_blank" rel="noopener noreferrer">
+            Browse repository ↗
+          </a>
+
+          <a href="https://github.com/ManopovMuhammadali/Web-programming/commits/main/" target="_blank" rel="noopener noreferrer">
+            View commit history ↗
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+
+    <section class="case-closing section-wrap">
+      <p class="section-index mono">THE NEXT STEP</p>
+
+      <h2>
+        Build it.<br>
+        Understand it.<br>
+        <em>Improve it.</em>
+      </h2>
+
+      <p>
+        These projects represent my current learning and practical
+        experience. I want to keep improving them through better
+        accessibility, clearer interfaces and more complete
+        interactions.
+      </p>
+
+      <div class="case-actions">
+        <a href="./index.html" class="case-primary-link">
+          Return to portfolio homepage ↗
+        </a>
+
+        <a href="https://github.com/ManopovMuhammadali" target="_blank" rel="noopener noreferrer">
+          GitHub profile ↗
+        </a>
+
+        <a href="mailto:muhammadalimajidov228@gmail.com">
+          Email me ↗
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="section-wrap footer-inner">
+      <a class="footer-brand" href="./index.html">MM<span>.</span></a>
+
+      <p>Project documentation by Muhammadali Manopov.</p>
+
+      <div class="footer-links">
+        <a href="./index.html">Portfolio ↗</a>
+        <a href="#main">Back to top ↑</a>
+      </div>
+
+      <span class="footer-year mono">© <span id="current-year">2026</span></span>
+    </div>
+  </footer>
+</body>
+</html>
