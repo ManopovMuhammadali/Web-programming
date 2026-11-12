@@ -22,7 +22,7 @@
       themeButton.setAttribute('title', dark ? 'Switch to light theme' : 'Switch to dark theme');
     }
     if (themeColor) {
-      themeColor.setAttribute('content', theme === 'dark' ? '#191512' : '#F4EEE7');
+      themeColor.setAttribute('content', theme === 'dark' ? '#1E231E' : '#FAF8F3');
     }
     if (save) {
       try { localStorage.setItem('mm-portfolio-theme', theme); } catch (error) { /* Storage is optional. */ }
@@ -235,8 +235,8 @@
         var rect = item.getBoundingClientRect();
         var dx = (event.clientX - (rect.left + rect.width / 2)) / Math.max(rect.width, 1);
         var dy = (event.clientY - (rect.top + rect.height / 2)) / Math.max(rect.height, 1);
-        item.style.setProperty('--mag-x', (dx * 5).toFixed(2) + 'px');
-        item.style.setProperty('--mag-y', (dy * 4).toFixed(2) + 'px');
+        item.style.setProperty('--mag-x', (dx * 3).toFixed(2) + 'px');
+        item.style.setProperty('--mag-y', (dy * 2.5).toFixed(2) + 'px');
       });
       item.addEventListener('pointerleave', function () {
         item.style.setProperty('--mag-x', '0px');
@@ -251,15 +251,15 @@
         var rect = item.getBoundingClientRect();
         var x = (event.clientX - rect.left) / Math.max(rect.width, 1);
         var y = (event.clientY - rect.top) / Math.max(rect.height, 1);
-        var rotateY = (x - 0.5) * (item.classList.contains('project-card') ? 5 : 3.5);
-        var rotateX = (0.5 - y) * (item.classList.contains('project-card') ? 5 : 3.5);
+        var rotateY = (x - 0.5) * (item.classList.contains('project-card') ? 2.5 : 1.8);
+        var rotateX = (0.5 - y) * (item.classList.contains('project-card') ? 2.5 : 1.8);
 
         if (item.classList.contains('project-card')) {
           item.style.setProperty('--spot-x', (x * 100).toFixed(1) + '%');
           item.style.setProperty('--spot-y', (y * 100).toFixed(1) + '%');
-          item.style.transform = 'perspective(1100px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) translateY(-5px)';
+         item.style.transform = 'perspective(1100px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) translateY(-3px)';
         } else {
-          item.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) rotateZ(1.2deg)';
+         item.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) rotateZ(0.6deg)';
         }
       });
       item.addEventListener('pointerleave', function () {
@@ -275,8 +275,8 @@
         var rect = hero.getBoundingClientRect();
         var x = (event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5;
         var y = (event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5;
-        heroVisual.style.setProperty('--drift-x', (x * 7).toFixed(2) + 'px');
-        heroVisual.style.setProperty('--drift-y', (y * 6).toFixed(2) + 'px');
+       heroVisual.style.setProperty('--drift-x', (x * 4).toFixed(2) + 'px');
+       heroVisual.style.setProperty('--drift-y', (y * 3).toFixed(2) + 'px');
       });
       hero.addEventListener('pointerleave', function () {
         heroVisual.style.setProperty('--drift-x', '0px');
