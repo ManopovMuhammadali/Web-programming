@@ -192,7 +192,105 @@ function addTask(formId, inputId, listId, statusId) {
 }
 
 addTask("todoForm", "todoInput", "todoList");
-addTask("projectForm", "projectInput", "projectList", "projectStatus");
+// Exercise 6: Task Tracker Mini Project
+
+const projectForm = document.getElementById("projectForm");
+const projectInput = document.getElementById("projectInput");
+const projectList = document.getElementById("projectList");
+const projectStatus = document.getElementById("projectStatus");
+
+let projectTasks = [];
+
+function renderProjectTasks() {
+  projectList.replaceChildren();
+
+  projectTasks.forEach(task => {
+    const item = document.createElement("li");
+
+    item.style.display = "flex";
+    item.style.alignItems = "center";
+    item.style.flexWrap = "wrap";
+    item.style.gap = "10px";
+    item.style.margin = "12px 0";
+
+    const text = document.createElement("span");
+    text.textContent = task.text;
+    text.style.flex = "1";
+    text.style.overflowWrap = "anywhere";
+
+    if (task.completed) {
+      text.style.textDecoration = "line-through";
+      text.style.opacity = "0.6";
+    }
+
+    const completeButton = document.createElement("button");
+    completeButton.type = "button";
+    completeButton.textContent = task.completed ? "Undo" : "Complete";
+    completeButton.setAttribute(
+      "aria-pressed",
+      String(task.completed)
+    );
+
+    completeButton.addEventListener("click", () => {
+      task.completed = !task.completed;
+      renderProjectTasks();
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Delete";
+    deleteButton.setAttribute(
+      "aria-label",
+      "Delete task: " + task.text
+    );
+
+    deleteButton.addEventListener("click", () => {
+      projectTasks = projectTasks.filter(
+        existingTask => existingTask !== task
+      );
+
+      renderProjectTasks();
+    });
+
+    item.append(text, completeButton, deleteButton);
+    projectList.appendChild(item);
+  });
+
+  const completed = projectTasks.filter(
+    task => task.completed
+  ).length;
+
+  const remaining = projectTasks.length - completed;
+
+  projectStatus.textContent =
+    "Total: " + projectTasks.length +
+    " | Completed: " + completed +
+    " | Remaining: " + remaining;
+}
+
+projectForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const text = projectInput.value.trim();
+
+  if (!text) {
+    projectInput.focus();
+    projectStatus.textContent = "Enter a task first.";
+    return;
+  }
+
+  projectTasks.push({
+    text: text,
+    completed: false
+  });
+
+  projectInput.value = "";
+
+  renderProjectTasks();
+  projectInput.focus();
+});
+
+renderProjectTasks();
 
 const filterInput = document.getElementById("filterInput");
 const nameItems = [...document.querySelectorAll("#nameList li")];
