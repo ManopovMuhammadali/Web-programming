@@ -1,0 +1,985 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive GitHub Profile Explorer built with the GitHub REST API, fetch and JSON.">
+<title>GitHub Profile Explorer — Week 11</title>
+
+<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../weeks.css">
+
+<style>
+.api-project {
+  max-width: 1000px;
+  margin: 45px auto 90px;
+}
+
+.panel {
+  margin-bottom: 28px;
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: clamp(23px, 4vw, 32px);
+  letter-spacing: -.04em;
+}
+
+.panel h3 {
+  margin: 20px 0 10px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.field {
+  flex: 1 1 230px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+.field input:focus {
+  outline: 3px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.action-button {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 7px;
+  color: white;
+  background: var(--accent);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.action-button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+.status {
+  min-height: 26px;
+  margin-top: 17px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.error-box {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #df837b;
+  border-radius: 8px;
+  color: #9b302b;
+  background: #fff0ed;
+  line-height: 1.6;
+}
+
+.rate-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.rate-panel strong {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.rate-panel small {
+  display: block;
+  color: var(--muted);
+}
+
+.profile-card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.avatar {
+  width: 120px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-soft);
+}
+
+.profile-name {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 34px);
+  letter-spacing: -.04em;
+}
+
+.profile-login {
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.profile-bio {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.profile-link {
+  display: inline-flex;
+  margin-top: 15px;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 30px;
+}
+
+.stat-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+
+.stat-card strong {
+  display: block;
+  font-size: clamp(23px, 4vw, 30px);
+}
+
+.stat-card span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+
+.repo-card h3 {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+}
+
+.repo-card p {
+  flex: 1;
+  margin: 0 0 17px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.repo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.repo-card a {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.raw-json {
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.raw-json summary {
+  padding: 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.raw-json pre {
+  max-height: 420px;
+  margin: 0;
+  padding: 18px;
+  overflow: auto;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.code {
+  margin: 14px 0;
+  padding: 18px;
+  overflow-x: auto;
+  border-radius: 8px;
+  color: #e8edf4;
+  background: #17242b;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.reflection {
+  margin-top: 18px;
+  padding: 17px;
+  border-left: 4px solid var(--orange);
+  background: var(--bg-soft);
+}
+
+.reflection p {
+  margin: 7px 0;
+}
+
+@media (max-width: 650px) {
+  .profile-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .avatar {
+    margin-inline: auto;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .repo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">
+    MM / <span>PORTFOLIO</span>
+  </a>
+  <a class="nav-link" href="index.html">← Week 11</a>
+</header>
+
+<main>
+
+<header class="archive-intro">
+  <div class="archive-meta">
+    <span>Week 11 / Public API Project</span>
+    <span>JavaScript · JSON · REST</span>
+  </div>
+
+  <h1>GitHub Profile Explorer.</h1>
+
+  <p>
+    Search for any public GitHub user and explore
+    their profile information and repositories using
+    the GitHub REST API.
+  </p>
+</header>
+
+<div class="api-project">
+
+<section class="panel" id="app">
+
+  <h2>Explore a GitHub profile</h2>
+
+  <p class="muted">
+    Enter a GitHub username to retrieve public profile data.
+  </p>
+
+  <form class="search-form" id="search-form">
+
+    <div class="field">
+      <label for="username">GitHub username</label>
+      <input
+        id="username"
+        name="username"
+        type="search"
+        placeholder="For example: octocat"
+        maxlength="39"
+        autocomplete="off"
+        required
+      >
+    </div>
+
+    <button class="action-button" id="search-button" type="submit">
+      Search profile
+    </button>
+
+  </form>
+
+  <p class="status" id="status" role="status" aria-live="polite">
+    Enter a username to begin.
+  </p>
+
+  <div class="error-box" id="error-box" role="alert" hidden></div>
+
+  <div class="rate-panel">
+    <div>
+      <strong>API RATE LIMIT</strong>
+      <small id="rate-reset">Waiting for the first API response.</small>
+    </div>
+
+    <strong id="rate-value">Not checked</strong>
+  </div>
+
+</section>
+
+<section id="results" hidden>
+
+  <div id="profile-card"></div>
+
+  <div class="stat-grid" id="stat-grid"></div>
+
+  <div class="panel">
+    <h2>Public repositories</h2>
+    <p class="muted">
+      Six recently updated repositories, when available.
+    </p>
+
+    <div class="repo-grid" id="repo-list"></div>
+  </div>
+
+  <div class="panel">
+    <h2>JSON response</h2>
+    <p class="muted">
+      Expand this section to inspect the data received from the API.
+    </p>
+
+    <details class="raw-json">
+      <summary>View raw JSON data</summary>
+      <pre id="json-output"></pre>
+    </details>
+  </div>
+
+</section>
+
+<section class="panel" id="api-process">
+
+  <h2>01 — Fetch API and JSON</h2>
+
+  <p>
+    The application sends a GET request to GitHub's public
+    API. The response is converted into a JavaScript object
+    using the json() method.
+  </p>
+
+  <pre class="code"><code>async function getProfile(username) {
+
+  const response = await fetch(
+    `https://api.github.com/users/${username}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Unable to retrieve profile.");
+  }
+
+  const data = await response.json();
+
+  console.log(data.name);
+  console.log(data.public_repos);
+
+  return data;
+}</code></pre>
+
+  <p>
+    This project uses async/await because API requests are
+    asynchronous. The browser can continue responding
+    while it waits for the server.
+  </p>
+
+</section>
+
+<section class="panel" id="rate-limits">
+
+  <h2>02 — Rate limits and error handling</h2>
+
+  <p>
+    Public, unauthenticated GitHub REST API requests are
+    limited to 60 requests per hour per originating IP address.
+    The application reads the response headers to display
+    the current allowance.
+  </p>
+
+  <h3>Important response headers</h3>
+
+  <ul>
+    <li><code>X-RateLimit-Limit</code> — maximum requests.</li>
+    <li><code>X-RateLimit-Remaining</code> — requests remaining.</li>
+    <li><code>X-RateLimit-Reset</code> — reset time as a UTC timestamp.</li>
+    <li><code>Retry-After</code> — how long to wait when provided.</li>
+  </ul>
+
+  <h3>Error cases</h3>
+
+  <ul>
+    <li>404 — the requested user does not exist.</li>
+    <li>403 — forbidden or a rate-limit restriction.</li>
+    <li>429 — too many requests.</li>
+    <li>5xx — a server-side problem.</li>
+    <li>Network error — the API cannot be reached.</li>
+    <li>Timeout — the request took too long.</li>
+  </ul>
+
+  <p>
+    The application does not automatically repeat a
+    rate-limited request. This prevents additional requests
+    from making the restriction worse.
+  </p>
+
+</section>
+
+<section class="panel" id="reflection">
+
+  <h2>03 — Project reflection</h2>
+
+  <div class="reflection">
+
+    <p><strong>What is an API?</strong></p>
+    <p>
+      An API allows different software systems to communicate.
+      It provides a structured way for an application to
+      request information or services from another system.
+    </p>
+
+    <p><strong>What is JSON?</strong></p>
+    <p>
+      JSON is a lightweight data format that represents
+      information using objects, arrays and values.
+      JavaScript can convert JSON into objects for processing.
+    </p>
+
+    <p><strong>Why is error handling important?</strong></p>
+    <p>
+      An API might be unavailable, a user may not exist,
+      or the application may reach its request limit.
+      Clear error messages help users understand what happened.
+    </p>
+
+    <p><strong>What did I learn?</strong></p>
+    <p>
+      I learned how to retrieve external data, process JSON,
+      display dynamic information and handle HTTP errors
+      when building an API-powered web application.
+    </p>
+
+  </div>
+
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 11 ↑</a>
+</footer>
+
+<script>
+"use strict";
+
+// DOM references
+const form = document.getElementById("search-form");
+const usernameInput = document.getElementById("username");
+const searchButton = document.getElementById("search-button");
+
+const statusBox = document.getElementById("status");
+const errorBox = document.getElementById("error-box");
+
+const results = document.getElementById("results");
+const profileCard = document.getElementById("profile-card");
+const statGrid = document.getElementById("stat-grid");
+const repoList = document.getElementById("repo-list");
+const jsonOutput = document.getElementById("json-output");
+
+const rateValue = document.getElementById("rate-value");
+const rateReset = document.getElementById("rate-reset");
+
+let activeController = null;
+
+// Display rate-limit information from response headers.
+function updateRateLimit(headers) {
+
+  const limit = headers.get("x-ratelimit-limit");
+  const remaining = headers.get("x-ratelimit-remaining");
+  const reset = headers.get("x-ratelimit-reset");
+
+  if (limit !== null && remaining !== null) {
+
+    rateValue.textContent =
+      `${remaining} of ${limit} requests remaining`;
+
+    if (reset) {
+      const resetDate = new Date(Number(reset) * 1000);
+
+      rateReset.textContent =
+        `Rate limit resets at ${resetDate.toLocaleTimeString()}`;
+    } else {
+      rateReset.textContent = "Reset time unavailable.";
+    }
+
+  } else {
+    rateValue.textContent = "Headers unavailable";
+    rateReset.textContent =
+      "The API did not expose rate-limit information.";
+  }
+}
+
+// Fetch a URL and safely process its JSON response.
+async function requestJSON(url, signal) {
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Accept": "application/vnd.github+json"
+    },
+    signal
+  });
+
+  updateRateLimit(response.headers);
+
+  let data = null;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
+
+  if (!response.ok) {
+
+    if (response.status === 404) {
+      throw new Error(
+        "GitHub could not find this username. Check the spelling."
+      );
+    }
+
+    if (response.status === 403 || response.status === 429) {
+
+      const remaining =
+        response.headers.get("x-ratelimit-remaining");
+
+      const reset =
+        response.headers.get("x-ratelimit-reset");
+
+      const retryAfter =
+        response.headers.get("retry-after");
+
+      let waitMessage;
+
+      if (retryAfter) {
+
+        waitMessage =
+          `Wait ${retryAfter} seconds before trying again.`;
+
+      } else if (remaining === "0" && reset) {
+
+        const resetTime =
+          new Date(Number(reset) * 1000).toLocaleTimeString();
+
+        waitMessage =
+          `Wait until the rate limit resets at ${resetTime}.`;
+
+      } else {
+
+        waitMessage =
+          "Wait at least one minute before trying again.";
+
+      }
+
+      throw new Error(
+        `GitHub has temporarily limited this request. ${waitMessage}`
+      );
+    }
+
+    const apiMessage =
+      data && typeof data.message === "string"
+        ? data.message
+        : `HTTP ${response.status}`;
+
+    throw new Error(`GitHub API error: ${apiMessage}`);
+  }
+
+  if (!data || typeof data !== "object") {
+    throw new Error("The API did not return valid JSON data.");
+  }
+
+  return data;
+}
+
+// Create text elements without inserting external data as HTML.
+function createTextElement(tag, className, value) {
+
+  const element = document.createElement(tag);
+
+  if (className) {
+    element.className = className;
+  }
+
+  element.textContent =
+    value === null || value === undefined || value === ""
+      ? "Not available"
+      : String(value);
+
+  return element;
+}
+
+// Format large numbers.
+function formatNumber(value) {
+  return new Intl.NumberFormat().format(Number(value) || 0);
+}
+
+// Render profile information.
+function renderProfile(profile) {
+
+  profileCard.replaceChildren();
+
+  const card = document.createElement("article");
+  card.className = "profile-card";
+
+  const avatar = document.createElement("img");
+  avatar.className = "avatar";
+  avatar.src = profile.avatar_url;
+  avatar.alt = `GitHub avatar of ${profile.login}`;
+  avatar.loading = "lazy";
+  avatar.referrerPolicy = "no-referrer";
+
+  avatar.addEventListener("error", () => {
+    avatar.hidden = true;
+  }, { once: true });
+
+  const information = document.createElement("div");
+
+  information.appendChild(
+    createTextElement(
+      "h2",
+      "profile-name",
+      profile.name || profile.login
+    )
+  );
+
+  information.appendChild(
+    createTextElement(
+      "p",
+      "profile-login",
+      "@" + profile.login
+    )
+  );
+
+  information.appendChild(
+    createTextElement(
+      "p",
+      "profile-bio",
+      profile.bio || "This user has not added a public bio."
+    )
+  );
+
+  information.appendChild(
+    createTextElement(
+      "p",
+      "muted",
+      "Location: " + (profile.location || "Not specified")
+    )
+  );
+
+  const link = document.createElement("a");
+  link.className = "profile-link";
+  link.href = profile.html_url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Open GitHub profile ↗";
+
+  information.appendChild(link);
+
+  card.append(avatar, information);
+  profileCard.appendChild(card);
+}
+
+// Render profile statistics.
+function renderStats(profile) {
+
+  statGrid.replaceChildren();
+
+  const items = [
+    {
+      label: "Public repositories",
+      value: profile.public_repos
+    },
+    {
+      label: "Followers",
+      value: profile.followers
+    },
+    {
+      label: "Following",
+      value: profile.following
+    }
+  ];
+
+  items.forEach(item => {
+
+    const card = document.createElement("div");
+    card.className = "stat-card";
+
+    card.appendChild(
+      createTextElement(
+        "strong",
+        "",
+        formatNumber(item.value)
+      )
+    );
+
+    card.appendChild(
+      createTextElement("span", "", item.label)
+    );
+
+    statGrid.appendChild(card);
+  });
+}
+
+// Render public repositories.
+function renderRepositories(repositories) {
+
+  repoList.replaceChildren();
+
+  if (!Array.isArray(repositories) || repositories.length === 0) {
+
+    repoList.appendChild(
+      createTextElement(
+        "p",
+        "muted",
+        "No public repositories were found."
+      )
+    );
+
+    return;
+  }
+
+  repositories.forEach(repo => {
+
+    const card = document.createElement("article");
+    card.className = "repo-card";
+
+    card.appendChild(
+      createTextElement("h3", "", repo.name)
+    );
+
+    card.appendChild(
+      createTextElement(
+        "p",
+        "",
+        repo.description || "No description provided."
+      )
+    );
+
+    const meta = document.createElement("div");
+    meta.className = "repo-meta";
+
+    meta.appendChild(
+      createTextElement(
+        "span",
+        "",
+        repo.language || "Language unavailable"
+      )
+    );
+
+    meta.appendChild(
+      createTextElement(
+        "span",
+        "",
+        "★ " + formatNumber(repo.stargazers_count)
+      )
+    );
+
+    const link = document.createElement("a");
+    link.href = repo.html_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "View repository ↗";
+
+    card.append(meta, link);
+    repoList.appendChild(card);
+  });
+}
+
+// Main search function.
+async function searchProfile(username) {
+
+  if (activeController) {
+    activeController.abort();
+  }
+
+  const controller = new AbortController();
+  activeController = controller;
+
+  const timeout = window.setTimeout(() => {
+    controller.abort();
+  }, 15000);
+
+  searchButton.disabled = true;
+  searchButton.textContent = "Loading...";
+
+  statusBox.textContent = "Connecting to GitHub...";
+  errorBox.hidden = true;
+  errorBox.textContent = "";
+  results.hidden = true;
+
+  try {
+
+    // First request: retrieve the user profile.
+    const profile = await requestJSON(
+      `https://api.github.com/users/${encodeURIComponent(username)}`,
+      controller.signal
+    );
+
+    statusBox.textContent = "Profile loaded. Retrieving repositories...";
+
+    // Second request: retrieve the user's public repositories.
+    // Requests are sequential to avoid unnecessary request bursts.
+    const repositories = await requestJSON(
+      `https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=6&type=owner`,
+      controller.signal
+    );
+
+    // Render the API data.
+    renderProfile(profile);
+    renderStats(profile);
+    renderRepositories(repositories);
+
+    // Expose the original JSON for inspection.
+    jsonOutput.textContent = JSON.stringify(
+      {
+        profile: profile,
+        repositories: repositories
+      },
+      null,
+      2
+    );
+
+    results.hidden = false;
+
+    statusBox.textContent =
+      `Successfully loaded the public profile for ${profile.login}.`;
+
+  } catch (error) {
+
+    if (error.name === "AbortError") {
+
+      errorBox.textContent =
+        "The request timed out after 15 seconds. Check your connection and try again.";
+
+    } else {
+
+      errorBox.textContent =
+        error.message || "An unexpected error occurred.";
+
+    }
+
+    errorBox.hidden = false;
+    statusBox.textContent = "Unable to complete the request.";
+
+  } finally {
+
+    window.clearTimeout(timeout);
+
+    if (activeController === controller) {
+      activeController = null;
+    }
+
+    searchButton.disabled = false;
+    searchButton.textContent = "Search profile";
+  }
+}
+
+// Validate the username and listen for form submission.
+form.addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  const username = usernameInput.value.trim();
+
+  if (!/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i.test(username)) {
+
+    errorBox.textContent =
+      "Enter a valid GitHub username using letters, numbers and hyphens.";
+
+    errorBox.hidden = false;
+    statusBox.textContent = "Please check the username.";
+
+    return;
+  }
+
+  searchProfile(username);
+
+});
+</script>
+
+</body>
+</html>
