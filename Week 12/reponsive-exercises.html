@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Practical responsive web design exercises using media queries, clamp, CSS Grid and mobile-first layouts.">
+<title>Responsive Design Exercises — Week 12</title>
+
+<link rel="stylesheet" href="../site.css">
+<link rel="stylesheet" href="../weeks.css">
+
+<style>
+.responsive-lab {
+  max-width: 1050px;
+  margin: 42px auto 90px;
+}
+
+.exercise {
+  margin-bottom: 28px;
+  padding: clamp(19px, 4vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+}
+
+.exercise h2 {
+  margin: 0 0 12px;
+  font-size: clamp(21px, 4vw, 30px);
+  letter-spacing: -.04em;
+}
+
+.exercise h3 {
+  margin: 23px 0 10px;
+  font-size: 17px;
+}
+
+.exercise > p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.code {
+  margin-top: 17px;
+  padding: 19px;
+  overflow-x: auto;
+  border-radius: 8px;
+  color: #e8edf4;
+  background: #17242b;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.reflection {
+  margin-top: 18px;
+  padding: 17px;
+  border-left: 4px solid var(--orange);
+  background: var(--bg-soft);
+}
+
+.reflection p {
+  margin: 6px 0;
+  line-height: 1.7;
+}
+
+/* Live preview */
+
+.preview {
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.preview-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.preview-info strong {
+  color: var(--accent);
+}
+
+.preview-content {
+  padding: clamp(14px, 3vw, 24px);
+}
+
+/* Fluid navigation */
+
+.demo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 16px 19px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.demo-brand {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.demo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.demo-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Mobile-first main layout */
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.demo-sidebar {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.demo-sidebar p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.demo-main {
+  min-width: 0;
+}
+
+.demo-heading {
+  margin: 0 0 15px;
+  color: var(--ink);
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: 1.1;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 13px;
+}
+
+.demo-card {
+  min-width: 0;
+  min-height: 115px;
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+
+.demo-card strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.demo-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Breakpoints:
+   Mobile: default
+   Tablet: 620px and above
+   Desktop: 960px and above
+*/
+
+@media (min-width: 620px) {
+
+  .demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (min-width: 960px) {
+
+  .demo-layout {
+    grid-template-columns: 210px minmax(0, 1fr);
+  }
+
+  .demo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+/* Responsive SVG and images */
+
+.fluid-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-nav">
+  <a class="wordmark" href="../index.html">
+    MM / <span>PORTFOLIO</span>
+  </a>
+  <a class="nav-link" href="index.html">← Week 12</a>
+</header>
+
+<main>
+
+<header class="archive-intro">
+  <div class="archive-meta">
+    <span>Week 12 / Practical Exercises</span>
+    <span>CSS · Responsive Design</span>
+  </div>
+
+  <h1>Responsive layouts.</h1>
+
+  <p>
+    Exploring mobile-first development, media queries,
+    fluid typography and adaptable website components.
+  </p>
+</header>
+
+<div class="responsive-lab">
+
+<!-- LIVE DEMONSTRATION -->
+
+<section class="exercise" id="live-demo">
+
+  <h2>Live Responsive Preview</h2>
+
+  <p>
+    Resize the browser window to see how the navigation,
+    sidebar and card layout adapt to the available space.
+  </p>
+
+  <div class="preview">
+
+    <div class="preview-info">
+      <span>
+        VIEWPORT: <strong id="viewport-width">—</strong>
+      </span>
+
+      <span>
+        LAYOUT: <strong id="layout-state">—</strong>
+      </span>
+    </div>
+
+    <div class="preview-content">
+
+      <header class="demo-nav">
+
+        <span class="demo-brand">RESPONSIVE / DEMO</span>
+
+        <nav class="demo-links" aria-label="Demo navigation">
+          <a href="#live-demo">Home</a>
+          <a href="#mobile-first">Layout</a>
+          <a href="#fluid-type">Typography</a>
+          <a href="#reflection">About</a>
+        </nav>
+
+      </header>
+
+      <div class="demo-layout">
+
+        <aside class="demo-sidebar">
+          <strong>Sidebar</strong>
+          <p>Navigation links</p>
+          <p>Course materials</p>
+          <p>Project information</p>
+        </aside>
+
+        <div class="demo-main">
+
+          <h2 class="demo-heading">
+            Design for every screen.
+          </h2>
+
+          <div class="demo-grid">
+
+            <article class="demo-card">
+              <strong>Mobile</strong>
+              <p>A single-column layout for smaller screens.</p>
+            </article>
+
+            <article class="demo-card">
+              <strong>Tablet</strong>
+              <p>Two-column content when enough space is available.</p>
+            </article>
+
+            <article class="demo-card">
+              <strong>Desktop</strong>
+              <p>More columns and a separate sidebar on wider screens.</p>
+            </article>
+
+            <article class="demo-card">
+              <strong>Flexible</strong>
+              <p>Content adjusts to the available browser width.</p>
+            </article>
+
+            <article class="demo-card">
+              <strong>Readable</strong>
+              <p>Typography scales smoothly with the viewport.</p>
+            </article>
+
+            <article class="demo-card">
+              <strong>Accessible</strong>
+              <p>Navigation and content remain easy to use.</p>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- 01 MOBILE FIRST -->
+
+<section class="exercise" id="mobile-first">
+
+  <h2>01 — Mobile-First Design</h2>
+
+  <p>
+    Mobile-first design means creating the basic layout
+    for small screens first, then adding more complex
+    layouts as the available screen width increases.
+  </p>
+
+  <h3>CSS Code</h3>
+
+  <pre class="code"><code>/* Default: mobile layout */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Tablet */
+
+@media (min-width: 620px) {
+  .container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 960px) {
+  .container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}</code></pre>
+
+  <div class="reflection">
+    <strong>Result:</strong>
+    <p>
+      The content begins in one column and expands
+      into two or three columns as the screen becomes wider.
+    </p>
+  </div>
+
+</section>
+
+<!-- 02 MEDIA QUERIES -->
+
+<section class="exercise" id="media-queries">
+
+  <h2>02 — CSS Media Queries</h2>
+
+  <p>
+    Media queries allow CSS rules to apply only when
+    certain conditions are met, such as a minimum
+    or maximum viewport width.
+  </p>
+
+  <h3>CSS Code</h3>
+
+  <pre class="code"><code>/* Base navigation */
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Smaller screens */
+
+@media (max-width: 600px) {
+  .navigation {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Larger screens */
+
+@media (min-width: 900px) {
+  .navigation {
+    flex-direction: row;
+    align-items: center;
+  }
+}</code></pre>
+
+  <div class="reflection">
+    <strong>Result:</strong>
+    <p>
+      Navigation items can change their direction
+      according to the available screen width.
+    </p>
+  </div>
+
+</section>
+
+<!-- 03 FLUID TYPOGRAPHY -->
+
+<section class="exercise" id="fluid-type">
+
+  <h2>03 — Fluid Typography with clamp()</h2>
+
+  <p>
+    The CSS clamp() function creates a flexible value
+    with a minimum, preferred and maximum size.
+  </p>
+
+  <h3>CSS Code</h3>
+
+  <pre class="code"><code>.heading {
+  font-size: clamp(
+    2rem,
+    5vw,
+    4.5rem
+  );
+}
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}</code></pre>
+
+  <div class="reflection">
+    <strong>Result:</strong>
+    <p>
+      The heading scales with the viewport but
+      never becomes smaller or larger than its limits.
+    </p>
+  </div>
+
+</section>
+
+<!-- 04 RESPONSIVE GRID -->
+
+<section class="exercise" id="responsive-grid">
+
+  <h2>04 — Responsive Grid and Flexbox</h2>
+
+  <p>
+    CSS Grid and Flexbox help create layouts that
+    can adjust when the browser size changes.
+    The auto-fit and minmax functions are useful
+    for flexible card collections.
+  </p>
+
+  <h3>CSS Grid Code</h3>
+
+  <pre class="code"><code>.card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 16px;
+}</code></pre>
+
+  <h3>Flexbox Code</h3>
+
+  <pre class="code"><code>.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.flex-item {
+  flex: 1 1 220px;
+}</code></pre>
+
+  <div class="reflection">
+    <strong>Result:</strong>
+    <p>
+      Grid automatically adjusts the number of columns.
+      Flexbox lets items wrap into additional rows.
+    </p>
+  </div>
+
+</section>
+
+<!-- 05 RESPONSIVE IMAGES -->
+
+<section class="exercise" id="images">
+
+  <h2>05 — Responsive Images and Containers</h2>
+
+  <p>
+    Images and visual elements should not force
+    a page to become wider than the screen.
+    A maximum width of 100% allows images to fit
+    their parent containers.
+  </p>
+
+  <div style="max-width:520px;margin:20px auto;padding:16px;border:1px solid var(--line);border-radius:9px;background:var(--bg);">
+
+    <svg class="fluid-image"
+         viewBox="0 0 600 260"
+         role="img"
+         aria-labelledby="illustration-title illustration-desc">
+
+      <title id="illustration-title">Responsive container illustration</title>
+      <desc id="illustration-desc">
+        A visual illustration showing content contained
+        within a flexible responsive area.
+      </desc>
+
+      <rect x="8" y="8" width="584" height="244"
+            rx="18" fill="#dce7f5"/>
+
+      <rect x="35" y="35" width="530" height="190"
+            rx="12" fill="#3558ee"/>
+
+      <rect x="57" y="57" width="486" height="38"
+            rx="7" fill="#ffffff" opacity=".92"/>
+
+      <rect x="57" y="113" width="230" height="90"
+            rx="9" fill="#ffffff" opacity=".76"/>
+
+      <rect x="311" y="113" width="232" height="90"
+            rx="9" fill="#ffffff" opacity=".55"/>
+
+    </svg>
+
+  </div>
+
+  <h3>CSS Code</h3>
+
+  <pre class="code"><code>img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}</code></pre>
+
+  <div class="reflection">
+    <strong>Result:</strong>
+    <p>
+      Visual elements preserve their proportions and
+      stay within the available content width.
+    </p>
+  </div>
+
+</section>
+
+<!-- 06 REFLECTION -->
+
+<section class="exercise" id="reflection">
+
+  <h2>06 — Responsive Design Reflection</h2>
+
+  <h3>What is responsive web design?</h3>
+
+  <p>
+    Responsive web design is an approach to web development
+    in which a website adapts to different screen sizes,
+    resolutions and devices.
+  </p>
+
+  <h3>Why is mobile-first development useful?</h3>
+
+  <p>
+    It ensures that important content and functionality
+    work on smaller screens before additional desktop
+    features and layouts are introduced.
+  </p>
+
+  <h3>What is a media query?</h3>
+
+  <p>
+    A media query is a CSS feature that applies styles
+    based on conditions such as screen width or
+    user accessibility preferences.
+  </p>
+
+  <h3>What does clamp() do?</h3>
+
+  <p>
+    It limits a CSS value between a minimum and
+    maximum size while allowing a preferred
+    fluid value between those limits.
+  </p>
+
+  <h3>Conclusion</h3>
+
+  <p>
+    Responsive design improves the usability of websites
+    on mobile devices, tablets and desktop computers.
+    Mobile-first CSS, flexible layouts, media queries
+    and fluid typography help create interfaces that
+    remain readable and functional across screen sizes.
+  </p>
+
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <p>MM / Web Programming Portfolio</p>
+  <a href="index.html">Back to Week 12 ↑</a>
+</footer>
+
+<script>
+"use strict";
+
+const viewportWidth =
+  document.getElementById("viewport-width");
+
+const layoutState =
+  document.getElementById("layout-state");
+
+function updateViewportInformation() {
+
+  const width = window.innerWidth;
+
+  viewportWidth.textContent = `${width}px`;
+
+  if (width >= 960) {
+
+    layoutState.textContent = "Desktop";
+
+  } else if (width >= 620) {
+
+    layoutState.textContent = "Tablet";
+
+  } else {
+
+    layoutState.textContent = "Mobile";
+
+  }
+}
+
+window.addEventListener(
+  "resize",
+  updateViewportInformation,
+  { passive: true }
+);
+
+updateViewportInformation();
+</script>
+
+</body>
+</html>
