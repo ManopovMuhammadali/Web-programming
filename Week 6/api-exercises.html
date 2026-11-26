@@ -231,24 +231,24 @@ document.getElementById("countriesButton").addEventListener("click", async () =>
   box.textContent = "Loading countries...";
   try {
     const response = await getJSON(
-      "https://countriesnow.space/api/v0.1/countries"
+      "https://jsonconsole.com/api/countries.json"
     );
-    const countries = response.data; const table = document.createElement("table");
+    const countries = response; const table = document.createElement("table");
     const header = table.insertRow();
-    ["Country", "Example city", "ISO code"].forEach(text => {
+    ["Country", "Capital", "Continent"].forEach(text => {
       const cell = document.createElement("th");
       cell.textContent = text;
       header.appendChild(cell);
     });
 
     countries.sort((a, b) =>
-      a.country.localeCompare(b.country)
+      a.name.localeCompare(b.name)
     ).slice(0, 20).forEach(country => {
       const row = table.insertRow();
       [
-        country.country,
-        country.cities[0] || "Not listed",
-        country.iso2 || "Not listed"
+        country.name,
+        country.capital || "Not listed",
+        country.continent || "Not listed"
       ].forEach(value => {
         const cell = row.insertCell();
         cell.textContent = value;
