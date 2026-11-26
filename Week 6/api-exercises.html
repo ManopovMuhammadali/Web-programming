@@ -115,9 +115,9 @@ document.getElementById("jokeButton").addEventListener("click", async () => {
   box.textContent = "Loading...";
   try {
     const joke = await getJSON(
-      "https://api.chucknorris.io/jokes/random"
+      "https://v2.jokeapi.dev/joke/Any?safe-mode"
     );
-    box.textContent = joke.value;
+    box.textContent = joke.type === "single" ? joke.joke : joke.setup + " " + joke.delivery;
   } catch (error) {
     showError(box, error);
   }
@@ -230,25 +230,25 @@ document.getElementById("countriesButton").addEventListener("click", async () =>
   const box = document.getElementById("countriesOutput");
   box.textContent = "Loading countries...";
   try {
-    const countries = await getJSON(
-      "https://restcountries.com/v3.1/all?fields=name,capital,region"
+    const response = await getJSON(
+      "https://countriesnow.space/api/v0.1/countries"
     );
-    const table = document.createElement("table");
+    const countries = response.data; const table = document.createElement("table");
     const header = table.insertRow();
-    ["Country", "Capital", "Region"].forEach(text => {
+    ["Country", "Example city", "ISO code"].forEach(text => {
       const cell = document.createElement("th");
       cell.textContent = text;
       header.appendChild(cell);
     });
 
     countries.sort((a, b) =>
-      a.name.common.localeCompare(b.name.common)
+      a.country.localeCompare(b.country)
     ).slice(0, 20).forEach(country => {
       const row = table.insertRow();
       [
-        country.name.common,
-        country.capital?.[0] || "Not listed",
-        country.region || "Not listed"
+        country.country,
+        country.cities[0] || "Not listed",
+        country.iso2 || "Not listed"
       ].forEach(value => {
         const cell = row.insertCell();
         cell.textContent = value;
