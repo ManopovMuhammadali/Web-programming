@@ -115,9 +115,9 @@ document.getElementById("jokeButton").addEventListener("click", async () => {
   box.textContent = "Loading...";
   try {
     const joke = await getJSON(
-      "https://official-joke-api.appspot.com/random_joke"
+      "https://v2.jokeapi.dev/joke/Programming?type=twopart&blacklistFlags=nsfw%2Creligious%2Cpolitical%2Cracist%2Csexist%2Cexplicit&lang=en"
     );
-    box.textContent = joke.setup + " — " + joke.punchline;
+    box.textContent = joke.setup + " — " + joke.delivery;
   } catch (error) {
     showError(box, error);
   }
