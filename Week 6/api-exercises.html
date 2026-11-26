@@ -231,11 +231,11 @@ document.getElementById("countriesButton").addEventListener("click", async () =>
   box.textContent = "Loading countries...";
   try {
     const response = await getJSON(
-      "https://jsonconsole.com/api/countries.json"
+      "https://countries.dev/countries?limit=20&fields=name,capital,region"
     );
     const countries = response; const table = document.createElement("table");
     const header = table.insertRow();
-    ["Country", "Capital", "Continent"].forEach(text => {
+    ["Country", "Capital", "Region"].forEach(text => {
       const cell = document.createElement("th");
       cell.textContent = text;
       header.appendChild(cell);
@@ -248,7 +248,7 @@ document.getElementById("countriesButton").addEventListener("click", async () =>
       [
         country.name,
         country.capital || "Not listed",
-        country.continent || "Not listed"
+        country.region || "Not listed"
       ].forEach(value => {
         const cell = row.insertCell();
         cell.textContent = value;
