@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive React form practice covering controlled inputs, change handlers, preventDefault, validation, refs, and multi-step registration.">
+  <title>Week 13 — React Forms Practice</title>
+  <link rel="stylesheet" href="../react-coursework.css">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+  <nav class="rc-nav"><a class="rc-brand" href="../index.html">MM / <span>PORTFOLIO</span></a><a href="index.html">← Week 13</a></nav>
+  <main class="rc-wrap">
+    <header class="rc-hero"><span class="rc-kicker">Web Programming · Week 13</span><h1>Let React control form values.</h1><p>Each controlled value follows one loop: the user types, <code>onChange</code> updates state, and React renders the current state back into the field.</p><div class="rc-tags"><span class="rc-tag">Controlled inputs</span><span class="rc-tag">Submit & validate</span><span class="rc-tag">useRef</span></div></header>
+    <section class="rc-section"><div class="rc-section-head"><h2>01 · Controlled contact form</h2><p>One handler updates several fields by their name</p></div><div id="contact-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>02 · Controlled select, textarea & checkbox</h2><p>Different input types use the same state loop</p></div><div id="preferences-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>03 · Uncontrolled input with a ref</h2><p>Read the DOM value at submit time when React does not own it</p></div><div id="ref-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>04 · Multi-step registration</h2><p>Validate each step, keep the entered values, and review before submitting</p></div><div id="registration-root"></div></section>
+    <section class="rc-section rc-card"><h2>Practice checklist</h2><ul><li>Controlled fields always receive a string value and update it in <code>onChange</code>.</li><li>A shared handler uses each field's <code>name</code> to update the right state property.</li><li>Forms call <code>preventDefault()</code> before handling data in the page.</li><li>Validation errors are connected to fields and announced clearly.</li><li>A ref is reserved for the uncontrolled example; normal form values stay in state.</li></ul><p class="rc-muted">All form data is sample input held in component state. Nothing is sent or saved.</p></section>
+    <footer class="rc-footer">MM / Web Programming Portfolio · <a href="index.html">Return to Week 13 ↑</a></footer>
+  </main>
+  <script>
+const jsxRuntime = (type, props, key) => React.createElement(type, { ...props, key });
+const _jsx = jsxRuntime;
+const _jsxs = jsxRuntime;
+const {
+  useRef,
+  useState
+} = React;
+function ControlledContact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  function handleChange(event) {
+    const {
+      name,
+      value
+    } = event.target;
+    setForm(current => ({
+      ...current,
+      [name]: value
+    }));
+    setError("");
+    setSubmitted(false);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError("Complete your name, email, and message before submitting.");
+      setSubmitted(false);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError("Enter an email address in the format name@example.com.");
+      setSubmitted(false);
+      return;
+    }
+    setError("");
+    setSubmitted(true);
+  }
+  return /*#__PURE__*/_jsxs("form", {
+    className: "rc-card",
+    onSubmit: handleSubmit,
+    noValidate: true,
+    children: [/*#__PURE__*/_jsxs("div", {
+      className: "rc-two",
+      children: [/*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "contact-name",
+          children: "Name"
+        }), /*#__PURE__*/_jsx("input", {
+          id: "contact-name",
+          className: "rc-field",
+          name: "name",
+          autoComplete: "name",
+          value: form.name,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.name.trim()),
+          "aria-describedby": error ? "contact-error" : undefined
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "contact-email",
+          children: "Email"
+        }), /*#__PURE__*/_jsx("input", {
+          id: "contact-email",
+          className: "rc-field",
+          name: "email",
+          type: "email",
+          autoComplete: "email",
+          value: form.email,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))),
+          "aria-describedby": error ? "contact-error" : undefined
+        })]
+      })]
+    }), /*#__PURE__*/_jsx("label", {
+      htmlFor: "contact-message",
+      style: {
+        display: "block",
+        marginTop: "1rem"
+      },
+      children: "Message"
+    }), /*#__PURE__*/_jsx("textarea", {
+      id: "contact-message",
+      className: "rc-field",
+      name: "message",
+      rows: "4",
+      value: form.message,
+      onChange: handleChange,
+      "aria-invalid": Boolean(error && !form.message.trim()),
+      "aria-describedby": error ? "contact-error" : undefined
+    }), error && /*#__PURE__*/_jsx("p", {
+      className: "rc-notice",
+      id: "contact-error",
+      role: "alert",
+      children: error
+    }), submitted && /*#__PURE__*/_jsxs("p", {
+      className: "rc-notice",
+      role: "status",
+      children: ["Demo submitted for ", form.name.trim(), " (", form.email.trim(), "). No message was sent."]
+    }), /*#__PURE__*/_jsx("button", {
+      className: "rc-btn",
+      type: "submit",
+      children: "Preview submission"
+    })]
+  });
+}
+function PreferencesForm() {
+  const [preferences, setPreferences] = useState({
+    topic: "components",
+    note: "",
+    updates: false
+  });
+  function handleChange(event) {
+    const {
+      name,
+      value,
+      type,
+      checked
+    } = event.target;
+    setPreferences(current => ({
+      ...current,
+      [name]: type === "checkbox" ? checked : value
+    }));
+  }
+  return /*#__PURE__*/_jsxs("div", {
+    className: "rc-two",
+    children: [/*#__PURE__*/_jsxs("form", {
+      className: "rc-card",
+      onSubmit: event => event.preventDefault(),
+      children: [/*#__PURE__*/_jsx("label", {
+        htmlFor: "topic",
+        children: "Topic"
+      }), /*#__PURE__*/_jsxs("select", {
+        id: "topic",
+        className: "rc-field",
+        name: "topic",
+        value: preferences.topic,
+        onChange: handleChange,
+        children: [/*#__PURE__*/_jsx("option", {
+          value: "components",
+          children: "React components"
+        }), /*#__PURE__*/_jsx("option", {
+          value: "state",
+          children: "React state"
+        }), /*#__PURE__*/_jsx("option", {
+          value: "effects",
+          children: "React effects"
+        })]
+      }), /*#__PURE__*/_jsx("label", {
+        htmlFor: "preferences-note",
+        style: {
+          display: "block",
+          marginTop: "1rem"
+        },
+        children: "Learning note"
+      }), /*#__PURE__*/_jsx("textarea", {
+        id: "preferences-note",
+        className: "rc-field",
+        name: "note",
+        rows: "3",
+        maxLength: "240",
+        value: preferences.note,
+        onChange: handleChange
+      }), /*#__PURE__*/_jsxs("label", {
+        style: {
+          display: "block",
+          marginTop: "1rem"
+        },
+        children: [/*#__PURE__*/_jsx("input", {
+          type: "checkbox",
+          name: "updates",
+          checked: preferences.updates,
+          onChange: handleChange
+        }), " Show a reminder on this page"]
+      })]
+    }), /*#__PURE__*/_jsxs("article", {
+      className: "rc-card",
+      children: [/*#__PURE__*/_jsx("h3", {
+        children: "State preview"
+      }), /*#__PURE__*/_jsxs("p", {
+        children: [/*#__PURE__*/_jsx("strong", {
+          children: "Topic:"
+        }), " ", preferences.topic]
+      }), /*#__PURE__*/_jsxs("p", {
+        children: [/*#__PURE__*/_jsx("strong", {
+          children: "Note:"
+        }), " ", preferences.note || "Nothing written yet."]
+      }), /*#__PURE__*/_jsxs("p", {
+        role: "status",
+        children: ["Reminder ", preferences.updates ? "on" : "off"]
+      }), /*#__PURE__*/_jsx("p", {
+        className: "rc-muted",
+        children: "Try changing a select, textarea, and checkbox. Each is controlled by the same state object."
+      })]
+    })]
+  });
+}
+function UncontrolledNote() {
+  const noteRef = useRef(null);
+  const [preview, setPreview] = useState("");
+  function handleSubmit(event) {
+    event.preventDefault();
+    const note = noteRef.current.value.trim();
+    if (!note) {
+      noteRef.current.focus();
+      setPreview("Enter a note first.");
+      return;
+    }
+    setPreview(`Read from the DOM with a ref: “${note}”`);
+    event.currentTarget.reset();
+    noteRef.current.focus();
+  }
+  return /*#__PURE__*/_jsxs("form", {
+    className: "rc-card",
+    onSubmit: handleSubmit,
+    children: [/*#__PURE__*/_jsx("label", {
+      htmlFor: "uncontrolled-note",
+      children: "One-time note"
+    }), /*#__PURE__*/_jsx("input", {
+      id: "uncontrolled-note",
+      className: "rc-field",
+      ref: noteRef,
+      placeholder: "This field has no value or onChange prop"
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "rc-row",
+      style: {
+        marginTop: ".8rem"
+      },
+      children: [/*#__PURE__*/_jsx("button", {
+        className: "rc-btn",
+        type: "submit",
+        children: "Read with ref"
+      }), /*#__PURE__*/_jsx("small", {
+        className: "rc-muted",
+        children: "Uncontrolled input"
+      })]
+    }), preview && /*#__PURE__*/_jsx("p", {
+      role: "status",
+      className: "rc-notice",
+      children: preview
+    })]
+  });
+}
+function RegistrationWizard() {
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    studentId: "",
+    major: "",
+    year: "",
+    agree: false
+  });
+  const [error, setError] = useState("");
+  const [complete, setComplete] = useState(false);
+  function handleChange(event) {
+    const {
+      name,
+      value,
+      type,
+      checked
+    } = event.target;
+    setForm(current => ({
+      ...current,
+      [name]: type === "checkbox" ? checked : value
+    }));
+    setError("");
+    setComplete(false);
+  }
+  function continueStep(event) {
+    event.preventDefault();
+    if (step === 1 && (!form.fullName.trim() || !form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))) {
+      setError("Enter your name and a valid email address to continue.");
+      return;
+    }
+    if (step === 2 && (!form.studentId.trim() || !form.major || !form.year || !form.agree)) {
+      setError("Complete all study details and confirm the checkbox to continue.");
+      return;
+    }
+    setError("");
+    setStep(current => Math.min(3, current + 1));
+  }
+  function finish(event) {
+    event.preventDefault();
+    setComplete(true);
+  }
+  return /*#__PURE__*/_jsxs("form", {
+    className: "rc-card",
+    onSubmit: step < 3 ? continueStep : finish,
+    noValidate: true,
+    children: [/*#__PURE__*/_jsxs("div", {
+      className: "rc-card-top",
+      children: [/*#__PURE__*/_jsxs("h3", {
+        children: ["Registration · Step ", step, " of 3"]
+      }), /*#__PURE__*/_jsxs("span", {
+        className: "rc-badge",
+        "aria-live": "polite",
+        children: [Math.round(step / 3 * 100), "%"]
+      })]
+    }), step === 1 && /*#__PURE__*/_jsxs("div", {
+      className: "rc-two",
+      children: [/*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "full-name",
+          children: "Full name"
+        }), /*#__PURE__*/_jsx("input", {
+          id: "full-name",
+          className: "rc-field",
+          name: "fullName",
+          autoComplete: "name",
+          value: form.fullName,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.fullName.trim()),
+          "aria-describedby": error ? "registration-error" : undefined,
+          required: true
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "registration-email",
+          children: "Email"
+        }), /*#__PURE__*/_jsx("input", {
+          id: "registration-email",
+          className: "rc-field",
+          name: "email",
+          type: "email",
+          autoComplete: "email",
+          value: form.email,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))),
+          "aria-describedby": error ? "registration-error" : undefined,
+          required: true
+        })]
+      })]
+    }), step === 2 && /*#__PURE__*/_jsxs("div", {
+      className: "rc-grid",
+      children: [/*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "student-id",
+          children: "Student ID"
+        }), /*#__PURE__*/_jsx("input", {
+          id: "student-id",
+          className: "rc-field",
+          name: "studentId",
+          inputMode: "numeric",
+          value: form.studentId,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.studentId.trim()),
+          "aria-describedby": error ? "registration-error" : undefined,
+          required: true
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "major",
+          children: "Major"
+        }), /*#__PURE__*/_jsxs("select", {
+          id: "major",
+          className: "rc-field",
+          name: "major",
+          value: form.major,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.major),
+          "aria-describedby": error ? "registration-error" : undefined,
+          required: true,
+          children: [/*#__PURE__*/_jsx("option", {
+            value: "",
+            children: "Choose a major"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "Computer Engineering"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "Computer Science"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "Business Administration"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "Other"
+          })]
+        })]
+      }), /*#__PURE__*/_jsxs("div", {
+        children: [/*#__PURE__*/_jsx("label", {
+          htmlFor: "year",
+          children: "Year"
+        }), /*#__PURE__*/_jsxs("select", {
+          id: "year",
+          className: "rc-field",
+          name: "year",
+          value: form.year,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.year),
+          "aria-describedby": error ? "registration-error" : undefined,
+          required: true,
+          children: [/*#__PURE__*/_jsx("option", {
+            value: "",
+            children: "Choose a year"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "1st year"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "2nd year"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "3rd year"
+          }), /*#__PURE__*/_jsx("option", {
+            children: "4th year"
+          })]
+        })]
+      }), /*#__PURE__*/_jsxs("label", {
+        children: [/*#__PURE__*/_jsx("input", {
+          type: "checkbox",
+          name: "agree",
+          checked: form.agree,
+          onChange: handleChange,
+          "aria-invalid": Boolean(error && !form.agree),
+          "aria-describedby": error ? "registration-error" : undefined
+        }), " I confirm these sample details are ready to review."]
+      })]
+    }), step === 3 && /*#__PURE__*/_jsxs("div", {
+      children: [/*#__PURE__*/_jsx("h4", {
+        children: "Review your details"
+      }), /*#__PURE__*/_jsxs("dl", {
+        children: [/*#__PURE__*/_jsx("dt", {
+          children: "Name"
+        }), /*#__PURE__*/_jsx("dd", {
+          children: form.fullName
+        }), /*#__PURE__*/_jsx("dt", {
+          children: "Email"
+        }), /*#__PURE__*/_jsx("dd", {
+          children: form.email
+        }), /*#__PURE__*/_jsx("dt", {
+          children: "Student ID"
+        }), /*#__PURE__*/_jsx("dd", {
+          children: form.studentId
+        }), /*#__PURE__*/_jsx("dt", {
+          children: "Major"
+        }), /*#__PURE__*/_jsx("dd", {
+          children: form.major
+        }), /*#__PURE__*/_jsx("dt", {
+          children: "Year"
+        }), /*#__PURE__*/_jsx("dd", {
+          children: form.year
+        })]
+      }), /*#__PURE__*/_jsx("p", {
+        className: "rc-muted",
+        children: "This is a local demo. Finish only previews a confirmation; it does not submit or store your data."
+      })]
+    }), error && /*#__PURE__*/_jsx("p", {
+      className: "rc-notice",
+      id: "registration-error",
+      role: "alert",
+      children: error
+    }), complete && /*#__PURE__*/_jsx("p", {
+      className: "rc-notice",
+      role: "status",
+      children: "Registration preview complete. No data was sent or saved."
+    }), /*#__PURE__*/_jsxs("div", {
+      className: "rc-row",
+      style: {
+        marginTop: "1rem"
+      },
+      children: [step > 1 && /*#__PURE__*/_jsx("button", {
+        className: "rc-btn secondary",
+        type: "button",
+        onClick: () => {
+          setError("");
+          setComplete(false);
+          setStep(current => current - 1);
+        },
+        children: "Back"
+      }), step < 3 ? /*#__PURE__*/_jsx("button", {
+        className: "rc-btn",
+        type: "submit",
+        children: "Continue"
+      }) : /*#__PURE__*/_jsx("button", {
+        className: "rc-btn",
+        type: "submit",
+        children: "Finish preview"
+      })]
+    })]
+  });
+}
+ReactDOM.createRoot(document.getElementById("contact-root")).render(/*#__PURE__*/_jsx(ControlledContact, {}));
+ReactDOM.createRoot(document.getElementById("preferences-root")).render(/*#__PURE__*/_jsx(PreferencesForm, {}));
+ReactDOM.createRoot(document.getElementById("ref-root")).render(/*#__PURE__*/_jsx(UncontrolledNote, {}));
+ReactDOM.createRoot(document.getElementById("registration-root")).render(/*#__PURE__*/_jsx(RegistrationWizard, {}));
+</script>
+</body>
+</html>

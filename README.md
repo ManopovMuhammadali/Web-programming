@@ -11,13 +11,12 @@
 | 6 | Fetch API and Asynchronous JavaScript |
 | 7 | Open Library Book Search |
 | 8 | HTML Forms and JavaScript Validation |
-| 9 | Web Accessibility and Performance |
-| 10 | Website Optimization, Git and GitHub |
-| 11_1 | React Components, Props and Composition |
-| 11_2 | React State, Events, Forms and Browser Storage |
-| 12_1 | React Shopping Cart and Derived State |
-| 12_2 | React Effects, API Requests and Cleanup |
-| Additional | Responsive Design Review, GitHub Pages and Custom 404 |
+| 9 | Web Accessibility |
+| 10 | Git, GitHub Pages, and Website Optimization |
+| 11 | React Components, JSX, Props, Composition, Lists, and Conditional Rendering |
+| 12 | React State, Immutable Updates, Derived Values, Effects, and Cleanup |
+| 13 | React Forms, Controlled Inputs, Validation, Refs, and Multi-step Registration |
+| Additional | Responsive Design Review, GitHub Pages, and Custom 404 |
 
 ## Technologies
 
