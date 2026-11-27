@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 12 React state practice: useState, functional updates, immutable object and array changes, derived values, and lifting state up.">
+  <title>Week 12 — React State Fundamentals</title>
+  <link rel="stylesheet" href="../react-coursework.css">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+  <nav class="rc-nav"><a class="rc-brand" href="../index.html">MM / <span>PORTFOLIO</span></a><a href="index.html">← Week 12</a></nav>
+  <main class="rc-wrap">
+    <header class="rc-hero"><span class="rc-kicker">Web Programming · Week 12</span><h1>State remembers change.</h1><p>Use React state for values that affect the interface. Practice functional updates, immutable objects and arrays, derived values, and shared parent state.</p><div class="rc-tags"><span class="rc-tag">useState</span><span class="rc-tag">Immutable updates</span><span class="rc-tag">Lifted state</span></div></header>
+    <section class="rc-section"><div class="rc-section-head"><h2>01 · Counter with history</h2><p>Use a functional update when the next value depends on the previous value</p></div><div id="counter-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>02 · Shared scoreboard</h2><p>Keep shared state in the closest common parent</p></div><div id="score-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>03 · Immutable array updates</h2><p>Toggle saved topics without changing the existing array</p></div><div id="topics-root"></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>04 · Object state</h2><p>Update one field while preserving the other object properties</p></div><div id="settings-root"></div></section>
+    <section class="rc-section rc-card"><h2>Practice checklist</h2><ul><li>State belongs to a component and triggers a re-render when updated.</li><li>Use functional updates when the new value uses the previous value.</li><li>Replace objects and arrays instead of mutating them.</li><li>Calculate values such as totals from current state during render.</li><li>Lift state to a shared parent when multiple children need to read or update it.</li></ul></section>
+    <footer class="rc-footer">MM / Web Programming Portfolio · <a href="index.html">Return to Week 12 ↑</a></footer>
+  </main>
+  <script>
+const {
+  useState
+} = React;
+function CounterLab() {
+  const [history, setHistory] = useState([0]);
+  const count = history[history.length - 1];
+  function changeBy(amount) {
+    setHistory(previous => [...previous, previous[previous.length - 1] + amount]);
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rc-two"
+  }, /*#__PURE__*/React.createElement("article", {
+    className: "rc-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rc-card-top"
+  }, /*#__PURE__*/React.createElement("h3", null, "Current value"), /*#__PURE__*/React.createElement("span", {
+    className: "rc-badge"
+  }, history.length - 1, " changes")), /*#__PURE__*/React.createElement("p", {
+    className: "rc-stat",
+    "aria-live": "polite"
+  }, count), /*#__PURE__*/React.createElement("div", {
+    className: "rc-row"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn",
+    onClick: () => changeBy(1)
+  }, "+1"), /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn secondary",
+    onClick: () => changeBy(-1)
+  }, "−1"), /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn ghost",
+    disabled: history.length === 1,
+    onClick: () => setHistory(values => values.slice(0, -1))
+  }, "Undo"), /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn ghost",
+    onClick: () => setHistory([0])
+  }, "Reset"))), /*#__PURE__*/React.createElement("article", {
+    className: "rc-card"
+  }, /*#__PURE__*/React.createElement("h3", null, "Value history"), /*#__PURE__*/React.createElement("p", {
+    className: "rc-muted"
+  }, "The latest value is derived from the state array."), /*#__PURE__*/React.createElement("ol", null, history.map((value, index) => /*#__PURE__*/React.createElement("li", {
+    key: index
+  }, "Change ", index, ": ", value)))));
+}
+function PlayerScore({
+  name,
+  score,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("article", {
+    className: "rc-card"
+  }, /*#__PURE__*/React.createElement("h3", null, name), /*#__PURE__*/React.createElement("p", {
+    className: "rc-stat",
+    "aria-live": "polite"
+  }, score), /*#__PURE__*/React.createElement("div", {
+    className: "rc-row"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn",
+    onClick: () => onChange(1)
+  }, "Add point"), /*#__PURE__*/React.createElement("button", {
+    className: "rc-btn secondary",
+    disabled: score === 0,
+    onClick: () => onChange(-1)
+  }, "Remove point")));
+}
+function Scoreboard() {
+  const [scores, setScores] = useState({
+    A: 0,
+    B: 0
+  });
+  function change(player, amount) {
+    setScores(previous => ({
+      ...previous,
+      [player]: Math.max(0, previous[player] + amount)
+    }));
+  }
+  const leader = scores.A === scores.B ? "Tied" : scores.A > scores.B ? "Player A leads" : "Player B leads";
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "rc-grid"
+  }, /*#__PURE__*/React.createElement(PlayerScore, {
+    name: "Player A",
+    score: scores.A,
+    onChange: amount => change("A", amount)
+  }), /*#__PURE__*/React.createElement(PlayerScore, {
+    name: "Player B",
+    score: scores.B,
+    onChange: amount => change("B", amount)
+  })), /*#__PURE__*/React.createElement("p", {
+    className: "rc-card rc-muted",
+    "aria-live": "polite"
+  }, leader, " · ", scores.A + scores.B, " total points"));
+}
+const topics = ["Props", "Component composition", "Lists and keys", "Conditional rendering", "State objects", "State arrays"];
+function TopicPicker() {
+  const [saved, setSaved] = useState(["Props"]);
+  function toggle(topic) {
+    setSaved(current => current.includes(topic) ? current.filter(item => item !== topic) : [...current, topic]);
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rc-card"
+  }, /*#__PURE__*/React.createElement("p", null, "Select the concepts you want to revisit."), /*#__PURE__*/React.createElement("div", {
+    className: "rc-toolbar"
+  }, topics.map(topic => /*#__PURE__*/React.createElement("button", {
+    key: topic,
+    className: `rc-btn ${saved.includes(topic) ? "" : "secondary"}`,
+    "aria-pressed": saved.includes(topic),
+    onClick: () => toggle(topic)
+  }, saved.includes(topic) ? "Saved · " : "Save · ", topic))), /*#__PURE__*/React.createElement("p", {
+    className: "rc-muted",
+    "aria-live": "polite"
+  }, saved.length ? `Saved topics: ${saved.join(", ")}` : "No topics saved yet."));
+}
+function SettingsLab() {
+  const [settings, setSettings] = useState({
+    compact: false,
+    showHints: true
+  });
+  const enabledCount = Number(settings.compact) + Number(settings.showHints);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rc-card"
+  }, /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: settings.compact,
+    onChange: event => setSettings(current => ({
+      ...current,
+      compact: event.target.checked
+    }))
+  }), " Compact cards"), /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: "block",
+      marginTop: ".8rem"
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: settings.showHints,
+    onChange: event => setSettings(current => ({
+      ...current,
+      showHints: event.target.checked
+    }))
+  }), " Show learning hints"), settings.showHints && /*#__PURE__*/React.createElement("p", {
+    className: "rc-muted"
+  }, "Spread the previous object before changing one property so the other setting is preserved."), /*#__PURE__*/React.createElement("p", {
+    className: "rc-badge",
+    "aria-live": "polite"
+  }, enabledCount, " settings enabled"));
+}
+ReactDOM.createRoot(document.getElementById("counter-root")).render(/*#__PURE__*/React.createElement(CounterLab, null));
+ReactDOM.createRoot(document.getElementById("score-root")).render(/*#__PURE__*/React.createElement(Scoreboard, null));
+ReactDOM.createRoot(document.getElementById("topics-root")).render(/*#__PURE__*/React.createElement(TopicPicker, null));
+ReactDOM.createRoot(document.getElementById("settings-root")).render(/*#__PURE__*/React.createElement(SettingsLab, null));
+</script>
+</body>
+</html>

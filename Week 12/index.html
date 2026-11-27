@@ -1,53 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Week 12 React coursework: component state, useState, immutable updates, effects, API requests and cleanup.">
-  <title>Week 12 — React State &amp; Effects</title>
-  <link rel="stylesheet" href="../site.css">
-  <link rel="stylesheet" href="../weeks.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 12 React coursework: useState, immutable updates, derived values, effects, API requests, and cleanup.">
+  <title>Week 12 — React State & Effects</title>
+  <link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../weeks.css"><link rel="stylesheet" href="../react-coursework.css">
   <script src="../site.js" defer></script>
 </head>
 <body>
-<header class="site-nav"><a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a><a class="nav-link" href="../index.html">← Back to home</a></header>
-<main>
-  <header class="archive-intro">
-    <div class="archive-meta"><span>Web Programming · Gachon University</span><span>Week 12 / Coursework</span></div>
-    <h1>React State &amp; Effects.</h1>
-    <p>Build interactive components that remember information, update it safely, and synchronize with APIs, timers and the browser.</p>
-  </header>
-  <section class="archive-content">
-    <div class="archive-content-head"><h2>React labs</h2><p>Week 12 · useState and useEffect</p></div>
-    <div class="assignment-list">
-      <a class="assignment-link" href="week12-1.html"><span class="assignment-index">12.1</span><span class="assignment-title">Shopping Cart · State &amp; Immutable Updates</span><span class="assignment-arrow">↗</span></a>
-      <a class="assignment-link" href="week12-2.html"><span class="assignment-index">12.2</span><span class="assignment-title">Effects · API Requests &amp; Cleanup</span><span class="assignment-arrow">↗</span></a>
-      <a class="assignment-link" href="CounterHistory.html"><span class="assignment-index">12.1</span><span class="assignment-title">Counter with History · State Practice</span><span class="assignment-arrow">↗</span></a>
-      <a class="assignment-link" href="SprintQuiz.html"><span class="assignment-index">QUIZ</span><span class="assignment-title">Week 12 Sprint Quiz</span><span class="assignment-arrow">↗</span></a>
-    </div>
-  </section>
-  <section class="archive-content">
-    <div class="archive-content-head"><h2>What I practiced</h2><p>Concepts from the lecture notes and study guide</p></div>
-    <ul>
-      <li>Distinguish component state from read-only props.</li>
-      <li>Use <code>useState</code> to remember values and trigger re-renders.</li>
-      <li>Keep state in components that own it, pass values as props, and lift shared state to the nearest common parent.</li>
-      <li>Update objects and arrays immutably, using functional updates when the next value depends on the previous one.</li>
-      <li>Use <code>useEffect</code> with intentional dependencies to synchronize with external systems.</li>
-      <li>Handle loading and error states, abort stale requests, and clean up timers and subscriptions.</li>
-    </ul>
-  </section>
-  <section class="archive-content">
-    <div class="archive-content-head"><h2>More Week 12 practice</h2><p>Responsive layout exercises</p></div>
-    <p>Continue the mobile-first CSS work with media queries, fluid typography, responsive Grid and Flexbox, and adaptable images.</p>
-    <a class="assignment-link" href="responsive-exercises.html"><span class="assignment-index">CSS</span><span class="assignment-title">Open Responsive Design Exercises</span><span class="assignment-arrow">↗</span></a>
-  </section>
-  <section class="archive-content">
-    <div class="archive-content-head"><h2>Course references</h2><p>Week 12 learning materials</p></div>
-    <p>React State &amp; the useState Hook · React Effects &amp; useEffect (continued) · Week 12 study guide and sprint quiz.</p>
-    <p><a href="https://muxiddin19.github.io/WebPro/docs/index.html">Open the Web Programming course repository ↗</a></p>
-  </section>
-</main>
-<footer class="site-footer"><p>MM / Web Programming Portfolio</p><a href="../index.html">Return to homepage ↑</a></footer>
+  <header class="site-nav"><a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a><a class="nav-link" href="../index.html">← Back to home</a></header>
+  <main class="rc-wrap">
+    <header class="rc-hero"><span class="rc-kicker">Web Programming · Week 12</span><h1>React state & effects.</h1><p>Keep interface state in React, update objects and arrays immutably, derive values during render, and use effects only when synchronizing with external systems.</p><div class="rc-tags"><span class="rc-tag">useState</span><span class="rc-tag">Immutable updates</span><span class="rc-tag">useEffect & cleanup</span></div></header>
+    <section class="rc-section"><div class="rc-section-head"><h2>Class practice</h2><p>Follow the topic order from state fundamentals to effects</p></div><div class="rc-two">
+      <a class="rc-card" href="week12-state.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">12 · State fundamentals</span><h2>Update state with confidence ↗</h2><p>Counter history, multiple state values, object and array updates, and shared parent state.</p></a>
+      <a class="rc-card" href="week12-2.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">12 · Effects</span><h2>Synchronize with external systems ↗</h2><p>Weather and profile requests, loading and error states, cancellation, dependencies, and timer cleanup.</p></a>
+    </div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>Extra practice</h2><p>History, object updates, and a knowledge check</p></div><div class="rc-two"><a class="rc-card" href="CounterHistory.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">State lab</span><h2>Counter with history ↗</h2><p>Undo, redo, shared state, object updates, and array operations.</p></a><a class="rc-card" href="SprintQuiz.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">5-question quiz</span><h2>Week 12 sprint quiz ↗</h2><p>Review state, immutable updates, effects, dependencies, and cleanup.</p></a></div></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>Applied challenge</h2><p>Use the same ideas in a small interface</p></div><a class="rc-card" href="week12-1.html" style="display:block;text-decoration:none;color:inherit"><span class="rc-kicker">Practice project</span><h2>Build a shopping cart ↗</h2><p>Update a product array immutably, derive item counts and totals, and provide clear empty-cart feedback.</p></a></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>Extra responsive design reference</h2><p>Earlier practice retained for review</p></div><p><a href="responsive-exercises.html">Open the responsive layout exercises ↗</a></p></section>
+    <section class="rc-section rc-card"><h2>Learning outcomes</h2><ul><li>Use <code>useState</code> to preserve values between renders.</li><li>Update objects and arrays immutably, using functional updates when state depends on its previous value.</li><li>Lift shared state to the closest common parent and calculate derived values during render.</li><li>Use effects with accurate dependencies to synchronize with external data or timers.</li><li>Show loading and error states, cancel outdated requests, and clean up timers.</li></ul></section>
+  </main>
+  <footer class="rc-wrap rc-footer">MM / Web Programming Portfolio · <a href="../index.html">Return to homepage ↑</a></footer>
 </body>
 </html>
