@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="React useState practice: counter with history, immutable object and array updates, and lifting state to a shared parent.">
+  <title>Week 12.1 | Counter with History</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root{color-scheme:light;--ink:#18362c;--muted:#5b7168;--line:#d8e7df;--mint:#eaf6ef;--green:#176b4d;--paper:#f4f8f5}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}
+    main{width:min(1000px,calc(100% - 32px));margin:auto;padding:24px 0 56px}a{color:var(--green)}header,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,28px);margin:16px 0;box-shadow:0 8px 24px #18362c0a}header{background:linear-gradient(135deg,#e4f4e9,#fff 70%)}small,.eyebrow{color:var(--green);font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:.5rem 0}h2{font-size:1.35rem;margin:.1rem 0 .45rem}.muted{color:var(--muted)}button{font:inherit;border:0;border-radius:10px;padding:.58rem .85rem;margin:.2rem;background:var(--green);color:#fff;font-weight:700;cursor:pointer}button.secondary{background:var(--mint);color:var(--green)}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e3a532;outline-offset:3px}input{font:inherit;padding:.62rem .72rem;border:1px solid #b9cbc0;border-radius:9px;max-width:100%}.row{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.count{font-size:3rem;font-weight:800;margin:.1rem 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}.demo{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;background:#fff}.history{display:flex;flex-wrap:wrap;gap:6px;padding:0;list-style:none}.history li{background:var(--mint);border-radius:999px;padding:3px 10px}.status{min-height:1.5em}footer{text-align:center;color:var(--muted);padding:24px 0}
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Week 12 overview</a>
+  <header><small>WEB PROGRAMMING · WEEK 12.1</small><h1>Counter with history</h1><p class="muted">Practice <code>useState</code>, functional updates, immutable arrays and objects, and sharing state through a parent component.</p></header>
+  <section class="panel"><p class="eyebrow">Lecture challenge · State &amp; useState</p><h2>Counter history</h2><p>Every count change is saved as a new history entry. Undo, redo, reset, and clear history without mutating the state array.</p><div id="counter"></div></section>
+  <section class="panel"><p class="eyebrow">State patterns</p><h2>Objects, arrays, and shared state</h2><p class="muted">Each demo updates its own state through the setter. The parent owns the shared step value and passes it to both sibling controls as props.</p><div id="patterns"></div></section>
+  <footer>Week 12 · React State</footer>
+</main>
+<script type="text/babel">
+const {useState}=React;
+function Counter(){
+  const [history,setHistory]=useState([0]);
+  const [index,setIndex]=useState(0);
+  const count=history[index];
+  function change(delta){const next=count+delta;setHistory(previous=>[...previous.slice(0,index+1),next]);setIndex(i=>i+1)}
+  function undo(){setIndex(i=>Math.max(0,i-1))}
+  function redo(){setIndex(i=>Math.min(history.length-1,i+1))}
+  function reset(){setHistory([0]);setIndex(0)}
+  function clearHistory(){setHistory([count]);setIndex(0)}
+  return <><p className="count" aria-live="polite">{count}</p><div className="row"><button onClick={()=>change(-1)}>− 1</button><button onClick={()=>change(1)}>+ 1</button><button className="secondary" onClick={undo} disabled={index===0}>Undo</button><button className="secondary" onClick={redo} disabled={index===history.length-1}>Redo</button><button className="secondary" onClick={reset}>Reset</button><button className="secondary" onClick={clearHistory}>Clear history</button></div><p className="status muted" aria-live="polite">History position {index+1} of {history.length}</p><ol className="history" aria-label="Counter history">{history.map((value,i)=><li key={i} aria-current={i===index?"step":undefined}>{value}{i===index?" · current":""}</li>)}</ol><p className="muted">The functional setter uses the previous history, and array spread/slice create a new history without changing the old one.</p></>
+}
+function StepControls({step,onStep}){return <div className="row"><button onClick={()=>onStep(n=>Math.max(1,n-1))}>− step</button><strong>Shared step: {step}</strong><button onClick={()=>onStep(n=>n+1)}>+ step</button></div>}
+function StepCounter({step}){const[value,setValue]=useState(0);return <div className="demo"><h3>Counter sibling</h3><p className="count">{value}</p><button onClick={()=>setValue(n=>n+step)}>Add shared step ({step})</button><p className="muted">This child receives <code>step</code> as a prop; its own count is local state.</p></div>}
+function ProfileEditor(){const[profile,setProfile]=useState({name:"Ada",role:"Learner"});return <div className="demo"><h3>Object state</h3><p>{profile.name} · {profile.role}</p><label>Name <input value={profile.name} onChange={e=>setProfile(current=>({...current,name:e.target.value}))}/></label><p className="muted">Spread keeps the other object fields while creating a new object.</p></div>}
+function TaskList(){const[tasks,setTasks]=useState(["Read the state notes","Build the shopping cart"]),[draft,setDraft]=useState("");function add(e){e.preventDefault();const text=draft.trim();if(text){setTasks(items=>[...items,text]);setDraft("")}}return <div className="demo"><h3>Array state</h3><form onSubmit={add}><label>New task <input value={draft} onChange={e=>setDraft(e.target.value)}/></label><button>Add task</button></form><ul>{tasks.map((task,i)=><li key={task}>{task} <button className="secondary" onClick={()=>setTasks(items=>items.filter((_,j)=>j!==i))}>Remove</button></li>)}</ul><p className="muted">Adding uses array spread; removing uses filter to return a new array.</p></div>}
+function App(){const[step,setStep]=useState(1);return <><div className="demo"><h3>Lifted shared state</h3><p>The parent owns the step size and passes it to both siblings through props.</p><StepControls step={step} onStep={setStep}/></div><div className="grid"><StepCounter step={step}/><ProfileEditor/><TaskList/></div></>}
+ReactDOM.createRoot(document.getElementById("counter")).render(<Counter/>);
+ReactDOM.createRoot(document.getElementById("patterns")).render(<App/>);
+</script>
+</body>
+</html>
