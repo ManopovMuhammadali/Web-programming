@@ -1,117 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Week 12 coursework: mobile-first responsive web design, media queries and fluid layouts.">
-  <title>Week 12 — Responsive Design</title>
-
+  <meta name="description" content="Week 12 React coursework: component state, useState, immutable updates, effects, API requests and cleanup.">
+  <title>Week 12 — React State &amp; Effects</title>
   <link rel="stylesheet" href="../site.css">
   <link rel="stylesheet" href="../weeks.css">
   <script src="../site.js" defer></script>
 </head>
-
 <body>
-
-<header class="site-nav">
-  <a class="wordmark" href="../index.html">
-    MM / <span>PORTFOLIO</span>
-  </a>
-  <a class="nav-link" href="../index.html">← Back to home</a>
-</header>
-
+<header class="site-nav"><a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a><a class="nav-link" href="../index.html">← Back to home</a></header>
 <main>
-
   <header class="archive-intro">
-    <div class="archive-meta">
-      <span>Web Programming</span>
-      <span>Week 12 / Coursework</span>
-    </div>
-
-    <h1>Responsive Design.</h1>
-
-    <p>
-      Creating adaptable websites with mobile-first CSS,
-      media queries, fluid typography and flexible layouts.
-    </p>
+    <div class="archive-meta"><span>Web Programming · Gachon University</span><span>Week 12 / Coursework</span></div>
+    <h1>React State &amp; Effects.</h1>
+    <p>Build interactive components that remember information, update it safely, and synchronize with APIs, timers and the browser.</p>
   </header>
-
   <section class="archive-content">
-
-    <div class="archive-content-head">
-      <h2>Assignments</h2>
-      <p>Responsive layout exercises</p>
-    </div>
-
+    <div class="archive-content-head"><h2>React labs</h2><p>Week 12 · useState and useEffect</p></div>
     <div class="assignment-list">
-
-      <a class="assignment-link" href="responsive-exercises.html#mobile-first">
-        <span class="assignment-index">01</span>
-        <span class="assignment-title">Mobile-First Design</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="responsive-exercises.html#media-queries">
-        <span class="assignment-index">02</span>
-        <span class="assignment-title">CSS Media Queries</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="responsive-exercises.html#fluid-type">
-        <span class="assignment-index">03</span>
-        <span class="assignment-title">Fluid Typography with clamp()</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="responsive-exercises.html#responsive-grid">
-        <span class="assignment-index">04</span>
-        <span class="assignment-title">Responsive Grid and Flexbox</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="responsive-exercises.html#images">
-        <span class="assignment-index">05</span>
-        <span class="assignment-title">Responsive Images and Containers</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="responsive-exercises.html#reflection">
-        <span class="assignment-index">06</span>
-        <span class="assignment-title">Responsive Design Reflection</span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
+      <a class="assignment-link" href="week12-1.html"><span class="assignment-index">12.1</span><span class="assignment-title">Shopping Cart · State &amp; Immutable Updates</span><span class="assignment-arrow">↗</span></a>
+      <a class="assignment-link" href="week12-2.html"><span class="assignment-index">12.2</span><span class="assignment-title">Effects · API Requests &amp; Cleanup</span><span class="assignment-arrow">↗</span></a>
     </div>
-
   </section>
-
   <section class="archive-content">
-
-    <div class="archive-content-head">
-      <h2>Learning outcomes</h2>
-      <p>What I learned</p>
-    </div>
-
+    <div class="archive-content-head"><h2>What I practiced</h2><p>Concepts from the lecture notes and study guide</p></div>
     <ul>
-      <li>Understand mobile-first development.</li>
-      <li>Use CSS media queries to adapt layouts.</li>
-      <li>Create fluid typography with clamp().</li>
-      <li>Build flexible Grid and Flexbox layouts.</li>
-      <li>Prevent horizontal overflow on small screens.</li>
-      <li>Make images and content scale appropriately.</li>
-      <li>Test websites at different screen sizes.</li>
+      <li>Distinguish component state from read-only props.</li>
+      <li>Use <code>useState</code> to remember values and trigger re-renders.</li>
+      <li>Update objects and arrays immutably, using functional updates when the next value depends on the previous one.</li>
+      <li>Share state between related components by lifting it to their common parent.</li>
+      <li>Use <code>useEffect</code> with intentional dependencies to synchronize with external systems.</li>
+      <li>Handle loading and error states, abort stale requests, and clean up timers and subscriptions.</li>
     </ul>
-
   </section>
-
-<section class="archive-content"><div class="archive-content-head"><h2>React coursework</h2><p>Weeks 12 exercises</p></div><div class="assignment-list"><a class="assignment-link" href="week12-1.html"><span class="assignment-index">12.1</span><span class="assignment-title">Shopping Cart with React State</span><span class="assignment-arrow">↗</span></a><a class="assignment-link" href="week12-2.html"><span class="assignment-index">12.2</span><span class="assignment-title">Effects, Fetch & Cleanup</span><span class="assignment-arrow">↗</span></a></div></section></main>
-
-<footer class="site-footer">
-  <p>MM / Web Programming Portfolio</p>
-  <a href="../index.html">Return to homepage ↑</a>
-</footer>
-
+  <section class="archive-content">
+    <div class="archive-content-head"><h2>More Week 12 practice</h2><p>Responsive layout exercises</p></div>
+    <p>Continue the mobile-first CSS work with media queries, fluid typography, responsive Grid and Flexbox, and adaptable images.</p>
+    <a class="assignment-link" href="responsive-exercises.html"><span class="assignment-index">CSS</span><span class="assignment-title">Open Responsive Design Exercises</span><span class="assignment-arrow">↗</span></a>
+  </section>
+  <section class="archive-content">
+    <div class="archive-content-head"><h2>Course references</h2><p>Week 12 learning materials</p></div>
+    <p>React State &amp; the useState Hook · React Effects &amp; useEffect (continued) · Week 12 study guide and sprint quiz.</p>
+    <p><a href="https://muxiddin19.github.io/WebPro/docs/index.html">Open the Web Programming course repository ↗</a></p>
+  </section>
+</main>
+<footer class="site-footer"><p>MM / Web Programming Portfolio</p><a href="../index.html">Return to homepage ↑</a></footer>
 </body>
 </html>
-
