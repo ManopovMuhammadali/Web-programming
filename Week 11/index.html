@@ -1,142 +1,20 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Week 11 coursework: public APIs, JSON data, rate limits and error handling.">
-  <title>Week 11 — APIs and JSON</title>
-
-  <link rel="stylesheet" href="../site.css">
-  <link rel="stylesheet" href="../weeks.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 11 React coursework: function components, JSX, props, composition, lists, conditional rendering and reusable cards.">
+  <title>Week 11 — React Components & Props</title>
+  <link rel="stylesheet" href="../site.css"><link rel="stylesheet" href="../weeks.css"><link rel="stylesheet" href="../react-coursework.css">
   <script src="../site.js" defer></script>
 </head>
-
 <body>
-
-<header class="site-nav">
-  <a class="wordmark" href="../index.html">
-    MM / <span>PORTFOLIO</span>
-  </a>
-  <a class="nav-link" href="../index.html">← Back to home</a>
-</header>
-
-<main>
-
-  <header class="archive-intro">
-    <div class="archive-meta">
-      <span>Web Programming</span>
-      <span>Week 11 / Project</span>
-    </div>
-
-    <h1>APIs & JSON.</h1>
-
-    <p>
-      Working with public APIs, retrieving JSON data,
-      handling HTTP responses and managing API rate limits.
-    </p>
-  </header>
-
-  <section class="archive-content">
-
-    <div class="archive-content-head">
-      <h2>Project</h2>
-      <p>Public API integration and error handling</p>
-    </div>
-
-    <div class="assignment-list">
-
-      <a class="assignment-link" href="github-profile-explorer.html#app">
-        <span class="assignment-index">01</span>
-        <span class="assignment-title">
-          GitHub Profile Explorer
-        </span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="github-profile-explorer.html#api-process">
-        <span class="assignment-index">02</span>
-        <span class="assignment-title">
-          Fetch API and JSON Processing
-        </span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="github-profile-explorer.html#rate-limits">
-        <span class="assignment-index">03</span>
-        <span class="assignment-title">
-          API Rate Limits and Error Handling
-        </span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-      <a class="assignment-link" href="github-profile-explorer.html#reflection">
-        <span class="assignment-index">04</span>
-        <span class="assignment-title">
-          Project Reflection
-        </span>
-        <span class="assignment-arrow">↗</span>
-      </a>
-
-    </div>
-
-  </section>
-
-  <section class="archive-content">
-
-    <div class="archive-content-head">
-      <h2>Learning outcomes</h2>
-      <p>What this project demonstrates</p>
-    </div>
-
-    <ul>
-      <li>Understand how public APIs provide external data.</li>
-      <li>Send HTTP GET requests using JavaScript fetch().</li>
-      <li>Process JSON responses and access object properties.</li>
-      <li>Check HTTP response status codes.</li>
-      <li>Handle loading states and network errors.</li>
-      <li>Understand rate limits and response headers.</li>
-      <li>Display API information dynamically using the DOM.</li>
-    </ul>
-
-  </section>
-
-  <section class="archive-content">
-
-    <div class="archive-content-head">
-      <h2>Project links</h2>
-      <p>Source and API documentation</p>
-    </div>
-
-    <p>
-      <a href="https://docs.github.com/en/rest/users/users"
-         target="_blank" rel="noopener noreferrer">
-        GitHub Users API Documentation ↗
-      </a>
-    </p>
-
-    <p>
-      <a href="https://docs.github.com/en/rest/repos/repos"
-         target="_blank" rel="noopener noreferrer">
-        GitHub Repositories API Documentation ↗
-      </a>
-    </p>
-
-    <p>
-      <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
-         target="_blank" rel="noopener noreferrer">
-        API Rate Limit Documentation ↗
-      </a>
-    </p>
-
-  </section>
-
-<section class="archive-content"><div class="archive-content-head"><h2>React coursework</h2><p>Weeks 11 exercises</p></div><div class="assignment-list"><a class="assignment-link" href="week11-1.html"><span class="assignment-index">11.1</span><span class="assignment-title">Reusable Components, Props & Composition</span><span class="assignment-arrow">↗</span></a><a class="assignment-link" href="week11-2.html"><span class="assignment-index">11.2</span><span class="assignment-title">State, Updates & Shared Data</span><span class="assignment-arrow">↗</span></a></div></section></main>
-
-<footer class="site-footer">
-  <p>MM / Web Programming Portfolio</p>
-  <a href="../index.html">Return to homepage ↑</a>
-</footer>
-
+  <header class="site-nav"><a class="wordmark" href="../index.html">MM / <span>PORTFOLIO</span></a><a class="nav-link" href="../index.html">← Back to home</a></header>
+  <main class="rc-wrap">
+    <header class="rc-hero"><span class="rc-kicker">Web Programming · Week 11</span><h1>React components & props.</h1><p>Build reusable function components with JSX, pass data through read-only props, compose cards, and render lists with conditional interface states.</p><div class="rc-tags"><span class="rc-tag">Components & JSX</span><span class="rc-tag">Props & composition</span><span class="rc-tag">Lists & conditions</span></div></header>
+    <section class="rc-section"><div class="rc-section-head"><h2>Class practice</h2><p>Work through the concepts, then extend the card challenge</p></div><a class="rc-card" href="week11-1.html" style="display:block;text-decoration:none;color:inherit"><span class="rc-kicker">11 · Components & props</span><h2>Reusable React components ↗</h2><p>Function components, JSX, props, children, list rendering, conditional output, and a reusable product card challenge.</p></a></section>
+    <section class="rc-section"><div class="rc-section-head"><h2>Additional practice</h2><p>Related React state and API projects</p></div><div class="rc-two"><a class="rc-card" href="week11-2.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">Extra React practice</span><h2>State, events &amp; browser storage ↗</h2><p>Counter history, shared state, controlled forms, and a saved task list.</p></a><a class="rc-card" href="github-profile-explorer.html" style="text-decoration:none;color:inherit"><span class="rc-kicker">Related API project</span><h2>GitHub profile explorer ↗</h2><p>Fetch public JSON data and handle loading, errors, and rate limits.</p></a></div></section>
+    <section class="rc-section rc-card"><h2>Learning outcomes</h2><ul><li>Explain how a React component returns JSX and can be reused.</li><li>Pass data from a parent with props and treat those props as read-only.</li><li>Compose components using <code>props.children</code>.</li><li>Render data arrays with stable keys and choose content conditionally.</li><li>Build a reusable card from distinct pieces of sample data.</li></ul></section>
+  </main>
+  <footer class="rc-wrap rc-footer">MM / Web Programming Portfolio · <a href="../index.html">Return to homepage ↑</a></footer>
 </body>
 </html>
